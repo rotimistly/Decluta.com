@@ -212,13 +212,24 @@ button.who{background:none;border:0;color:var(--ink);font-family:inherit;cursor:
 .tbl{overflow-x:auto;margin:6px 0 14px}
 .tbl table{border-collapse:collapse;min-width:520px;font-size:14px;width:100%}
 .tbl th,.tbl td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;white-space:nowrap}
+.btn-green.danger{background:#C0341D;color:#fff}
+.btn-line.danger{color:var(--err);border-color:var(--err)}
+.contactband{background:var(--yellow);color:#15201A;border-top:10px solid #15201A;padding:30px 0;margin-top:40px}
+.contactband h2{font-size:clamp(26px,5vw,38px);font-weight:800;letter-spacing:-.02em}
+.contactband p{margin:8px 0 16px;font-size:17px;max-width:32em}
+.contactband .num{display:block;font-family:var(--display);font-weight:800;font-size:clamp(30px,7vw,48px);color:#15201A;text-decoration:none;margin:4px 0 14px}
+.contactband .acts{display:flex;gap:10px;flex-wrap:wrap}
+.helpfab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:40;background:#15201A;color:#fff;font-weight:700;padding:12px 16px;border-radius:999px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.35);display:flex;gap:6px;align-items:center}
+.helpfab span{display:none}
+@media(min-width:560px){.helpfab span{display:inline}}
+.strip a{color:var(--ink)}
 </style>
 </head>
 <body>
 
 <header class="top">
   <a class="logo" href="#"><span class="mark" aria-hidden="true">D</span>Declutter NG</a>
-  <div class="top-right"><button class="who" id="who" type="button" hidden aria-label="My account"></button><button class="linkbtn" id="signoutBtn" type="button" hidden>Sign out</button><button class="btn btn-green" id="signupBtn" type="button">Sign up</button></div>
+  <div class="top-right"><button class="who" id="who" type="button" hidden aria-label="My account"></button><button class="linkbtn" id="signoutBtn" type="button" hidden>Sign out</button><button class="btn btn-line btn-sm" id="signinBtn" type="button">Sign in</button><button class="btn btn-green" id="signupBtn" type="button">Sign up</button></div>
 </header>
 
 <section class="hero">
@@ -236,7 +247,7 @@ button.who{background:none;border:0;color:var(--ink);font-family:inherit;cursor:
   </div>
 </section>
 
-<section class="strip" aria-label="Why Declutter NG"><ul><li>✓ Every seller is ID and face checked</li><li>🔒 Safe Pay holds your money until you check the item</li><li>🚚 Delivery to any state</li></ul></section>
+<section class="strip" aria-label="Why Declutter NG"><ul><li>✓ Every seller is ID and face checked</li><li>🔒 Safe Pay holds your money until you check the item</li><li>🚚 Delivery to any state</li><li><a href="tel:+2348147838934">📞 Call or WhatsApp 0814 783 8934</a></li></ul></section>
 
 <nav class="cats" id="cats" aria-label="Categories"></nav>
 
@@ -306,10 +317,19 @@ button.who{background:none;border:0;color:var(--ink);font-family:inherit;cursor:
   </section>
 </main>
 
+<section class="contactband" id="contact" aria-label="Contact us"><div class="wrap">
+  <h2>Got a question? We're one call away.</h2>
+  <p>Selling, buying, delivery or a problem with a deal? Call or WhatsApp us for more information.</p>
+  <a class="num" href="tel:+2348147838934">0814 783 8934</a>
+  <div class="acts"><a class="btn btn-ink" href="tel:+2348147838934">📞 Call us now</a><a class="btn btn-white" href="https://wa.me/2348147838934?text=Hello%20Declutter%20NG%2C%20I%20need%20help" target="_blank" rel="noopener">💬 WhatsApp us</a></div>
+</div></section>
+<a class="helpfab" href="https://wa.me/2348147838934?text=Hello%20Declutter%20NG%2C%20I%20need%20help" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">💬<span>Need help? Chat with us</span></a>
+
 <footer class="wrap">
   <nav class="flinks" aria-label="Company">
     <a href="#page-about" data-page="about">About</a><a href="#page-trust" data-page="trust">Trust &amp; Safety</a><a href="#page-faq" data-page="faq">FAQ</a><a href="#page-refund" data-page="refund">Refund Policy</a><a href="#page-privacy" data-page="privacy">Privacy</a><a href="#page-terms" data-page="terms">Terms</a><a href="#page-contact" data-page="contact">Contact</a><a href="#page-earn" data-page="earn">Earn with us</a><a href="#admin" id="adminLink">Admin (demo)</a>
   </nav>
+  <p style="margin:0 0 6px">📞 Call or WhatsApp: <a href="tel:+2348147838934">0814 783 8934</a></p>
   Declutter NG is a prototype. Listings, sellers and verification are demo data.
 </footer>
 
@@ -325,6 +345,7 @@ button.who{background:none;border:0;color:var(--ink);font-family:inherit;cursor:
     <div id="s0" hidden>
       <button class="btn btn-line role" type="button" data-role="buyer"><strong>I want to buy</strong><span>Quick sign up. Post what you're looking for.</span></button>
       <button class="btn btn-line role" type="button" data-role="seller"><strong>I want to sell</strong><span>Needs your ID and a selfie. You get the blue tick.</span></button>
+      <p class="hint" style="text-align:center">Already have an account? <button class="linkbtn" type="button" id="s0ToSignin">Sign in</button></p>
     </div>
 
     <form id="s1" novalidate>
@@ -336,6 +357,7 @@ button.who{background:none;border:0;color:var(--ink);font-family:inherit;cursor:
       <label for="vRef">Referral code (optional)</label>
       <input class="field" id="vRef" autocomplete="off" placeholder="e.g. DNG1001">
       <p class="err" id="e1" role="alert"></p>
+      <button class="linkbtn" type="button" id="toSignin" hidden>Sign in instead</button>
       <div class="actions"><button class="btn btn-green" type="submit">Continue</button></div>
     </form>
 
@@ -351,6 +373,7 @@ button.who{background:none;border:0;color:var(--ink);font-family:inherit;cursor:
       <input class="field" id="vIdNo" inputmode="numeric" autocomplete="off" required>
       <p class="hint" id="idHint">A NIN has 11 digits.</p>
       <p class="hint">We only use your ID to confirm who you are. It is never shown to buyers.</p>
+      <p class="hint">Demo tip: an ID ending in 000 shows a name mismatch, and one ending in 999 shows a face mismatch.</p>
       <p class="err" id="e2" role="alert"></p>
       <div class="actions">
         <button class="btn btn-line" type="button" id="back2">Back</button>
@@ -361,6 +384,7 @@ button.who{background:none;border:0;color:var(--ink);font-family:inherit;cursor:
     <div id="s3" hidden>
       <video id="cam" autoplay playsinline muted hidden></video>
       <p class="hint" id="camMsg">We take a quick live selfie and match it to the photo on your ID.</p>
+      <p class="err" id="e3" role="alert"></p>
       <div class="actions">
         <button class="btn btn-line" type="button" id="back3">Back</button>
         <button class="btn btn-green" type="button" id="camOpen">Open camera</button>
@@ -477,6 +501,35 @@ button.who{background:none;border:0;color:var(--ink);font-family:inherit;cursor:
 <dialog id="sellerDlg" aria-label="Seller shop"><div class="dlg" id="sellerBody"></div></dialog>
 <dialog id="adminDlg" aria-label="Admin demo"><div class="dlg" id="adminBody"></div></dialog>
 
+<dialog id="delDlg" aria-labelledby="delTitle"><form class="dlg" id="delForm">
+  <div class="dlg-head"><h2 id="delTitle">Delete your account?</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+  <p style="margin:0 0 6px">Your account will be deactivated now and <strong>permanently deleted after 90 days</strong>. Then we delete:</p>
+  <ul style="margin:0 0 8px;padding-left:20px"><li>your profile and login</li><li>all your listings and wanted requests</li><li>your chats, saved items and alerts</li><li>your credit and referral rewards</li></ul>
+  <p class="hint">For the next 90 days your listings and profile are hidden. Sign in any time during that period to restore everything. After 90 days it can't be undone. Records of past payments are kept without your name, for fraud checks.</p>
+  <label for="delConfirm">Type DELETE to confirm</label>
+  <input class="field" id="delConfirm" autocomplete="off">
+  <p class="err" id="delErr" role="alert"></p>
+  <div class="actions"><button class="btn btn-line" type="button" data-close>Cancel</button><button class="btn btn-green danger" type="submit">Delete my account</button></div>
+</form></dialog>
+
+<dialog id="signinDlg" aria-labelledby="siTitle"><form class="dlg" id="signinForm" novalidate>
+  <div class="dlg-head"><h2 id="siTitle">Welcome back</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+  <p class="hint" style="margin:0">Sign in with the name and phone number you signed up with.</p>
+  <label for="siName">Full name</label>
+  <input class="field" id="siName" autocomplete="name" required>
+  <label for="siPhone">Phone number</label>
+  <input class="field" id="siPhone" type="tel" inputmode="tel" placeholder="0803 123 4567" autocomplete="tel" required>
+  <p class="err" id="siErr" role="alert"></p>
+  <div class="actions"><button class="btn btn-green" type="submit">Sign in</button></div>
+  <p class="hint" style="text-align:center">New here? <button class="linkbtn" type="button" id="siToSignup">Sign up</button></p>
+</form></dialog>
+
+<dialog id="restoreDlg" aria-labelledby="rsTitle"><div class="dlg">
+  <div class="dlg-head"><h2 id="rsTitle">Your account is scheduled for deletion</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+  <p id="rsText" style="margin:0 0 10px"></p>
+  <div class="actions"><button class="btn btn-line" type="button" id="rsKeep">Keep deletion</button><button class="btn btn-green" type="button" id="rsRestore">Restore my account</button></div>
+</div></dialog>
+
 <div class="toast" id="toast" role="status" hidden></div>
 
 <script>
@@ -525,7 +578,7 @@ function renderCats(){
 
 function renderGrid(){
   const q=S.q.trim().toLowerCase();
-  const items=[...listings].sort((a,b)=>(+!!a.sold)-(+!!b.sold)||(+isBoosted(b))-(+isBoosted(a))).filter(l=>
+  const items=listings.filter(listingVisible).sort((a,b)=>(+!!a.sold)-(+!!b.sold)||(+isBoosted(b))-(+isBoosted(a))).filter(l=>
     (S.st==="all"||l.state===S.st)&&(!S.ship||l.ship)&&(S.kind==="all"||l.kind===S.kind)&&(!S.saved||isSaved(l.id))&&(!S.swap||l.swap)&&(!S.hideSold||!l.sold)&&
     (S.cat==="all"||l.cat===S.cat)&&
     (!q||(l.title+" "+l.area+" "+l.state+" "+catOf(l.cat).name).toLowerCase().includes(q))
@@ -552,7 +605,7 @@ function renderGrid(){
 
 function renderStates(){
   const counts={};
-  listings.forEach(l=>counts[l.state]=(counts[l.state]||0)+1);
+  listings.filter(listingVisible).forEach(l=>counts[l.state]=(counts[l.state]||0)+1);
   $("#stateGrid").innerHTML=STATES.map(s=>`<button type="button" class="state-btn" data-state="${esc(s)}" aria-pressed="${S.st===s}"><span>${esc(s)}</span><small>${counts[s]||0}</small></button>`).join("");
 }
 
@@ -581,7 +634,7 @@ document.querySelectorAll("dialog").forEach(d=>{
   d.addEventListener("click",e=>{if(e.target===d)d.close();});
   d.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>d.close()));
 });
-function toast(msg){const t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>t.hidden=true,3200);}
+function toast(msg){const t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>t.hidden=true,Math.max(3200,msg.length*55));}
 
 function openDetail(id){
   const l=listings.find(x=>x.id===id);if(!l)return;
@@ -645,18 +698,20 @@ function showStep(n){
   if(n!==3)stopCam();
 }
 function resetCamUI(){
-  $("#camOpen").hidden=false;$("#camShot").hidden=true;$("#camDemo").hidden=true;
+  $("#camOpen").hidden=false;$("#camOpen").textContent="Open camera";$("#camShot").hidden=true;$("#camDemo").hidden=true;
+  $("#e3").textContent="";
   $("#camMsg").textContent="We take a quick live selfie and match it to the photo on your ID.";
 }
 
-$("#verifyDlg").addEventListener("close",stopCam);
+$("#verifyDlg").addEventListener("close",()=>{stopCam();pendingIdNo="";$("#vIdNo").value="";});
 
 $("#s1").addEventListener("submit",e=>{
   e.preventDefault();
   const name=$("#vName").value.trim();
-  const phone=$("#vPhone").value.replace(/[\s-]/g,"");
+  const phone=normPhone($("#vPhone").value);
   if(name.split(/\s+/).length<2){$("#e1").textContent="Enter your first and last name as they appear on your ID.";return;}
   if(!/^(\+234|234|0)[789]\d{9}$/.test(phone)){$("#e1").textContent="Enter a valid Nigerian phone number, for example 0803 123 4567.";return;}
+  const exu=users.find(x=>x.phone===phone);if(exu&&!(S.user&&S.user.id===exu.id)){$("#e1").textContent="This number already has an account. Please sign in instead.";$("#toSignin").hidden=false;return;}$("#toSignin").hidden=true;
   const rc=$("#vRef").value.trim().toUpperCase();if(rc&&!/^DNG\d{4,}$/.test(rc)){$("#e1").textContent="Referral codes look like DNG1001. Check yours or leave it empty.";return;}$("#e1").textContent="";if(role==="buyer"){completeSignup();return;}showStep(2);
 });
 const ID_RULES={
@@ -666,16 +721,25 @@ const ID_RULES={
   voter:{re:/^[A-Za-z0-9 ]{9,19}$/,hint:"Use the VIN printed on your card.",err:"Enter the number printed on your card."}
 };
 $("#vIdType").addEventListener("change",e=>{$("#idHint").textContent=ID_RULES[e.target.value].hint;$("#e2").textContent="";});
-$("#s2").addEventListener("submit",e=>{
+$("#s2").addEventListener("submit",async e=>{
   e.preventDefault();
-  const r=ID_RULES[$("#vIdType").value];
-  if(!r.re.test($("#vIdNo").value.trim())){$("#e2").textContent=r.err;return;}
+  if(Date.now()<lockUntil){$("#e2").textContent="Too many failed tries. Please wait a few minutes or contact support.";return;}
+  const type=$("#vIdType").value,r=ID_RULES[type],no=$("#vIdNo").value.trim();
+  if(!r.re.test(no)){$("#e2").textContent=r.err;return;}
+  const h=await hashId(type,no);
+  const phone=normPhone($("#vPhone").value);
+  const owner=users.find(u=>u.idHash===h);
+  if(owner&&owner.phone!==phone){$("#e2").textContent="This ID is already registered to another account. Please recheck your ID number.";return;}
+  const mine=users.find(u=>u.phone===phone);
+  if(mine&&mine.idHash&&mine.idHash!==h){$("#e2").textContent="This phone number is already verified with a different ID. Use the ID you signed up with.";return;}
+  pendingIdHash=h;pendingIdNo=no;
   $("#e2").textContent="";showStep(3);
 });
 $("#back2").addEventListener("click",()=>showStep(1));
 $("#back3").addEventListener("click",()=>{resetCamUI();showStep(2);});
 
 $("#camOpen").addEventListener("click",async()=>{
+  $("#e3").textContent="";
   try{
     stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user"}});
     const v=$("#cam");v.srcObject=stream;v.hidden=false;
@@ -690,7 +754,17 @@ function finishVerify(){
   stopCam();
   $("#camMsg").textContent="Matching your selfie to your ID…";
   ["camShot","camDemo","camOpen"].forEach(id=>$("#"+id).hidden=true);
-  setTimeout(()=>{if($("#verifyDlg").open)completeSignup();},1400);
+  setTimeout(()=>{
+    if(!$("#verifyDlg").open)return;
+    const res=verifyIdentity(pendingIdNo,$("#vName").value);
+    if(res.ok){vFails=0;completeSignup();return;}
+    vFails++;
+    const locked=vFails>=3;
+    if(locked)lockUntil=Date.now()+10*60*1000;
+    $("#camMsg").textContent="";
+    $("#e3").textContent="ID doesn't match. "+res.msg+(locked?" Too many failed tries, so please wait 10 minutes or contact support.":"");
+    $("#camOpen").textContent="Try selfie again";$("#camOpen").hidden=locked;
+  },1400);
 }
 $("#camShot").addEventListener("click",finishVerify);
 $("#camDemo").addEventListener("click",finishVerify);
@@ -862,7 +936,7 @@ function openReview(l){
 $("#stars").addEventListener("click",e=>{const b=e.target.closest("[data-star]");if(!b||!rv)return;rv.stars=+b.dataset.star;renderStars();});
 $("#reviewForm").addEventListener("submit",e=>{
   e.preventDefault();if(!rv)return;
-  reviews.push({seller:rv.seller,stars:rv.stars,text:$("#rvText").value.trim(),by:S.user.name.split(" ")[0],mine:true});
+  reviews.push({seller:rv.seller,stars:rv.stars,text:$("#rvText").value.trim(),by:S.user.name.split(" ")[0],byId:S.user.id,mine:true});
   rv=null;$("#reviewDlg").close();refresh();toast("Thanks for your review.");
 });
 
@@ -892,6 +966,7 @@ function openAcct(){
   h+='<div class="remote"><h3>💬 Chats</h3>'+(th.length?'<ul class="slist">'+th.map(t=>'<li><div class="srow2"><span>'+esc(t.l.title)+' <span class="hint">· '+esc(t.last.text.slice(0,30))+'</span></span><button class="btn btn-line btn-sm" type="button" data-thread="'+t.l.id+'|'+t.buyer+'">Open</button></div></li>').join("")+"</ul>":'<p class="hint" style="margin:0">No chats yet. Use "Chat with seller" on any item.</p>')+'</div>';
   h+='<div class="remote"><h3>Refer a friend</h3><p style="margin:0 0 10px;font-size:15px">Share your code <strong>'+esc(code)+'</strong>. When your friend finishes their first Safe Pay purchase, you both get '+money(REFERRAL_CREDIT)+' credit.</p><a class="btn btn-green" target="_blank" rel="noopener" href="https://wa.me/?text='+msg+'" style="width:100%">Invite on WhatsApp</a></div>';
   h+='<p class="hint">Purchases: '+(u.purchases||0)+(seller?" · Earn the Top Seller badge with at least 3 reviews averaging 4.5 stars or more.":"")+'</p>';
+  h+='<div class="remote"><h3>Delete account</h3><p class="hint" style="margin:0 0 8px">Deactivate your account now. It is permanently deleted after 90 days, and you can sign in before then to restore it.</p><button class="btn btn-line btn-sm danger" type="button" data-delete>Delete my account</button></div>';
   $("#acctBody").innerHTML=h;
   const d=$("#acctDlg");if(!d.open)d.showModal();
 }
@@ -918,13 +993,13 @@ $("#postForm").addEventListener("reset",()=>{photoData=[];$("#pThumbs").innerHTM
 const DRAFT='<p class="hint">Draft for review by a Nigerian lawyer before launch.</p>';
 const PAGES={
   about:{t:"About Declutter NG",h:'<p>Declutter NG helps Nigerians sell used and new items to people nearby or in other states.</p><p>Every seller is checked with a government ID and a live selfie. Safe Pay holds the buyer\'s money until the item is checked, and anything you can\'t find can go on the Wanted board.</p>'},
-  trust:{t:"Trust & Safety",h:'<h3>Verified sellers</h3><p>Sellers confirm their phone, ID and face before they can post. The blue tick shows who has done this.</p><h3>Safe Pay</h3><p>You pay through Safe Pay, never in cash or by transfer to the seller. The seller is paid only after you give them your pickup code.</p><h3>When you meet</h3><ul><li>Meet in a busy public place in daylight.</li><li>Take someone with you for large items.</li><li>Check the item before you give the code.</li><li>Never share your bank details or home address.</li></ul><h3>Report a problem</h3><p>Use "Report this listing" on any item. See the <a href="#page-refund" data-page="refund">Refund Policy</a>.</p>'},
+  trust:{t:"Trust & Safety",h:'<h3>Verified sellers</h3><p>Sellers confirm their phone, ID and face before they can post. The blue tick shows who has done this.</p><h3>Safe Pay</h3><p>You pay through Safe Pay, never in cash or by transfer to the seller. The seller is paid only after you give them your pickup code.</p><h3>When you meet</h3><ul><li>Meet in a busy public place in daylight.</li><li>Take someone with you for large items.</li><li>Check the item before you give the code.</li><li>Never share your bank details or home address.</li></ul><h3>Report a problem</h3><p>Use "Report this listing" on any item. See the <a href="#page-refund" data-page="refund">Refund Policy</a>. Need help fast? Call or WhatsApp 0814 783 8934.</p>'},
   faq:{t:"FAQ",h:'<h3>How does Safe Pay work?</h3><p>You pay, we hold the money, you check the item, then you give the seller your pickup code. They enter it and get paid.</p><h3>What if the item isn\'t as described?</h3><p>Don\'t give the code. Ask for a refund in Safe Pay and your money comes back.</p><h3>Why do sellers need ID and a selfie?</h3><p>So buyers know a real, identified person is selling to them.</p><h3>Can I buy from another state?</h3><p>Yes, from sellers marked with 🚚. Choose delivery in Safe Pay.</p><h3>How do rewards work?</h3><p>Refer a friend and you both get credit after their first purchase. Sellers pay no commission on their first 3 sales.</p>'},
   refund:{t:"Refund Policy",h:'<p>If an item is not as described or has a major fault you were not told about, do not give the seller your pickup code. Choose "Ask for a refund" in Safe Pay and your money is returned. The seller is not paid.</p><p>For delivered items, check the item when it arrives before you give the code.</p><p>Once you have given the pickup code, the sale is complete. We cannot refund problems you could have seen when you checked the item.</p>'+DRAFT},
-  privacy:{t:"Privacy",h:'<p>We collect your name, phone number, the type of ID you used, and the result of your selfie match. We use this to verify sellers and prevent fraud.</p><p>We never show your ID or selfie to buyers or other users. We keep verification data only as long as needed for fraud prevention and legal reasons.</p><p>Under the Nigeria Data Protection Act you can ask to see, correct or delete your data.</p><p>In this prototype, your data stays in your own browser.</p>'+DRAFT},
+  privacy:{t:"Privacy",h:'<p>We collect your name, phone number, the type of ID you used, and the result of your selfie match. We use this to verify sellers and prevent fraud.</p><p>We never show your ID or selfie to buyers or other users. We keep verification data only as long as needed for fraud prevention and legal reasons.</p><p>Under the Nigeria Data Protection Act you can ask to see, correct or delete your data. You can also delete your account yourself at any time from My account. Deleted accounts are kept for 90 days in case you change your mind, then permanently erased.</p><p>We never keep your ID number itself. We keep only a scrambled version, to stop the same ID being used on two accounts.</p><p>In this prototype, your data stays in your own browser.</p>'+DRAFT},
   terms:{t:"Terms of Service",h:'<ul><li>You must be 18 or older.</li><li>Listings must be honest. No stolen, fake or illegal items.</li><li>Pay only through Safe Pay. Do not pay or ask to be paid outside it.</li><li>We may remove listings or accounts that break these rules.</li><li>You meet other users at your own risk, so follow the safety tips.</li><li>Fees and commissions are shown before you pay or sell.</li></ul>'+DRAFT},
   earn:{t:"Earn with us",h:'<p>Refer friends and earn credit: you both get ₦1,000 after their first Safe Pay purchase. Your code is in My account.</p><h3>Campus and market ambassadors</h3><p>Know lots of people who want to sell? Bring them to Declutter NG and earn a commission on their sales. Leave your details and we will contact you when the programme opens.</p><form id="eForm"><label for="eName">Your name</label><input class="field" id="eName" required><label for="eContact">Phone or email</label><input class="field" id="eContact" required><label for="eWhere">Campus or market</label><input class="field" id="eWhere"><div class="actions"><button class="btn btn-green" type="submit">Join the waiting list</button></div></form>'},
-  contact:{t:"Contact us",h:'<p>Tell us what happened and how to reach you.</p><form id="cForm"><label for="cMsg">Your message</label><textarea class="field" id="cMsg" maxlength="500" required></textarea><label for="cEmail">Phone or email</label><input class="field" id="cEmail" required><div class="actions"><button class="btn btn-green" type="submit">Send message</button></div></form>'}
+  contact:{t:"Contact us",h:'<p><strong>Call or WhatsApp: <a href="tel:+2348147838934">0814 783 8934</a></strong></p><p><a class="btn btn-green" href="https://wa.me/2348147838934" target="_blank" rel="noopener" style="width:100%">💬 Chat on WhatsApp</a></p><p>Or send us a message and we will reply.</p><form id="cForm"><label for="cMsg">Your message</label><textarea class="field" id="cMsg" maxlength="500" required></textarea><label for="cEmail">Phone or email</label><input class="field" id="cEmail" required><div class="actions"><button class="btn btn-green" type="submit">Send message</button></div></form>'}
 };
 function openPage(k){
   if(!PAGES[k])return;
@@ -940,22 +1015,22 @@ listings.forEach(l=>{l.kind=[9,10].includes(l.id)?"new":"used";if(l.kind==="new"
 
 function renderWho(){
   const u=S.user;
-  $("#who").hidden=!u;$("#signupBtn").hidden=!!u;$("#signoutBtn").hidden=!u;
+  $("#who").hidden=!u;$("#signupBtn").hidden=!!u;$("#signinBtn").hidden=!!u;$("#signoutBtn").hidden=!u;
   if(u)$("#who").innerHTML=esc(u.name.split(" ")[0])+" · "+(u.role==="seller"?"Seller "+TICK:"Buyer")+((u.credit||0)>0?" · "+money(u.credit):"")+((u.notes||[]).length?" · 🔔"+u.notes.length:"");
 }
 function startSignup(r){
-  role=r;resetCamUI();$("#e1").textContent="";$("#e2").textContent="";$("#vRef").value=pendingRef;
+  role=r;resetCamUI();$("#e1").textContent="";$("#e2").textContent="";$("#vRef").value=pendingRef;$("#toSignin").hidden=true;
   if(S.user&&r==="seller"){$("#vName").value=S.user.name;$("#vPhone").value=S.user.phone;}
   showStep(r?1:0);$("#verifyDlg").showModal();
 }
 function completeSignup(){
   const name=$("#vName").value.trim().replace(/\s+/g," ");
-  const phone=$("#vPhone").value.replace(/[\s-]/g,"");
-  const ex=users.find(x=>x.phone===phone);if(ex&&ex.blocked){showStep(1);$("#e1").textContent="This account is suspended. Please contact support.";return;}
+  const phone=normPhone($("#vPhone").value);
+  const ex=users.find(x=>x.phone===phone);if(ex&&ex.blocked){showStep(1);$("#e1").textContent="This account is suspended. Please contact support on 0814 783 8934.";return;}
   const wantSeller=role==="seller";
   let u=users.find(x=>x.phone===phone);
   if(!u){u={id:"U"+(users.length+1001),name,phone,joined:new Date().toISOString().slice(0,10),role:"buyer",verified:false,credit:0,purchases:0,sales:0,saved:[],alerts:[],notes:[],boosts:0,blocked:false,usedRef:$("#vRef").value.trim().toUpperCase()||null,refPaid:false};users.push(u);}
-  if(wantSeller){u.role="seller";u.verified=true;u.idType=$("#vIdType").value;if(!u.sellerSince){u.sellerSince=Date.now();u.boosts=(u.boosts||0)+3;}}
+  if(wantSeller){u.role="seller";u.verified=true;u.idType=$("#vIdType").value;u.idHash=pendingIdHash||u.idHash;if(!u.sellerSince){u.sellerSince=Date.now();u.boosts=(u.boosts||0)+3;}}
   S.user=u;
   const seller=u.role==="seller";
   renderWho();
@@ -989,7 +1064,7 @@ $("#wCat").innerHTML=CATS.map(c=>`<option value="${c.id}">${esc(c.name)}</option
 $("#wState").innerHTML=STATES.map(x=>`<option>${esc(x)}</option>`).join("");
 
 function renderWanted(){
-  const items=wanted.filter(w=>(S.st==="all"||w.state===S.st)&&(S.cat==="all"||w.cat===S.cat)).sort((a,b)=>(+!!a.found)-(+!!b.found));
+  const items=wanted.filter(w=>(S.st==="all"||w.state===S.st)&&(S.cat==="all"||w.cat===S.cat)&&wantedVisible(w)).sort((a,b)=>(+!!a.found)-(+!!b.found));
   $("#wantedTitle").textContent="Wanted in "+(S.st==="all"?"all Nigeria":S.st);
   $("#wlist").innerHTML=items.length?items.map(w=>{
     const c=catOf(w.cat);
@@ -1053,7 +1128,7 @@ function addAlert(){
 }
 function notifyMatches(l){
   users.forEach(u=>{
-    if(u.id===l.owner)return;
+    if(u.id===l.owner||u.deleteAt)return;
     if((u.alerts||[]).some(a=>matchesAlert(a,l)))pushNote(u,"New match: "+l.title+" in "+l.state);
   });
   wanted.forEach(w=>{
@@ -1099,7 +1174,7 @@ $("#chatDlg").addEventListener("close",()=>{chat=null;renderWho();});
 
 /* public seller shop */
 function openSeller(name){
-  const items=listings.filter(l=>l.seller===name);
+  const items=listings.filter(l=>l.seller===name&&listingVisible(l));
   const st=sellerStats(name),su=sellerUser(name);
   const top=isTop(name)?'<span class="topbadge">Top Seller</span>':"";
   const lvl=su?'<span class="topbadge">'+levelOf(su.sales||0)+'</span>':"";
@@ -1119,6 +1194,7 @@ $("#sellerBody").addEventListener("click",e=>{
 $("#acctBody").addEventListener("click",e=>{
   const t=e.target,u=S.user;if(!u)return;
   if(t.closest("[data-close]")){$("#acctDlg").close();return;}
+  if(t.closest("[data-delete]")){$("#acctDlg").close();openDelete();return;}
   const bo=t.closest("[data-boost]");
   if(bo){const l=listings.find(x=>x.id==bo.dataset.boost);if(!l)return;if((u.boosts||0)<1){toast("No free boosts left. You earn one with every sale.");return;}u.boosts--;l.boostUntil=Date.now()+3*86400000;refresh();openAcct();toast("Boosted for 3 days. It shows first in the list.");return;}
   const fl=t.closest("[data-flip]");
@@ -1140,7 +1216,7 @@ function openAdmin(){
   const table=(head,rows)=>'<div class="tbl"><table><thead><tr>'+head.map(x=>"<th>"+x+"</th>").join("")+"</tr></thead><tbody>"+(rows.join("")||'<tr><td colspan="'+head.length+'">Nothing yet</td></tr>')+"</tbody></table></div>";
   let h='<div class="dlg-head"><h2>Admin (demo)</h2><button class="x" type="button" data-close aria-label="Close">×</button></div><p class="hint" style="margin:0 0 10px">Demo only: anyone can open this here. On the live site only your team can.</p>';
   h+='<div class="stat">'+[["Users",users.length+" ("+b+" buyers, "+sl+" sellers)"],["Listings",listings.length+" ("+listings.filter(l=>l.sold).length+" sold)"],["Open wanted",wanted.filter(w=>!w.found).length],["Deals",deals.length+" · "+money(vol)],["Reports",reports.length],["Reviews",reviews.length]].map(x=>"<div><span>"+x[0]+"</span><strong>"+esc(String(x[1]))+"</strong></div>").join("")+"</div>";
-  h+='<h3 style="font-size:17px;margin:0">Users</h3>'+table(["ID","Name","Role","Verified","Phone","Credit","Buys","Sales","Action"],users.map(u=>tr([esc(u.id),esc(u.name),esc(u.role),u.verified?"Yes":"No",esc(u.phone.slice(0,4)+"•••"+u.phone.slice(-3)),money(u.credit||0),u.purchases||0,u.sales||0,'<button class="btn btn-line btn-sm" type="button" data-block="'+esc(u.id)+'">'+(u.blocked?"Unblock":"Suspend")+"</button>"])));
+  h+='<h3 style="font-size:17px;margin:0">Users</h3>'+table(["ID","Name","Role","Verified","Phone","Credit","Buys","Sales","Status","Action"],users.map(u=>tr([esc(u.id),esc(u.name),esc(u.role),u.verified?"Yes":"No",esc(u.phone.slice(0,4)+"•••"+u.phone.slice(-3)),money(u.credit||0),u.purchases||0,u.sales||0,u.deleteAt?"Deletes "+fmtDate(u.deleteAt):u.blocked?"Suspended":"Active",'<button class="btn btn-line btn-sm" type="button" data-block="'+esc(u.id)+'">'+(u.blocked?"Unblock":"Suspend")+"</button>"])));
   h+='<h3 style="font-size:17px;margin:0">Reports</h3>'+table(["Item","Reason","By","Action"],reports.map(r=>{const l=listings.find(x=>x.id===r.id);return tr([esc(l?l.title:"(removed)"),esc(r.reason),esc(r.by),l?'<button class="btn btn-line btn-sm" type="button" data-remove="'+l.id+'">Remove listing</button>':""]);}));
   h+='<h3 style="font-size:17px;margin:0">Deals</h3>'+table(["Item","Price","Safe Pay fee","Commission","Method"],deals.slice(-10).reverse().map(x=>tr([esc(x.title),money(x.price),money(x.fee),money(x.commission),esc(x.method)])));
   $("#adminBody").innerHTML=h;
@@ -1156,6 +1232,98 @@ $("#adminBody").addEventListener("click",e=>{
 });
 $("#infoBody").addEventListener("submit",e=>{if(e.target.id!=="eForm")return;e.preventDefault();$("#infoDlg").close();toast("You're on the waiting list. We'll contact you when ambassadors open.");});
 
+/* ---------- ID checks and account deletion ---------- */
+let lockUntil=0,vFails=0,pendingIdHash="",pendingIdNo="";
+async function hashId(type,no){
+  const s=type+":"+no.toLowerCase().replace(/\s+/g,"");
+  try{
+    const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));
+    return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");
+  }catch(e){let h=5381;for(const ch of s)h=((h<<5)+h+ch.charCodeAt(0))|0;return "x"+h;}
+}
+/* DEMO ONLY: stands in for a real ID verification provider (name + face match). Replace with a provider call. */
+function verifyIdentity(idNo,name){
+  if(/000$/.test(idNo))return{ok:false,msg:"The name you entered doesn't match the name on this ID. Check your name and ID number."};
+  if(/999$/.test(idNo))return{ok:false,msg:"Your selfie doesn't match the photo on this ID. Try again in good light, or check your ID number."};
+  return{ok:true};
+}
+function openDelete(){$("#delConfirm").value="";$("#delErr").textContent="";$("#delDlg").showModal();}
+$("#delForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  if($("#delConfirm").value.trim()!=="DELETE"){$("#delErr").textContent="Type DELETE in capital letters to confirm.";return;}
+  requestDeletion();
+});
+const DELETE_DAYS=90;
+const fmtDate=t=>new Date(t).toLocaleDateString("en-NG",{day:"numeric",month:"long",year:"numeric"});
+function listingVisible(l){const o=l.owner&&users.find(u=>u.id===l.owner);return !(o&&o.deleteAt);}
+function wantedVisible(w){const o=w.owner&&users.find(u=>u.id===w.owner);return !(o&&o.deleteAt);}
+function requestDeletion(){
+  const u=S.user;if(!u)return;
+  u.deleteAt=Date.now()+DELETE_DAYS*86400000;
+  S.user=null;
+  $("#delDlg").close();renderWho();refresh();
+  toast("Your account is deactivated and will be permanently deleted on "+fmtDate(u.deleteAt)+". Sign in before then to restore it.");
+}
+function purgeUser(u){
+  const id=u.id,sn=shortName(u);
+  const myIds=listings.filter(l=>l.owner===id).map(l=>l.id);
+  const drop=(arr,fn)=>{for(let i=arr.length-1;i>=0;i--)if(fn(arr[i]))arr.splice(i,1);};
+  drop(listings,l=>l.owner===id);
+  drop(wanted,w=>w.owner===id);
+  drop(messages,m=>m.buyer===id||myIds.includes(m.lid));
+  drop(reviews,r=>r.byId===id||(r.mine&&r.seller===sn));
+  drop(reports,r=>r.by===id);
+  deals.forEach(d=>{if(d.buyer===id)d.buyer="deleted";if(d.seller===id){d.seller=null;d.sellerName="Deleted seller";}});
+  const i=users.findIndex(x=>x.id===id);if(i>=0)users.splice(i,1);
+  if(S.user&&S.user.id===id)S.user=null;
+}
+function purgeExpired(){users.filter(u=>u.deleteAt&&u.deleteAt<=Date.now()).forEach(purgeUser);}
+let restoreUser=null;
+function showRestore(u){
+  restoreUser=u;
+  $("#rsText").textContent="This account will be permanently deleted on "+fmtDate(u.deleteAt)+". Restore it now to get your profile and listings back.";
+  $("#restoreDlg").showModal();
+}
+$("#rsRestore").addEventListener("click",()=>{
+  const u=restoreUser;if(!u)return;
+  delete u.deleteAt;S.user=u;restoreUser=null;
+  $("#restoreDlg").close();renderWho();refresh();toast("Welcome back. Your account is restored.");
+});
+$("#rsKeep").addEventListener("click",()=>{
+  const u=restoreUser;restoreUser=null;$("#restoreDlg").close();
+  if(u)toast("Okay. Your account will be permanently deleted on "+fmtDate(u.deleteAt)+".");
+});
+
+/* ---------- sign in ---------- */
+function normPhone(p){return String(p).replace(/[\s-]/g,"").replace(/^(\+234|234)/,"0");}
+const normName=n=>String(n).toLowerCase().replace(/\s+/g," ").trim();
+let siFails=0,siLock=0;
+function openSignin(name,phone){
+  $("#siErr").textContent="";$("#siName").value=name||"";$("#siPhone").value=phone||"";
+  $("#signinDlg").showModal();
+}
+$("#signinBtn").addEventListener("click",()=>openSignin());
+$("#siToSignup").addEventListener("click",()=>{$("#signinDlg").close();startSignup(null);});
+$("#s0ToSignin").addEventListener("click",()=>{$("#verifyDlg").close();openSignin();});
+$("#toSignin").addEventListener("click",()=>{const n=$("#vName").value,ph=$("#vPhone").value;$("#verifyDlg").close();openSignin(n,ph);});
+$("#signinForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  if(Date.now()<siLock){$("#siErr").textContent="Too many tries. Please wait a few minutes and try again.";return;}
+  const name=normName($("#siName").value),phone=normPhone($("#siPhone").value);
+  if(!name||!/^0[789]\d{9}$/.test(phone)){$("#siErr").textContent="Enter your full name and a valid Nigerian phone number.";return;}
+  const u=users.find(x=>x.phone===phone&&normName(x.name)===name);
+  if(!u){
+    siFails++;
+    if(siFails>=5){siLock=Date.now()+5*60*1000;siFails=0;$("#siErr").textContent="Too many tries. Please wait 5 minutes or sign up if you're new.";return;}
+    $("#siErr").textContent="We couldn't find an account with that name and number. Check both and try again, or sign up.";return;
+  }
+  if(u.blocked){$("#siErr").textContent="This account is suspended. Please contact support on 0814 783 8934.";return;}
+  if(u.deleteAt){siFails=0;$("#signinDlg").close();showRestore(u);return;}
+  siFails=0;S.user=u;
+  $("#signinDlg").close();renderWho();refresh();
+  toast("Welcome back, "+u.name.split(" ")[0]+".");
+});
+
 /* ---------- keep your posts in this browser ---------- */
 const KEY="declutterng-v2";
 function save(){
@@ -1169,13 +1337,13 @@ function load(){
     listings.unshift(...d.listings);wanted.unshift(...d.wanted);users.push(...d.users);
     reviews.push(...(d.reviews||[]));reports.push(...(d.reports||[]));messages.push(...(d.messages||[]));deals.push(...(d.deals||[]));removed.push(...(d.removed||[]));
     for(let i=listings.length-1;i>=0;i--)if(removed.includes(listings[i].id))listings.splice(i,1);
-    users.forEach(u=>{u.credit=u.credit||0;u.purchases=u.purchases||0;u.sales=u.sales||0;u.saved=u.saved||[];u.alerts=u.alerts||[];u.notes=u.notes||[];u.boosts=u.boosts||0;});
-    S.user=users.find(u=>u.id===d.uid)||null;
+    users.forEach(u=>{u.phone=normPhone(u.phone);u.credit=u.credit||0;u.purchases=u.purchases||0;u.sales=u.sales||0;u.saved=u.saved||[];u.alerts=u.alerts||[];u.notes=u.notes||[];u.boosts=u.boosts||0;});
+    S.user=users.find(u=>u.id===d.uid)||null;if(S.user&&S.user.deleteAt)S.user=null;
   }catch(e){}
 }
 $("#signoutBtn").addEventListener("click",()=>{S.user=null;renderWho();refresh();toast("You're signed out.");});
 
-load();renderWho();refresh();applyHash(false);
+load();purgeExpired();renderWho();refresh();applyHash(false);
 </script>
 </body>
 </html>
