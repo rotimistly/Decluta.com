@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data: blob:; media-src blob:; connect-src https://script.google.com https://script.googleusercontent.com; form-action 'none'; base-uri 'none'; object-src 'none'; frame-src 'none'">
+<title>Declutter NG | Buy and sell used items in Nigeria</title>
+<meta name="description" content="Buy and sell used phones, furniture, cars, laptops and more in Lagos, Abuja, Kano, Port Harcourt and every Nigerian state. Verified sellers, Safe Pay and delivery to your state.">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_NG">
+<meta property="og:title" content="Declutter NG | Buy and sell used items in Nigeria">
+<meta property="og:description" content="Verified sellers in every state. Ask for a video, pay safely and get items delivered.">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Declutter NG","inLanguage":"en-NG","description":"Marketplace for used items in Nigeria with ID-verified sellers."}</script>
+<script type="application/ld+json" id="ldItems"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F7F4; --surface:#FFFFFF; --ink:#15201A; --muted:#58665D; --line:#DCE1DA;
+  --green:#0E6B3F; --green-hover:#0A5632; --yellow:#FFC20E; --blue:#1D6FE0;
+  --display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --body:'Figtree','Segoe UI',system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#0F1511; --surface:#17201A; --ink:#EDF2EE; --muted:#9BAAA0; --line:#2A362E; --green:#23895A; --green-hover:#2B9C69; --chip-on-bg:#EDF2EE; --err:#FF8A75; }
+}
+:root[data-theme="dark"]{ --bg:#0F1511; --surface:#17201A; --ink:#EDF2EE; --muted:#9BAAA0; --line:#2A362E; --green:#23895A; --green-hover:#2B9C69; --chip-on-bg:#EDF2EE; --err:#FF8A75; }
+:root{ --chip-on-bg:#15201A; --err:#C0341D; box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); }
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+button{font:inherit;cursor:pointer}
+h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0}
+
+/* top bar */
+.top{flex-wrap:wrap;gap:8px;display:flex;align-items:center;justify-content:space-between;padding:12px 18px;max-width:1080px;margin:0 auto}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:20px;color:var(--ink);text-decoration:none}
+.mark{display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:#15201A;color:var(--yellow);font-size:19px}
+.btn{border:0;border-radius:10px;padding:12px 18px;font-weight:700;font-size:16px;min-height:46px}
+.btn-green{background:var(--green);color:#fff}
+.btn-green:hover{background:var(--green-hover)}
+.btn-ink{background:#15201A;color:#fff}
+.btn-ink:hover{background:#000}
+.btn-line{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.btn-line:hover{border-color:var(--ink)}
+
+/* hero */
+.hero{background:var(--yellow);color:#15201A;border-bottom:10px solid #15201A;padding:34px 0 40px}
+.hero h1{font-size:clamp(32px,6.4vw,58px);font-weight:800;max-width:15em;letter-spacing:-.02em}
+.hero .sub{font-size:18px;max-width:34em;margin:14px 0 24px}
+.finder{display:grid;grid-template-columns:1fr;gap:8px;background:#fff;padding:8px;border-radius:14px;max-width:760px}
+.finder input,.finder select{width:100%;min-height:48px;border:1.5px solid #D6DAD3;border-radius:10px;padding:0 12px;font:inherit;font-size:16px;color:#15201A;background:#fff}
+@media(min-width:680px){.finder{grid-template-columns:1fr 200px auto}}
+
+/* categories */
+.cats{display:flex;gap:8px;overflow-x:auto;padding:20px 18px 6px;max-width:1080px;margin:0 auto;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 14px;font-weight:600;min-height:42px}
+.chip[aria-pressed="true"]{background:var(--chip-on-bg);border-color:var(--chip-on-bg);color:var(--bg)}
+
+/* results */
+.results{padding:18px 0 8px}
+.results-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.results-head h2{font-size:24px}
+.count{color:var(--muted);font-size:15px}
+.grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:14px}
+.card{display:block;width:100%;text-align:left;padding:0;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;overflow:hidden;color:var(--ink)}
+.card:hover{border-color:var(--green)}
+.tile{display:grid;place-items:center;aspect-ratio:4/3;background:color-mix(in srgb,var(--tint) 20%,var(--surface))}
+.tile .emoji{font-size:44px}
+.card-body{display:block;padding:10px 12px 12px}
+.price{display:block;font-weight:700;font-size:18px}
+.title{display:block;margin-top:2px;font-size:15px;line-height:1.3}
+.meta{display:flex;align-items:center;gap:6px;margin-top:8px;color:var(--muted);font-size:13px}
+.tick{width:18px;height:18px;flex:none;vertical-align:middle}
+.empty{padding:36px 18px;text-align:center;border:1.5px dashed var(--line);border-radius:14px;color:var(--muted)}
+.empty p{margin:0 0 14px}
+
+/* states */
+.states{padding:36px 0 8px}
+.states h2{font-size:24px;margin-bottom:6px}
+.states p{color:var(--muted);margin:0 0 16px}
+.state-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.state-btn{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--ink);text-align:left;min-height:46px}
+.state-btn:hover{border-color:var(--green)}
+.state-btn[aria-pressed="true"]{border-color:var(--green);background:color-mix(in srgb,var(--green) 12%,var(--surface))}
+.state-btn small{color:var(--muted);font-weight:600}
+
+/* trust */
+.trust{margin-top:40px;padding:30px 0;border-top:1.5px solid var(--line)}
+.trust h2{font-size:24px;display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.trust ul{margin:0;padding-left:20px;max-width:40em}
+.trust li{margin:6px 0}
+footer{padding:22px 0 40px;color:var(--muted);font-size:14px}
+
+/* dialogs */
+dialog{border:0;border-radius:16px;padding:0;width:min(480px,calc(100% - 24px));max-height:calc(100% - 24px);background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:rgba(10,16,12,.6)}
+.dlg{padding:20px}
+.dlg-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:6px}
+.dlg-head h2{font-size:24px}
+.x{border:0;background:transparent;color:var(--ink);font-size:28px;line-height:1;width:44px;height:44px;border-radius:10px;margin:-8px -8px 0 0}
+.x:hover{background:var(--bg)}
+.stepno{color:var(--muted);margin:0 0 14px;font-size:14px}
+label{display:block;font-weight:600;margin:12px 0 4px}
+.field{width:100%;min-height:48px;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;font-size:16px;color:var(--ink);background:var(--bg)}
+textarea.field{min-height:84px;resize:vertical}
+.hint{color:var(--muted);font-size:14px;margin:6px 0 0}
+.err{color:var(--err);font-size:14px;margin:8px 0 0;min-height:1em}
+.actions{display:flex;gap:10px;margin-top:18px}
+.actions .btn{flex:1}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.detail-tile{border-radius:12px;aspect-ratio:16/9;display:grid;place-items:center;background:color-mix(in srgb,var(--tint) 20%,var(--surface));margin-bottom:14px}
+.detail-tile .emoji{font-size:72px}
+.detail .price{font-size:26px}
+.seller{display:flex;align-items:center;gap:8px;padding:12px;border:1.5px solid var(--line);border-radius:12px;margin:14px 0}
+.safety{background:color-mix(in srgb,var(--yellow) 22%,var(--surface));border-radius:10px;padding:10px 12px;font-size:14px}
+video{width:100%;border-radius:12px;background:#000;aspect-ratio:4/3;object-fit:cover;transform:scaleX(-1)}
+.success{text-align:center;padding:10px 0}
+.success .tick{width:72px;height:72px}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#15201A;color:#fff;padding:12px 18px;border-radius:10px;max-width:calc(100% - 32px);z-index:50;font-weight:600}
+.toast[hidden]{display:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+a.btn{display:inline-block;text-align:center;text-decoration:none;line-height:1.5}
+.tile{position:relative}
+.soldtag{position:absolute;left:8px;top:8px;background:#15201A;color:#fff;font-weight:700;font-size:13px;padding:3px 8px;border-radius:6px}
+.tile.is-sold .emoji{opacity:.3}
+.tile.is-sold + .card-body .price{text-decoration:line-through;opacity:.6}
+.soldbar{background:#15201A;color:#fff;font-weight:700;padding:8px 12px;border-radius:10px;margin:0 0 10px}
+.ship{display:block;margin-top:6px;font-size:13px;font-weight:600;color:var(--green)}
+.toggle{display:flex;align-items:center;gap:8px;margin:0;font-weight:500;font-size:15px}
+.toggle input{width:20px;height:20px}
+.remote{border:1.5px solid var(--line);border-radius:12px;padding:12px;margin:14px 0}
+.remote h3{font-size:18px;margin-bottom:6px}
+.remote ul{margin:0;padding-left:20px;font-size:15px}
+.remote .actions{margin-top:12px;flex-wrap:wrap}
+.remote .actions .btn{min-width:150px}
+.steps{margin:12px 0;padding-left:22px}
+.steps li{padding:4px 0;color:var(--muted)}
+.steps li.now{color:var(--ink);font-weight:700}
+.steps li.done{color:var(--green)}
+.steps li.done::after{content:" ✓"}
+.pop{display:flex;flex-wrap:wrap;gap:8px}
+.pop a{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);padding:9px 14px;border-radius:999px;text-decoration:none;font-weight:600}
+.pop a:hover{border-color:var(--green)}
+.btn-white{background:#fff;color:#15201A}
+.btn-white:hover{background:#F1F1EA}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.top-right{display:flex;align-items:center;gap:10px}
+.who{font-weight:600;font-size:15px;display:flex;align-items:center;gap:6px}
+.role{display:block;width:100%;text-align:left;margin-bottom:10px;padding:14px}
+.role strong{display:block;font-size:18px}
+.role span{display:block;font-weight:400;color:var(--muted);font-size:14px}
+.newtag{position:absolute;right:8px;top:8px;background:var(--yellow);color:#15201A;font-weight:700;font-size:13px;padding:3px 8px;border-radius:6px}
+.wanted{padding:34px 0 0}
+.wanted h2{font-size:24px}
+.wlist{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:10px}
+.want{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px}
+.want.is-found{opacity:.6}
+.foundtag{font-weight:700;color:var(--green)}
+.who[hidden]{display:none}
+.linkbtn{background:none;border:0;color:var(--muted);text-decoration:underline;padding:8px 4px;font-size:14px;min-height:40px}
+.linkbtn[hidden]{display:none}
+button.who{background:none;border:0;color:var(--ink);font-family:inherit;cursor:pointer;padding:8px 4px;min-height:40px}
+.tile .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.soldtag,.newtag{z-index:1}
+.detail-tile{position:relative;overflow:hidden}
+.detail-tile .ph{width:100%;height:100%;object-fit:cover}
+.thumbs{display:flex;gap:8px;margin:8px 0}
+.thumbs img{width:64px;height:64px;object-fit:cover;border-radius:8px;cursor:pointer;border:1.5px solid var(--line)}
+.topbadge{background:var(--yellow);color:#15201A;font-weight:700;font-size:12px;padding:2px 8px;border-radius:999px;margin-left:6px}
+.report{margin-top:14px}
+.report summary{cursor:pointer;color:var(--muted);font-size:14px;padding:8px 0}
+.strip{background:var(--surface);border-bottom:1.5px solid var(--line)}
+.strip ul{list-style:none;margin:0 auto;padding:12px 18px;display:flex;flex-wrap:wrap;gap:6px 22px;font-weight:600;font-size:15px;max-width:1080px}
+.flinks{display:flex;flex-wrap:wrap;gap:6px 16px;margin-bottom:10px}
+.flinks a,.info a{color:var(--ink)}
+.info p,.info li{font-size:15px}
+.info h3{font-size:17px;margin:14px 0 4px}
+.info ul{padding-left:20px;margin:6px 0}
+.summary{font-size:15px;margin:8px 0}
+.summary div:last-child{font-weight:700}
+.codebox{background:color-mix(in srgb,var(--yellow) 22%,var(--surface));border-radius:10px;padding:10px 12px;margin:10px 0;font-size:15px}
+.code{font-size:24px;letter-spacing:.15em}
+.stars{display:flex;gap:2px;margin:6px 0}
+.star{font-size:30px;background:none;border:0;color:var(--line);min-width:44px;min-height:44px;padding:0}
+.star.on{color:#E8A600}
+.btn-sm{padding:6px 10px;min-height:36px;font-size:14px}
+.sellerlink{color:var(--ink);padding:0;min-height:0;font-size:16px;text-align:left}
+.boosttag{position:absolute;left:8px;bottom:8px;z-index:1;background:#15201A;color:var(--yellow);font-weight:700;font-size:12px;padding:3px 8px;border-radius:6px}
+.slist{list-style:none;margin:6px 0;padding:0}
+.slist li{border-bottom:1px solid var(--line)}
+.srow,.srow2{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;padding:8px 0;font-size:15px}
+.srow{background:none;border:0;color:var(--ink);text-align:left}
+.chatlog{display:flex;flex-direction:column;gap:6px;max-height:260px;overflow-y:auto;margin:10px 0;padding:4px}
+.msg{max-width:80%;padding:8px 12px;border-radius:14px;font-size:15px;word-break:break-word}
+.msg.me{align-self:flex-end;background:var(--green);color:#fff}
+.msg.them{align-self:flex-start;background:var(--bg);border:1.5px solid var(--line)}
+.chatform{display:flex;gap:8px}
+.chatform .field{flex:1}
+#adminDlg{width:min(720px,calc(100% - 24px))}
+.stat{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.stat div{border:1.5px solid var(--line);border-radius:10px;padding:8px 10px}
+.stat span{display:block;color:var(--muted);font-size:13px}
+.stat strong{font-size:15px}
+.tbl{overflow-x:auto;margin:6px 0 14px}
+.tbl table{border-collapse:collapse;min-width:520px;font-size:14px;width:100%}
+.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;white-space:nowrap}
+.btn-green.danger{background:#C0341D;color:#fff}
+.btn-line.danger{color:var(--err);border-color:var(--err)}
+.contactband{background:var(--yellow);color:#15201A;border-top:10px solid #15201A;padding:30px 0;margin-top:40px}
+.contactband h2{font-size:clamp(26px,5vw,38px);font-weight:800;letter-spacing:-.02em}
+.contactband p{margin:8px 0 16px;font-size:17px;max-width:32em}
+.contactband .num{display:block;font-family:var(--display);font-weight:800;font-size:clamp(30px,7vw,48px);color:#15201A;text-decoration:none;margin:4px 0 14px}
+.contactband .acts{display:flex;gap:10px;flex-wrap:wrap}
+.helpfab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:40;background:#15201A;color:#fff;font-weight:700;padding:12px 16px;border-radius:999px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.35);display:flex;gap:6px;align-items:center}
+.helpfab span{display:none}
+@media(min-width:560px){.helpfab span{display:inline}}
+.strip a{color:var(--ink)}
+footer a{color:var(--ink)}
+.toplink{display:none;font-weight:700;color:var(--ink);text-decoration:none}
+@media(min-width:760px){.toplink{display:inline}}
+.tile .ph{object-fit:contain;background:color-mix(in srgb,var(--tint) 12%,var(--surface))}
+.detail-tile.has-photo{aspect-ratio:auto;background:var(--bg)}
+.detail-tile.has-photo .ph{display:block;width:100%;height:auto;max-height:60vh;object-fit:contain;cursor:zoom-in}
+.chatacts{margin-top:6px}
+.srow2{flex-wrap:wrap}
+.want{align-items:flex-start}
+.wph{width:72px;height:72px;object-fit:contain;background:var(--bg);border:1.5px solid var(--line);border-radius:10px;cursor:zoom-in;flex:none}
+.wbody{flex:1;min-width:150px}
+.wbtns{display:flex;gap:6px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="logo" href="#"><span class="mark" aria-hidden="true">D</span>Declutter NG</a>
+  <div class="top-right"><a class="toplink" href="tel:+2348147838934">📞 0814 783 8934</a><button class="who" id="who" type="button" hidden aria-label="My account"></button><button class="linkbtn" id="signoutBtn" type="button" hidden>Sign out</button><button class="btn btn-line btn-sm" id="signinBtn" type="button">Sign in</button><button class="btn btn-green" id="signupBtn" type="button">Sign up</button></div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Someone near you wants what you don't need.</h1>
+    <p class="sub">Sell your used items in your state, or find a good deal close to home. Every seller is ID-checked and face-matched.</p>
+    <form class="finder" id="finder" role="search">
+      <label class="sr" for="q">What are you looking for?</label>
+      <input id="q" type="search" placeholder="Search phones, sofas, fans" autocomplete="off">
+      <label class="sr" for="stateSel">State</label>
+      <select id="stateSel"></select>
+      <button class="btn btn-ink" type="submit">Search</button>
+    </form>
+    <div class="hero-actions"><button class="btn btn-ink" id="sellBtn" type="button">Sell an item</button><button class="btn btn-white" id="wantBtn" type="button">Post a wanted item</button></div>
+  </div>
+</section>
+
+<section class="strip" aria-label="Why Declutter NG"><ul><li>✓ Every seller is ID and face checked</li><li>🔒 Safe Pay holds your money until you check the item</li><li>🚚 Delivery to any state</li><li><a href="tel:+2348147838934">📞 Call or WhatsApp 0814 783 8934</a></li></ul></section>
+
+<nav class="cats" id="cats" aria-label="Categories"></nav>
+
+<main class="wrap">
+  <section class="results" id="results" aria-live="polite">
+    <div class="results-head">
+      <h2 id="resultsTitle">Latest items</h2>
+      <span class="count" id="resultsCount"></span>
+      <button class="btn btn-line btn-sm" type="button" id="alertBtn">🔔 Alert me</button>
+      <label class="toggle"><input type="checkbox" id="hideSold"> Hide sold-out items</label>
+    </div>
+    <ul class="grid" id="grid"></ul>
+  </section>
+
+  <section class="states" id="states">
+    <h2>Browse by state</h2>
+    <p>Pick your state to see what's being sold near you.</p>
+    <div class="state-grid" id="stateGrid"></div>
+  </section>
+
+  <section class="wanted" id="wanted">
+    <div class="results-head"><h2 id="wantedTitle">Wanted</h2><button class="btn btn-line" type="button" id="postWantedBtn">Post a wanted item</button></div>
+    <p class="hint" style="margin:0">Can't find something? Tell sellers what you need. Sellers who have it will contact you.</p>
+    <ul class="wlist" id="wlist"></ul>
+  </section>
+
+  <section class="states" id="popular">
+    <h2>Popular searches</h2>
+    <p>Jump straight to what people are buying and selling.</p>
+    <nav class="pop" id="popLinks" aria-label="Popular searches"></nav>
+  </section>
+
+  <section class="trust">
+    <h2>Rewards and protection</h2>
+    <ul>
+      <li>Refer a friend: when they finish their first Safe Pay purchase, you both get ₦1,000 credit.</li>
+      <li>Sellers pay no commission on their first 3 sales.</li>
+      <li>Your first Safe Pay purchase has no Safe Pay fee.</li>
+      <li>Money-back protection: if the item isn't as described, don't give the seller your pickup code and ask for a refund.</li>
+      <li>Sellers with great reviews earn the Top Seller badge.</li>
+      <li>1% cashback on every Safe Pay purchase, paid as credit.</li>
+      <li>Sellers get a free boost with every sale, so their items show first. Gold sellers (10+ sales) pay lower commission.</li>
+      <li>Tap "Alert me" to hear when something you want is posted. Save items you like with ♥.</li>
+      <li>Chat inside the app, so your phone number stays private. Many items are open to a swap.</li>
+      <li>Every seller has a public shop page you can share on WhatsApp.</li>
+    </ul>
+    <p class="hint">Amounts are demo values. You can change them before launch.</p>
+  </section>
+
+  <section class="trust">
+    <h2>Can't meet the seller? Buy from anywhere.</h2>
+    <ul>
+      <li>Ask the seller for a video of the item before you pay.</li>
+      <li>Pay with Safe Pay: we hold your money until you confirm the item arrived.</li>
+      <li>Look for 🚚 on a listing. Those sellers deliver to other states.</li>
+    </ul>
+  </section>
+
+  <section class="trust">
+    <h2><svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#1D6FE0"/><path d="M7 12.5l3.2 3.2L17 8.8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>What the blue tick means</h2>
+    <ul>
+      <li>The seller's government ID was checked.</li>
+      <li>A live selfie matched the photo on that ID.</li>
+      <li>Their phone number was confirmed.</li>
+    </ul>
+    <p class="hint">Still meet in a public place and check the item before you pay.</p>
+  </section>
+</main>
+
+<section class="contactband" id="contact" aria-label="Contact us"><div class="wrap">
+  <h2>Got a question? We're one call away.</h2>
+  <p>Selling, buying, delivery or a problem with a deal? Call or WhatsApp us for more information.</p>
+  <a class="num" href="tel:+2348147838934">0814 783 8934</a>
+  <div class="acts"><a class="btn btn-ink" href="tel:+2348147838934">📞 Call us now</a><a class="btn btn-white" href="https://wa.me/2348147838934?text=Hello%20Declutter%20NG%2C%20I%20need%20help" target="_blank" rel="noopener noreferrer">💬 WhatsApp us</a></div>
+</div></section>
+<a class="helpfab" href="https://wa.me/2348147838934?text=Hello%20Declutter%20NG%2C%20I%20need%20help" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">💬<span>Need help? Chat with us</span></a>
+
+<footer class="wrap">
+  <nav class="flinks" aria-label="Company">
+    <a href="#page-about" data-page="about">About</a><a href="#page-trust" data-page="trust">Trust &amp; Safety</a><a href="#page-faq" data-page="faq">FAQ</a><a href="#page-refund" data-page="refund">Refund Policy</a><a href="#page-privacy" data-page="privacy">Privacy</a><a href="#page-terms" data-page="terms">Terms</a><a href="#page-contact" data-page="contact">Contact</a><a href="#page-earn" data-page="earn">Earn with us</a>
+  </nav>
+  <p style="margin:0 0 6px">📞 Call or WhatsApp: <a href="tel:+2348147838934">0814 783 8934</a></p>
+  Declutter NG is a prototype. Listings, sellers and verification are demo data.
+</footer>
+
+<!-- Listing detail -->
+<dialog id="detailDlg" aria-labelledby="dTitle"><div class="dlg detail" id="detailBody"></div></dialog>
+
+<!-- Verify -->
+<dialog id="verifyDlg" aria-labelledby="vTitle">
+  <div class="dlg">
+    <div class="dlg-head"><h2 id="vTitle">Verify to start selling</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+    <p class="stepno" id="stepNo">Step 1 of 3: Your details</p>
+
+    <div id="s0" hidden>
+      <button class="btn btn-line role" type="button" data-role="buyer"><strong>I want to buy</strong><span>Quick sign up. Post what you're looking for.</span></button>
+      <button class="btn btn-line role" type="button" data-role="seller"><strong>I want to sell</strong><span>Needs your ID and a selfie. You get the blue tick.</span></button>
+      <p class="hint" style="text-align:center">Already have an account? <button class="linkbtn" type="button" id="s0ToSignin">Sign in</button></p>
+    </div>
+
+    <form id="s1" novalidate>
+      <label for="vName">Full name (as on your ID)</label>
+      <input class="field" id="vName" autocomplete="name" required>
+      <label for="vPhone">Phone number</label>
+      <input class="field" id="vPhone" type="tel" inputmode="tel" placeholder="0803 123 4567" autocomplete="tel" required>
+      <p class="hint">On the live site we send a code to confirm this number.</p>
+      <label for="vRef">Referral code (optional)</label>
+      <input class="field" id="vRef" autocomplete="off" placeholder="e.g. DNG1001">
+      <p class="err" id="e1" role="alert"></p>
+      <button class="linkbtn" type="button" id="toSignin" hidden>Sign in instead</button>
+      <div class="actions"><button class="btn btn-green" type="submit">Continue</button></div>
+    </form>
+
+    <form id="s2" novalidate hidden>
+      <label for="vIdType">ID type</label>
+      <select class="field" id="vIdType">
+        <option value="nin">National ID (NIN)</option>
+        <option value="dl">Driver's licence</option>
+        <option value="passport">International passport</option>
+        <option value="voter">Voter's card</option>
+      </select>
+      <label for="vIdNo">ID number</label>
+      <input class="field" id="vIdNo" inputmode="numeric" autocomplete="off" required>
+      <p class="hint" id="idHint">A NIN has 11 digits.</p>
+      <p class="hint">We only use your ID to confirm who you are. It is never shown to buyers.</p>
+      <p class="hint">Demo tip: an ID ending in 000 shows a name mismatch, and one ending in 999 shows a face mismatch.</p>
+      <p class="err" id="e2" role="alert"></p>
+      <div class="actions">
+        <button class="btn btn-line" type="button" id="back2">Back</button>
+        <button class="btn btn-green" type="submit">Continue</button>
+      </div>
+    </form>
+
+    <div id="s3" hidden>
+      <video id="cam" autoplay playsinline muted hidden></video>
+      <p class="hint" id="camMsg">We take a quick live selfie and match it to the photo on your ID.</p>
+      <p class="err" id="e3" role="alert"></p>
+      <div class="actions">
+        <button class="btn btn-line" type="button" id="back3">Back</button>
+        <button class="btn btn-green" type="button" id="camOpen">Open camera</button>
+        <button class="btn btn-green" type="button" id="camShot" hidden>Take selfie</button>
+        <button class="btn btn-green" type="button" id="camDemo" hidden>Continue with demo</button>
+      </div>
+    </div>
+
+    <div id="s4" class="success" hidden>
+      <svg id="s4tick" class="tick" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#1D6FE0"/><path d="M7 12.5l3.2 3.2L17 8.8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h3 id="s4head" style="font-size:24px;margin:10px 0 4px">You're verified</h3>
+      <p class="hint" id="s4text" style="margin-bottom:16px">The blue tick now shows next to your name on every listing.</p>
+      <button class="btn btn-green" type="button" id="toPost" style="width:100%">Post your first item</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- Post item -->
+<dialog id="postDlg" aria-labelledby="pTitle">
+  <form class="dlg" id="postForm">
+    <div class="dlg-head"><h2 id="pTitle">Post an item</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+    <p class="hint" style="margin:0">Your item goes live instantly once you're verified. Your first 3 sales have no commission.</p>
+    <label for="pKind">Is it new or used?</label>
+    <select class="field" id="pKind"><option value="used">Used</option><option value="new">Brand new</option></select>
+    <label for="pItem">What are you selling?</label>
+    <input class="field" id="pItem" maxlength="70" placeholder="e.g. Samsung 43-inch TV" required>
+    <div class="row">
+      <div><label for="pCat">Category</label><select class="field" id="pCat"></select></div>
+      <div id="pCondWrap"><label for="pCond">Condition</label>
+        <select class="field" id="pCond"><option>Like new</option><option selected>Good</option><option>Fairly used</option><option>For parts</option></select></div>
+    </div>
+    <div class="row">
+      <div><label for="pState">State</label><select class="field" id="pState"></select></div>
+      <div><label for="pArea">Area or town</label><input class="field" id="pArea" maxlength="40" placeholder="e.g. Ikeja" required></div>
+    </div>
+    <label for="pPrice">Price (₦)</label>
+    <input class="field" id="pPrice" type="number" inputmode="numeric" min="100" placeholder="e.g. 85000" required>
+    <label class="toggle" style="margin-top:12px"><input type="checkbox" id="pSwap"> Open to a swap</label>
+    <label for="pPhotos">Photos (at least 1, up to 3)</label>
+    <input class="field" id="pPhotos" type="file" accept="image/*" multiple>
+    <div class="thumbs" id="pThumbs"></div>
+    <p class="hint" id="pPhotoHint" style="margin:0"></p>
+    <label for="pShip">Delivery</label>
+    <select class="field" id="pShip"><option value="0">Pickup only</option><option value="1">I can send it to other states</option></select>
+    <label for="pDesc">Description</label>
+    <textarea class="field" id="pDesc" maxlength="400" placeholder="Age, any faults, why you're selling"></textarea>
+    <p class="err" id="e5" role="alert"></p>
+    <div class="actions"><button class="btn btn-green" type="submit" id="postSubmit">Post item</button></div>
+  </form>
+</dialog>
+
+<dialog id="dealDlg" aria-labelledby="dealTitle">
+  <div class="dlg">
+    <div class="dlg-head"><h2 id="dealTitle">Safe Pay</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+    <label for="dealMethod">How do you want to get it?</label>
+    <select class="field" id="dealMethod"></select>
+    <div id="dealStateRow" hidden><label for="dealState">Deliver to which state?</label><select class="field" id="dealState"></select></div>
+    <p class="hint" id="dealEta"></p>
+    <div class="summary" id="dealSummary"></div>
+    <ol class="steps" id="dealSteps"></ol>
+    <div class="codebox" id="dealCodeBox" hidden></div>
+    <div id="dealCodeRow" hidden><label for="dealCodeIn">Seller types your pickup code</label><input class="field" id="dealCodeIn" inputmode="numeric" maxlength="6" autocomplete="off"><p class="err" id="dealErr" role="alert"></p></div>
+    <div class="actions"><button class="btn btn-green" type="button" id="dealNext"></button></div>
+    <button class="linkbtn" type="button" id="dealRefund" hidden>Item isn't as described? Ask for a refund</button>
+    <p class="hint">Demo only. No real money moves. See the <a href="#page-refund" data-page="refund">Refund Policy</a>.</p>
+  </div>
+</dialog>
+
+<dialog id="wantedDlg" aria-labelledby="wTitle">
+  <form class="dlg" id="wantedForm">
+    <div class="dlg-head"><h2 id="wTitle">Post a wanted item</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+    <p class="hint" style="margin:0 0 4px">Tell sellers what you're looking for. Matching sellers contact you.</p>
+    <label for="wItem">What do you need?</label>
+    <input class="field" id="wItem" maxlength="80" placeholder="e.g. Used 32-inch TV" required>
+    <div class="row">
+      <div><label for="wCat">Category</label><select class="field" id="wCat"></select></div>
+      <div><label for="wPref">New or used?</label><select class="field" id="wPref"><option>Either</option><option>Used is fine</option><option>Brand new only</option></select></div>
+    </div>
+    <div class="row">
+      <div><label for="wState">Your state</label><select class="field" id="wState"></select></div>
+      <div><label for="wBudget">Budget (₦, optional)</label><input class="field" id="wBudget" type="number" inputmode="numeric" min="100"></div>
+    </div>
+    <label for="wPhoto">Photo of what you want (optional)</label>
+    <input class="field" id="wPhoto" type="file" accept="image/*">
+    <div class="thumbs" id="wThumb"></div>
+    <button class="linkbtn" type="button" id="wPhotoRemove" hidden>Remove photo</button>
+    <p class="err" id="eW" role="alert"></p>
+    <label for="wNote">Details</label>
+    <textarea class="field" id="wNote" maxlength="300" placeholder="Size, colour, model, can you collect it?"></textarea>
+    <div class="actions"><button class="btn btn-green" type="submit" id="wantSubmit">Post request</button></div>
+  </form>
+</dialog>
+
+<dialog id="infoDlg" aria-labelledby="infoTitle"><div class="dlg">
+  <div class="dlg-head"><h2 id="infoTitle"></h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+  <div class="info" id="infoBody"></div>
+</div></dialog>
+
+<dialog id="acctDlg" aria-label="My account"><div class="dlg" id="acctBody"></div></dialog>
+
+<dialog id="reviewDlg" aria-labelledby="rvTitle">
+  <form class="dlg" id="reviewForm">
+    <div class="dlg-head"><h2 id="rvTitle">Rate the seller</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+    <p class="hint" id="rvSub" style="margin:0"></p>
+    <div class="stars" id="stars" role="group" aria-label="Rating"></div>
+    <label for="rvText">Comment (optional)</label>
+    <input class="field" id="rvText" maxlength="120">
+    <div class="actions"><button class="btn btn-line" type="button" data-close>Skip</button><button class="btn btn-green" type="submit">Send review</button></div>
+  </form>
+</dialog>
+
+<dialog id="chatDlg" aria-labelledby="chatTitle"><div class="dlg">
+  <div class="dlg-head"><h2 id="chatTitle">Chat</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+  <p class="hint" id="chatSub" style="margin:0"></p>
+  <p class="safety" id="chatDemo" hidden>This is a demo seller, so replies won't arrive here. Real sellers reply in this chat.</p>
+  <div class="chatlog" id="chatLog" aria-live="polite"></div>
+  <div class="chatacts"><button class="btn btn-line btn-sm" type="button" id="chatVideoBtn" hidden>📹 Send video</button><input type="file" id="chatVideo" accept="video/*" hidden></div>
+  <form class="chatform" id="chatForm"><label class="sr" for="chatIn">Message</label><input class="field" id="chatIn" maxlength="300" autocomplete="off" placeholder="Write a message" required><button class="btn btn-green" type="submit">Send</button></form>
+</div></dialog>
+
+<dialog id="sellerDlg" aria-label="Seller shop"><div class="dlg" id="sellerBody"></div></dialog>
+
+<dialog id="delDlg" aria-labelledby="delTitle"><form class="dlg" id="delForm">
+  <div class="dlg-head"><h2 id="delTitle">Delete your account?</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+  <p style="margin:0 0 6px">Your account will be deactivated now and <strong>permanently deleted after 90 days</strong>. Then we delete:</p>
+  <ul style="margin:0 0 8px;padding-left:20px"><li>your profile and login</li><li>all your listings and wanted requests</li><li>your chats, saved items and alerts</li><li>your credit and referral rewards</li></ul>
+  <p class="hint">For the next 90 days your listings and profile are hidden. Sign in any time during that period to restore everything. After 90 days it can't be undone. Records of past payments are kept without your name, for fraud checks.</p>
+  <label for="delConfirm">Type DELETE to confirm</label>
+  <input class="field" id="delConfirm" autocomplete="off">
+  <p class="err" id="delErr" role="alert"></p>
+  <div class="actions"><button class="btn btn-line" type="button" data-close>Cancel</button><button class="btn btn-green danger" type="submit">Delete my account</button></div>
+</form></dialog>
+
+<dialog id="signinDlg" aria-labelledby="siTitle"><form class="dlg" id="signinForm" novalidate>
+  <div class="dlg-head"><h2 id="siTitle">Welcome back</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+  <p class="hint" style="margin:0">Sign in with the name and phone number you signed up with.</p>
+  <label for="siName">Full name</label>
+  <input class="field" id="siName" autocomplete="name" required>
+  <label for="siPhone">Phone number</label>
+  <input class="field" id="siPhone" type="tel" inputmode="tel" placeholder="0803 123 4567" autocomplete="tel" required>
+  <p class="err" id="siErr" role="alert"></p>
+  <div class="actions"><button class="btn btn-green" type="submit">Sign in</button></div>
+  <p class="hint" style="text-align:center">New here? <button class="linkbtn" type="button" id="siToSignup">Sign up</button></p>
+</form></dialog>
+
+<dialog id="restoreDlg" aria-labelledby="rsTitle"><div class="dlg">
+  <div class="dlg-head"><h2 id="rsTitle">Your account is scheduled for deletion</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+  <p id="rsText" style="margin:0 0 10px"></p>
+  <div class="actions"><button class="btn btn-line" type="button" id="rsKeep">Keep deletion</button><button class="btn btn-green" type="button" id="rsRestore">Restore my account</button></div>
+</div></dialog>
+
+<dialog id="photoDlg" aria-label="Photo"><div class="dlg" style="padding:8px"><button class="x" type="button" data-close aria-label="Close" style="float:right">×</button><img id="photoBig" alt="Item photo" style="width:100%;height:auto;display:block;border-radius:10px"></div></dialog>
+<input type="file" id="rePhotos" accept="image/*" multiple hidden>
+
+<dialog id="confirmDlg" aria-labelledby="cfTitle"><div class="dlg">
+  <div class="dlg-head"><h2 id="cfTitle"></h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+  <p id="cfText" style="margin:0 0 10px"></p>
+  <div class="actions"><button class="btn btn-line" type="button" data-close>Cancel</button><button class="btn btn-green danger" type="button" id="cfOk"></button></div>
+</div></dialog>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>if(self!==top&&/(^|\.)github\.io$|^(www\.)?decluta\.com$/.test(location.hostname)){document.documentElement.innerHTML="";}</script>
+<script src="config.js"></script>
+<script>
+const STATES=["Abia","Adamawa","Akwa Ibom","Anambra","Bauchi","Bayelsa","Benue","Borno","Cross River","Delta","Ebonyi","Edo","Ekiti","Enugu","FCT Abuja","Gombe","Imo","Jigawa","Kaduna","Kano","Katsina","Kebbi","Kogi","Kwara","Lagos","Nasarawa","Niger","Ogun","Ondo","Osun","Oyo","Plateau","Rivers","Sokoto","Taraba","Yobe","Zamfara"];
+const CATS=[
+  {id:"phones",name:"Phones",icon:"📱",tint:"#1D6FE0"},
+  {id:"electronics",name:"Electronics",icon:"💻",tint:"#6B4CE0"},
+  {id:"furniture",name:"Furniture",icon:"🛋️",tint:"#B8741A"},
+  {id:"home",name:"Home & kitchen",icon:"🍳",tint:"#E0533D"},
+  {id:"fashion",name:"Fashion",icon:"👗",tint:"#D6338A"},
+  {id:"vehicles",name:"Vehicles",icon:"🚗",tint:"#2E8B57"},
+  {id:"kids",name:"Kids",icon:"🧸",tint:"#E0A21D"},
+  {id:"books",name:"Books",icon:"📚",tint:"#3B8FA8"}
+];
+let listings=[
+  {id:1,title:"iPhone 11, 64GB",cat:"phones",state:"Lagos",area:"Yaba",price:185000,cond:"Fairly used",seller:"Chidi O.",when:"2 hours ago",desc:"Battery health 84%. No cracks, comes with charger and box."},
+  {id:2,title:"3-seater leather sofa",cat:"furniture",state:"FCT Abuja",area:"Wuse 2",price:120000,cond:"Good",seller:"Amina B.",when:"Today",desc:"Moving out, need it gone this week. Brown leather, no tears."},
+  {id:3,title:"HP EliteBook 840 G5",cat:"electronics",state:"Rivers",area:"Port Harcourt GRA",price:260000,cond:"Good",seller:"Tunde A.",when:"Yesterday",desc:"8GB RAM, 256GB SSD, core i5. Battery lasts about 4 hours."},
+  {id:4,title:"Standing fan",cat:"home",state:"Kano",area:"Nassarawa GRA",price:18500,cond:"Good",seller:"Ibrahim S.",when:"Yesterday",desc:"Three speeds, works perfectly. Selling because I bought an AC."},
+  {id:5,title:"Ankara and lace gowns (6 pieces)",cat:"fashion",state:"Oyo",area:"Bodija, Ibadan",price:30000,cond:"Like new",seller:"Funke A.",when:"2 days ago",desc:"Sizes 12 to 14. Worn once or twice. Can sell separately."},
+  {id:6,title:"Toyota Corolla 2008",cat:"vehicles",state:"Enugu",area:"Independence Layout",price:2800000,cond:"Fairly used",seller:"Emeka N.",when:"3 days ago",desc:"Clean papers, engine and gearbox in good shape. Price slightly negotiable."},
+  {id:7,title:"Kids bicycle, 16-inch",cat:"kids",state:"Lagos",area:"Lekki",price:25000,cond:"Good",seller:"Ngozi E.",when:"3 days ago",desc:"My son outgrew it. Training wheels included."},
+  {id:8,title:"Samsung 43-inch Smart TV",cat:"electronics",state:"Kaduna",area:"Barnawa",price:145000,cond:"Good",seller:"Zainab M.",when:"4 days ago",desc:"Remote and wall bracket included. No dead pixels."},
+  {id:9,title:"4-burner gas cooker with oven",cat:"home",state:"Anambra",area:"Awka",price:65000,cond:"Fairly used",seller:"Blessing U.",when:"4 days ago",desc:"All burners work. Oven heats well."},
+  {id:10,title:"Tecno Spark 10",cat:"phones",state:"Ogun",area:"Abeokuta",price:78000,cond:"Like new",seller:"Segun K.",when:"5 days ago",desc:"Bought three months ago. Complete with receipt."},
+  {id:11,title:"Office desk and chair",cat:"furniture",state:"Delta",area:"Asaba",price:55000,cond:"Good",seller:"Obinna C.",when:"5 days ago",desc:"Solid wood desk with two drawers. Padded swivel chair."},
+  {id:12,title:"WAEC and JAMB textbooks (8)",cat:"books",state:"Kwara",area:"Ilorin",price:12000,cond:"Good",seller:"Hauwa D.",when:"1 week ago",desc:"Maths, English, Physics, Chemistry, Biology and more."}
+];
+const S={q:"",st:"all",cat:"all",ship:false,kind:"all",saved:false,swap:false,hideSold:false,user:null};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const money=n=>"₦"+Number(n).toLocaleString("en-NG");
+const catOf=id=>CATS.find(c=>c.id===id)||{id:"other",name:"Other",icon:"📦",tint:"#7A8780"};
+const TICK='<svg class="tick" viewBox="0 0 24 24" role="img" aria-label="Verified seller"><circle cx="12" cy="12" r="11" fill="#1D6FE0"/><path d="M7 12.5l3.2 3.2L17 8.8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+/* ---------- setup controls ---------- */
+const stateSel=$("#stateSel");
+stateSel.innerHTML='<option value="all">All Nigeria</option>'+STATES.map(s=>`<option>${esc(s)}</option>`).join("");
+$("#pState").innerHTML=STATES.map(s=>`<option>${esc(s)}</option>`).join("");
+$("#pCat").innerHTML=CATS.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("");
+
+function renderCats(){
+  const all=[{id:"all",name:"All items",icon:""},...CATS];
+  $("#cats").innerHTML=all.map(c=>`<button type="button" class="chip" data-cat="${c.id}" aria-pressed="${S.cat===c.id}">${c.icon?c.icon+" ":""}${esc(c.name)}</button>`).join("")+`<button type="button" class="chip" data-ship aria-pressed="${S.ship}">🚚 Delivery available</button><button type="button" class="chip" data-kind="used" aria-pressed="${S.kind==="used"}">Used</button><button type="button" class="chip" data-kind="new" aria-pressed="${S.kind==="new"}">Brand new</button><button type="button" class="chip" data-swap aria-pressed="${S.swap}">🔁 Swap</button><button type="button" class="chip" data-saved aria-pressed="${S.saved}">♥ Saved</button>`;
+}
+
+function renderGrid(){
+  const q=S.q.trim().toLowerCase();
+  const items=listings.filter(listingVisible).sort((a,b)=>(+!!a.sold)-(+!!b.sold)||(+isBoosted(b))-(+isBoosted(a))).filter(l=>
+    (S.st==="all"||l.state===S.st)&&(!S.ship||l.ship)&&(S.kind==="all"||l.kind===S.kind)&&(!S.saved||isSaved(l.id))&&(!S.swap||l.swap)&&(!S.hideSold||!l.sold)&&
+    (S.cat==="all"||l.cat===S.cat)&&
+    (!q||(l.title+" "+l.area+" "+l.state+" "+catOf(l.cat).name).toLowerCase().includes(q))
+  );
+  const where=S.st==="all"?"all Nigeria":S.st;
+  updateLD(items);
+  $("#resultsTitle").textContent=q?`Results for "${S.q.trim()}"`:(S.saved?`Your saved items in ${where}`:`Latest items in ${where}`);
+  $("#resultsCount").textContent=`${items.length} ${items.length===1?"item":"items"} in ${where}`;
+  if(!items.length){
+    $("#grid").innerHTML=`<li style="grid-column:1/-1"><div class="empty"><p>No items found${S.st!=="all"?" in "+esc(S.st):""}. Try another state or clear your search.</p><button class="btn btn-line" type="button" id="clearAll">Show all Nigeria</button> <button class="btn btn-green" type="button" id="wantFromEmpty">Post it as wanted</button></div></li>`;
+    return;
+  }
+  $("#grid").innerHTML=items.map(l=>{
+    const c=catOf(l.cat);
+    return `<li><button type="button" class="card" data-id="${l.id}">
+      <span class="tile${l.sold?' is-sold':''}" style="--tint:${c.tint}">${l.sold?'<span class="soldtag">Sold out</span>':''}${isBoosted(l)&&!l.sold?'<span class="boosttag">⚡ Boosted</span>':''}${l.kind==="new"?'<span class="newtag">Brand new</span>':''}${l.photos&&l.photos[0]?'<img class="ph" src="'+esc(l.photos[0])+'" alt="">':'<span class="emoji" aria-hidden="true">'+c.icon+'</span>'}</span>
+      <span class="card-body">
+        <span class="price">${money(l.price)}</span>
+        <span class="title">${esc(l.title)}</span>
+        <span class="meta">${TICK}<span>${esc(l.area)}, ${esc(l.state)}</span></span>${l.ship?'<span class="ship">🚚 Delivers to other states</span>':''}${isTop(l.seller)?'<span class="ship">⭐ Top Seller</span>':''}${l.swap?'<span class="ship">🔁 Open to swap</span>':''}${l.photoStatus==="verified"?'<span class="ship">📷 Photos verified</span>':''}
+      </span></button></li>`;
+  }).join("");
+}
+
+function renderStates(){
+  const counts={};
+  listings.filter(listingVisible).forEach(l=>counts[l.state]=(counts[l.state]||0)+1);
+  $("#stateGrid").innerHTML=STATES.map(s=>`<button type="button" class="state-btn" data-state="${esc(s)}" aria-pressed="${S.st===s}"><span>${esc(s)}</span><small>${counts[s]||0}</small></button>`).join("");
+}
+
+function refresh(){
+  stateSel.value=S.st;
+  renderCats();renderGrid();renderStates();renderWanted();save();
+}
+
+/* ---------- events: browsing ---------- */
+$("#finder").addEventListener("submit",e=>{e.preventDefault();S.q=$("#q").value;S.st=stateSel.value;refresh();$("#results").scrollIntoView();});
+stateSel.addEventListener("change",()=>{S.st=stateSel.value;refresh();});
+$("#q").addEventListener("input",e=>{S.q=e.target.value;renderGrid();});
+$("#cats").addEventListener("click",e=>{if(e.target.closest("[data-ship]")){S.ship=!S.ship;refresh();return;}if(e.target.closest("[data-swap]")){S.swap=!S.swap;refresh();return;}if(e.target.closest("[data-saved]")){if(!S.user){toast("Sign up to save items.");startSignup(null);return;}S.saved=!S.saved;refresh();return;}const k=e.target.closest("[data-kind]");if(k){S.kind=S.kind==="all"||S.kind!==k.dataset.kind?k.dataset.kind:"all";refresh();return;}const b=e.target.closest("[data-cat]");if(!b)return;S.cat=b.dataset.cat;refresh();});
+$("#stateGrid").addEventListener("click",e=>{
+  const b=e.target.closest("[data-state]");if(!b)return;
+  S.st=S.st===b.dataset.state?"all":b.dataset.state;
+  refresh();$("#results").scrollIntoView();
+});
+$("#grid").addEventListener("click",e=>{
+  if(e.target.closest("#wantFromEmpty")){openWanted(S.q.trim());return;}if(e.target.closest("#clearAll")){S.q="";S.st="all";S.cat="all";S.ship=false;S.kind="all";S.saved=false;S.swap=false;$("#q").value="";refresh();return;}
+  const b=e.target.closest("[data-id]");if(b)openDetail(+b.dataset.id);
+});
+
+/* ---------- dialogs ---------- */
+document.querySelectorAll("dialog").forEach(d=>{
+  d.addEventListener("click",e=>{if(e.target===d)d.close();});
+  d.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>d.close()));
+});
+function toast(msg){const t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>t.hidden=true,Math.max(3200,msg.length*55));}
+
+function openDetail(id){
+  const l=listings.find(x=>x.id===id);if(!l)return;
+  const c=catOf(l.cat);
+  const mine=!!S.user&&l.owner===S.user.id;
+  const ph=(l.photos||[]).filter(x=>String(x).startsWith("data:image/"));
+  const share=encodeURIComponent(l.title+" – "+money(l.price)+" in "+l.area+", "+l.state+". See it on Declutter NG: "+SITE_URL+(S.user?"#ref-"+refCode(S.user):""));
+  const st=sellerStats(l.seller);
+  const rating=st.n?"★ "+st.avg.toFixed(1)+" ("+st.n+(st.n===1?" review":" reviews")+")":"No reviews yet";
+  const top=isTop(l.seller)?'<span class="topbadge">Top Seller</span>':"";
+  const boost=(isBoosted(l)&&!l.sold?'<span class="topbadge">⚡ Boosted</span>':"")+(l.photoStatus==="verified"?'<span class="topbadge">📷 Photos verified</span>':"");
+  const tile=ph.length?'<img class="ph" id="dMain" src="'+esc(ph[0])+'" alt="">':'<span class="emoji" aria-hidden="true">'+c.icon+"</span>";
+  const thumbs=ph.length>1?'<div class="thumbs">'+ph.map((x,i)=>'<img src="'+esc(x)+'" alt="Photo '+(i+1)+'" data-ph="'+i+'">').join("")+"</div>":"";
+  const ownerBtn=mine?'<button class="btn btn-line" type="button" data-sold style="width:100%;margin-bottom:10px">'+(l.sold?"Mark as available":"Mark as sold out")+'</button><div class="actions" style="margin:0 0 12px"><button class="btn btn-line" type="button" data-edit>✏️ Edit item</button><button class="btn btn-line danger" type="button" data-delete-item>🗑 Delete item</button></div>':"";
+  const swapNote=l.swap?'<p class="hint" style="margin:0 0 10px">🔁 The seller is open to a swap.</p>':"";
+  const remote=l.sold?"":'<div class="remote"><h3>Too far to see it?</h3><ul><li>Ask the seller for a video of the item.</li><li>Pay with Safe Pay. Your money is held until you check the item and give the seller your pickup code.</li><li>'+(l.ship?"This seller can deliver to other states.":"This seller prefers pickup. Ask if they can send it.")+'</li></ul><div class="actions"><button class="btn btn-line" type="button" data-video>Ask for a video</button>'+(mine?"":'<button class="btn btn-green" type="button" data-buy>Buy with Safe Pay</button>')+"</div></div>";
+  const actions=l.sold?'<button class="btn btn-line" type="button" disabled>Sold out</button>':mine?'<button class="btn btn-line" type="button" disabled>This is your listing</button>':'<button class="btn btn-green" type="button" data-contact>Chat with seller</button>'+(l.swap?'<button class="btn btn-line" type="button" data-swap>Offer a swap</button>':"");
+  const report='<details class="report"><summary>Report this listing</summary><label for="rReason">What is wrong?</label><select class="field" id="rReason"><option>Looks like a scam</option><option>Fake or stolen item</option><option>Wrong category or price</option><option>Item is already sold</option><option>Other</option></select><button class="btn btn-line" type="button" data-report style="margin-top:10px">Send report</button></details>';
+  $("#detailBody").innerHTML=`
+    <div class="dlg-head"><h2 id="dTitle">${esc(l.title)}</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+    <div class="detail-tile${ph.length?" has-photo":""}" style="--tint:${c.tint}">${tile}</div>${thumbs}
+    ${l.sold?'<p class="soldbar">Sold out</p>':''}
+    <span class="price">${money(l.price)}</span>
+    <p class="hint" style="margin:2px 0 10px">${esc(l.cond)} · ${esc(l.area)}, ${esc(l.state)} · ${esc(l.when)}</p>
+    <p style="margin:0 0 10px">${esc(l.desc||"No description added.")}</p>${swapNote}
+    <div class="seller">${TICK}<div><button class="linkbtn sellerlink" type="button" data-seller><strong>${esc(l.seller)}</strong></button>${top}${boost}<div class="hint" style="margin:0">${rating} · ID checked and face matched</div></div></div>
+    ${ownerBtn}${remote}
+    <div class="actions" style="margin-top:0">${actions}</div>
+    <div class="actions" style="margin-top:10px">
+      <button class="btn btn-line" type="button" data-save>${isSaved(l.id)?"♥ Saved":"♡ Save"}</button>
+      <a class="btn btn-line" href="https://wa.me/?text=${share}" target="_blank" rel="noopener noreferrer">Share on WhatsApp</a>
+    </div>
+    <p class="safety" style="margin-top:14px">Meet in a public place, check the item, and never pay the seller outside Safe Pay.</p>
+    ${report}`;
+  const d=$("#detailDlg");
+  const on=(sel,fn)=>{const el=d.querySelector(sel);if(el)el.addEventListener("click",fn);};
+  on("[data-close]",()=>d.close());
+  on("[data-contact]",()=>openChat(l,null,""));
+  on("[data-swap]",()=>openChat(l,null,"I'd like to swap for this. I have: "));
+  on("[data-video]",()=>requestVideo(l));
+  on("[data-buy]",()=>openDeal(l));
+  on("[data-save]",()=>toggleSave(l.id));
+  on("[data-edit]",()=>{d.close();openPostForm(l);});
+  on("[data-delete-item]",()=>deleteListing(l.id));
+  on("[data-seller]",()=>{d.close();openSeller(l.seller);});
+  on("[data-sold]",()=>{l.sold=!l.sold;refresh();toast(l.sold?"Marked as sold out.":"Marked as available.");openDetail(id);});
+  on("[data-report]",()=>{reports.push({id:l.id,reason:$("#rReason").value,by:S.user?S.user.id:"guest",when:new Date().toISOString()});save();d.querySelector("details").open=false;toast("Thanks. Our team will review this listing.");});
+  d.querySelectorAll("[data-ph]").forEach(im=>im.addEventListener("click",()=>{$("#dMain").src=im.src;}));
+  const mainImg=d.querySelector("#dMain");if(mainImg)mainImg.addEventListener("click",()=>openPhoto(mainImg.src));
+  if(!d.open)d.showModal();
+}
+
+/* ---------- sell + verify flow ---------- */
+let stream=null;
+function stopCam(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}$("#cam").hidden=true;}
+let role=null;
+function showStep(n){
+  ["s0","s1","s2","s3","s4"].forEach((id,i)=>$("#"+id).hidden=i!==n);
+  const buyer=role==="buyer";
+  const labels={1:buyer?"Your details":"Step 1 of 3: Your details",2:"Step 2 of 3: Your ID",3:"Step 3 of 3: Live selfie"};
+  $("#stepNo").hidden=(n===0||n===4);
+  if(labels[n])$("#stepNo").textContent=labels[n];
+  $("#vTitle").textContent=n===0?"Create your account":n===4?"All done":buyer?"Sign up as a buyer":"Verify to start selling";
+  if(n!==3)stopCam();
+}
+function resetCamUI(){
+  $("#camOpen").hidden=false;$("#camOpen").textContent="Open camera";$("#camShot").hidden=true;$("#camDemo").hidden=true;
+  $("#e3").textContent="";
+  $("#camMsg").textContent="We take a quick live selfie and match it to the photo on your ID.";
+}
+
+$("#verifyDlg").addEventListener("close",()=>{stopCam();pendingIdNo="";$("#vIdNo").value="";});
+
+$("#s1").addEventListener("submit",e=>{
+  e.preventDefault();
+  const name=$("#vName").value.trim();
+  const phone=normPhone($("#vPhone").value);
+  if(name.split(/\s+/).length<2){$("#e1").textContent="Enter your first and last name as they appear on your ID.";return;}
+  if(!/^(\+234|234|0)[789]\d{9}$/.test(phone)){$("#e1").textContent="Enter a valid Nigerian phone number, for example 0803 123 4567.";return;}
+  const exu=users.find(x=>x.phone===phone);if(exu&&!(S.user&&S.user.id===exu.id)){$("#e1").textContent="This number already has an account. Please sign in instead.";$("#toSignin").hidden=false;return;}$("#toSignin").hidden=true;
+  const rc=$("#vRef").value.trim().toUpperCase();if(rc&&!/^DNG\d{4,}$/.test(rc)){$("#e1").textContent="Referral codes look like DNG1001. Check yours or leave it empty.";return;}$("#e1").textContent="";if(role==="buyer"){completeSignup();return;}showStep(2);
+});
+const ID_RULES={
+  nin:{re:/^\d{11}$/,hint:"A NIN has 11 digits.",err:"Your NIN must be exactly 11 digits."},
+  dl:{re:/^[A-Za-z0-9]{8,14}$/,hint:"Use the number printed on your licence.",err:"Enter the licence number exactly as printed (8 to 14 letters or digits)."},
+  passport:{re:/^[A-Za-z]\d{8}$/,hint:"A passport number is 1 letter followed by 8 digits.",err:"Enter 1 letter followed by 8 digits."},
+  voter:{re:/^[A-Za-z0-9 ]{9,19}$/,hint:"Use the VIN printed on your card.",err:"Enter the number printed on your card."}
+};
+$("#vIdType").addEventListener("change",e=>{$("#idHint").textContent=ID_RULES[e.target.value].hint;$("#e2").textContent="";});
+$("#s2").addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(Date.now()<lockUntil){$("#e2").textContent="Too many failed tries. Please wait a few minutes or contact support.";return;}
+  const type=$("#vIdType").value,r=ID_RULES[type],no=$("#vIdNo").value.trim();
+  if(!r.re.test(no)){$("#e2").textContent=r.err;return;}
+  const h=await hashIdStrong(type,no),hOld=await hashId(type,no);
+  const phone=normPhone($("#vPhone").value);
+  const owner=users.find(u=>u.idHash===h||u.idHash===hOld);
+  if(owner&&owner.phone!==phone){$("#e2").textContent="This ID is already registered to another account. Please recheck your ID number.";return;}
+  const mine=users.find(u=>u.phone===phone);
+  if(mine&&mine.idHash&&mine.idHash!==h&&mine.idHash!==hOld){$("#e2").textContent="This phone number is already verified with a different ID. Use the ID you signed up with.";return;}
+  pendingIdHash=h;pendingIdNo=no;
+  $("#e2").textContent="";showStep(3);
+});
+$("#back2").addEventListener("click",()=>showStep(1));
+$("#back3").addEventListener("click",()=>{resetCamUI();showStep(2);});
+
+$("#camOpen").addEventListener("click",async()=>{
+  $("#e3").textContent="";
+  try{
+    stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user"}});
+    const v=$("#cam");v.srcObject=stream;v.hidden=false;
+    $("#camOpen").hidden=true;$("#camShot").hidden=false;
+    $("#camMsg").textContent="Centre your face in the frame, then tap Take selfie.";
+  }catch(err){
+    $("#camMsg").textContent="The camera isn't available here. On the live site this step opens your phone camera. You can continue with the demo.";
+    $("#camOpen").hidden=true;$("#camDemo").hidden=false;
+  }
+});
+function finishVerify(){
+  stopCam();
+  $("#camMsg").textContent="Matching your selfie to your ID…";
+  ["camShot","camDemo","camOpen"].forEach(id=>$("#"+id).hidden=true);
+  setTimeout(()=>{
+    if(!$("#verifyDlg").open)return;
+    const res=verifyIdentity(pendingIdNo,$("#vName").value);
+    if(res.ok){vFails=0;completeSignup();return;}
+    vFails++;
+    const locked=vFails>=3;
+    if(locked)lockUntil=Date.now()+10*60*1000;
+    $("#camMsg").textContent="";
+    $("#e3").textContent="ID doesn't match. "+res.msg+(locked?" Too many failed tries, so please wait 10 minutes or contact support.":"");
+    $("#camOpen").textContent="Try selfie again";$("#camOpen").hidden=locked;
+  },1400);
+}
+$("#camShot").addEventListener("click",finishVerify);
+$("#camDemo").addEventListener("click",finishVerify);
+$("#toPost").addEventListener("click",()=>{$("#verifyDlg").close();if(S.user.role==="seller")openPostForm(null);else openWanted("");});
+
+/* ---------- post an item ---------- */
+$("#postForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const price=+$("#pPrice").value;
+  if(!price||price<100){$("#e5").textContent="Enter a price of ₦100 or more.";return;}
+  const editing=editListingId?listings.find(x=>x.id===editListingId&&S.user&&x.owner===S.user.id):null;
+  if(!editing&&!photoData.length){$("#e5").textContent="Add at least one photo of the item.";return;}
+  const kind=$("#pKind").value;
+  const f={title:$("#pItem").value.trim(),cat:$("#pCat").value,state:$("#pState").value,area:$("#pArea").value.trim(),price,cond:kind==="new"?"Brand new":$("#pCond").value,desc:$("#pDesc").value.trim(),swap:$("#pSwap").checked,kind,ship:$("#pShip").value==="1"};
+  if(editing){
+    Object.assign(editing,f);editing.edited=true;
+    if(photoData.length){editing.photos=photoData.slice();editing.photoStatus="pending";editing.hidden=false;}
+    editListingId=null;
+    $("#e5").textContent="";e.target.reset();$("#postDlg").close();refresh();toast("Changes saved.");
+    return;
+  }
+  const parts=S.user.name.split(" ");
+  const seller=parts[0]+" "+(parts[parts.length-1][0]||"")+".";
+  listings.unshift({id:Date.now(),...f,seller,when:"Just now",photos:photoData.slice(),photoStatus:"pending",sold:false,owner:S.user.id});
+  notifyMatches(listings[0]);S.q="";S.cat="all";S.kind="all";S.ship=false;S.st=f.state;$("#q").value="";
+  $("#e5").textContent="";e.target.reset();
+  $("#postDlg").close();refresh();$("#results").scrollIntoView();
+  toast("Your item is live.");
+});
+
+/* ---------- delivery, sold out, search visibility ---------- */
+const SITE_URL="https://claude.ai/artifact/7FzMD6KDMjYeiiDWYRyLSv";
+listings.forEach(l=>{l.ship=[1,3,4,5,8,10,12].includes(l.id);l.sold=l.id===6;});
+$("#hideSold").addEventListener("change",e=>{S.hideSold=e.target.checked;renderGrid();});
+
+const POP=[
+  {id:"phones-lagos",label:"Used phones in Lagos",cat:"phones",st:"Lagos"},
+  {id:"furniture-abuja",label:"Used furniture in Abuja",cat:"furniture",st:"FCT Abuja"},
+  {id:"laptops-rivers",label:"Used laptops in Port Harcourt",cat:"electronics",st:"Rivers"},
+  {id:"cars-enugu",label:"Used cars in Enugu",cat:"vehicles",st:"Enugu"},
+  {id:"fashion-oyo",label:"Ankara and fashion in Ibadan",cat:"fashion",st:"Oyo"},
+  {id:"kitchen-kano",label:"Home items in Kano",cat:"home",st:"Kano"},
+  {id:"books-kwara",label:"Textbooks in Ilorin",cat:"books",st:"Kwara"},
+  {id:"delivery",label:"Items you can have delivered",ship:true}
+];
+$("#popLinks").innerHTML=POP.map(p=>`<a href="#${p.id}">${esc(p.label)}</a>`).join("");
+function applyHash(scroll){
+  const t=location.hash.slice(1);
+  if(t.startsWith("page-")&&PAGES[t.slice(5)]){openPage(t.slice(5));return;}
+  if(t.startsWith("seller-")){const nm=[...new Set(listings.map(x=>x.seller))].find(n=>sellerSlug(n)===t.slice(7));if(nm)openSeller(nm);return;}
+  if(t.startsWith("ref-")){const rc=t.slice(4).toUpperCase();if(/^DNG\d{4,}$/.test(rc)){pendingRef=rc;toast("Referral code "+rc+" saved. Sign up to use it.");}return;}
+  const p=POP.find(x=>x.id===t);
+  if(!p)return;
+  S.cat=p.cat||"all";S.st=p.st||"all";S.ship=!!p.ship;S.kind="all";S.saved=false;S.swap=false;S.q="";$("#q").value="";
+  document.title=p.label+" | Declutter NG";
+  refresh();if(scroll)$("#results").scrollIntoView();
+}
+window.addEventListener("hashchange",()=>applyHash(true));
+
+function updateLD(items){
+  const ld={"@context":"https://schema.org","@type":"ItemList","itemListElement":items.slice(0,30).map((l,i)=>({"@type":"ListItem","position":i+1,"item":{"@type":"Product","name":l.title,"description":l.desc||l.title,"category":catOf(l.cat).name,"offers":{"@type":"Offer","price":l.price,"priceCurrency":"NGN","itemCondition":l.kind==="new"?"https://schema.org/NewCondition":"https://schema.org/UsedCondition","availability":l.sold?"https://schema.org/SoldOut":"https://schema.org/InStock","areaServed":l.state+", Nigeria"}}}))};
+  $("#ldItems").textContent=JSON.stringify(ld);
+}
+
+/* Safe Pay with pickup code (demo) */
+const SAFEPAY_FEE_PCT=2, REFERRAL_CREDIT=1000, FREE_SALES=3, CASHBACK_PCT=1, COMMISSION_PCT=5, GOLD_COMMISSION_PCT=3;
+let pendingRef="";
+const reviews=[
+  {seller:"Chidi O.",stars:5,text:"Phone was exactly as described.",by:"Tolu A."},
+  {seller:"Chidi O.",stars:5,text:"Fast reply and a fair price.",by:"Musa I."},
+  {seller:"Chidi O.",stars:4,text:"Good deal, easy meetup.",by:"Ife K."},
+  {seller:"Amina B.",stars:5,text:"Sofa was in great shape.",by:"Joy E."},
+  {seller:"Amina B.",stars:5,text:"Very honest seller.",by:"Bayo S."},
+  {seller:"Amina B.",stars:4,text:"Smooth delivery to my state.",by:"Nkem D."},
+  {seller:"Tunde A.",stars:4,text:"Laptop works well.",by:"Sade O."}
+];
+const reports=[];
+const refCode=u=>"DNG"+String(u.id).slice(1);
+function sellerStats(name){const r=reviews.filter(x=>x.seller===name);const n=r.length;return{n,avg:n?r.reduce((a,b)=>a+b.stars,0)/n:0};}
+function isTop(name){const s=sellerStats(name);return s.n>=3&&s.avg>=4.5;}
+
+let deal=null;
+$("#dealState").innerHTML=STATES.map(x=>`<option>${esc(x)}</option>`).join("");
+function fees(l){
+  const u=S.user;const fee=(u.purchases||0)===0?0:Math.round(l.price*SAFEPAY_FEE_PCT/100);
+  const total=l.price+fee;const use=Math.min(u.credit||0,total);
+  return{fee,total,use,pay:total-use};
+}
+function openDeal(l){
+  if(!S.user){toast("Sign up to pay with Safe Pay.");startSignup(null);return;}
+  deal={l,step:0,code:"",use:0,paid:0};
+  $("#dealTitle").textContent="Safe Pay: "+l.title;
+  $("#dealMethod").innerHTML='<option value="pickup">Meet and pick up</option>'+(l.ship?'<option value="delivery">Deliver to my state</option>':"");
+  $("#dealState").value=S.st==="all"?"Lagos":S.st;
+  $("#dealCodeIn").value="";$("#dealErr").textContent="";
+  renderDeal();$("#dealDlg").showModal();
+}
+function renderDeal(){
+  const l=deal.l,f=fees(l);
+  const del=$("#dealMethod").value==="delivery";
+  $("#dealStateRow").hidden=!del;
+  const same=$("#dealState").value===l.state;
+  $("#dealEta").textContent=del?(same?"Same state: usually 1 to 2 days. ":"Different state: usually 3 to 6 days. ")+"The delivery fee is agreed with the seller or courier before you pay.":"Agree a busy public place and time with the seller.";
+  const lines=["Item: "+money(l.price)];
+  if(deal.step===0){
+    lines.push("Safe Pay fee: "+(f.fee?money(f.fee):"Free (your first purchase)"));
+    if(f.use)lines.push("Credit used: −"+money(f.use));
+    lines.push("Cashback after pickup: "+money(Math.round(l.price*CASHBACK_PCT/100)));
+    lines.push("You pay: "+money(f.pay));
+  }else lines.push("Paid and held by Safe Pay: "+money(deal.paid));
+  $("#dealSummary").innerHTML=lines.map(x=>"<div>"+esc(x)+"</div>").join("");
+  const steps=["You pay. We hold the money.",del?"Seller sends the item. Check it when it arrives.":"Meet the seller and check the item carefully.","Happy with it? Give the seller your pickup code.","Seller enters the code and gets paid."];
+  $("#dealSteps").innerHTML=steps.map((t,i)=>`<li class="${i<deal.step?"done":i===deal.step?"now":""}">${esc(t)}</li>`).join("");
+  $("#dealCodeBox").hidden=deal.step<1;
+  $("#dealCodeBox").innerHTML='Your pickup code: <strong class="code" id="dealCodeTxt">'+deal.code+'</strong><br>Give it to the seller only after you have checked the item.';
+  $("#dealCodeRow").hidden=deal.step!==2;
+  $("#dealRefund").hidden=deal.step<1;
+  $("#dealNext").textContent=["Pay "+money(f.pay)+" (demo)","Demo: I have the item and checked it","Demo: seller enters the code"][deal.step]||"";
+  $("#dealMethod").disabled=deal.step>0;$("#dealState").disabled=deal.step>0;
+}
+$("#dealMethod").addEventListener("change",()=>{if(deal)renderDeal();});
+$("#dealState").addEventListener("change",()=>{if(deal)renderDeal();});
+$("#dealNext").addEventListener("click",()=>{
+  if(!deal)return;
+  const u=S.user;
+  if(deal.step===0){
+    const f=fees(deal.l);u.credit=(u.credit||0)-f.use;deal.use=f.use;deal.paid=f.pay;deal.fee=f.fee;deal.method=$("#dealMethod").value;
+    deal.code=String(Math.floor(100000+Math.random()*900000));deal.step=1;
+    renderDeal();renderWho();save();toast("Demo: payment is held safely.");return;
+  }
+  if(deal.step===1){deal.step=2;renderDeal();toast("Now give the seller your pickup code.");return;}
+  if($("#dealCodeIn").value.trim()!==deal.code){$("#dealErr").textContent="That code isn't right. Check it and try again.";return;}
+  completePurchase(deal.l);
+});
+function completePurchase(l){
+  const u=S.user,d=deal;const first=(u.purchases||0)===0;u.purchases=(u.purchases||0)+1;
+  let msg="Seller paid. This item is now sold out.";
+  const seller=users.find(x=>x.id===l.owner);
+  let commission=0;
+  if(seller){
+    const sales=seller.sales||0;
+    commission=sales<FREE_SALES?0:Math.round(l.price*(levelOf(sales)==="Gold"?GOLD_COMMISSION_PCT:COMMISSION_PCT)/100);
+    seller.sales=sales+1;seller.boosts=(seller.boosts||0)+1;
+    pushNote(seller,"Sold: "+l.title+" for "+money(l.price)+". You earned a free boost.");
+  }
+  deals.push({id:Date.now(),lid:l.id,title:l.title,price:l.price,fee:d?d.fee||0:0,commission,buyer:u.id,seller:l.owner||null,sellerName:l.seller,method:d?d.method||"pickup":"pickup",when:Date.now()});
+  const cb=Math.round(l.price*CASHBACK_PCT/100);u.credit=(u.credit||0)+cb;msg+=" You got "+money(cb)+" cashback.";
+  if(first&&u.usedRef&&!u.refPaid){
+    u.refPaid=true;u.credit=(u.credit||0)+REFERRAL_CREDIT;
+    const r=users.find(x=>refCode(x)===u.usedRef);if(r&&r.id!==u.id)r.credit=(r.credit||0)+REFERRAL_CREDIT;
+    msg+=" You earned "+money(REFERRAL_CREDIT)+" referral credit.";
+  }
+  l.sold=true;deal=null;
+  $("#dealDlg").close();$("#detailDlg").close();
+  renderWho();refresh();toast(msg);openReview(l);
+}
+$("#dealRefund").addEventListener("click",()=>{
+  if(!deal)return;
+  const d=deal;deal=null;S.user.credit=(S.user.credit||0)+d.use;
+  $("#dealDlg").close();renderWho();save();
+  toast("Refund started. Your money goes back to you and the seller isn't paid.");
+});
+$("#dealDlg").addEventListener("close",()=>{
+  if(deal&&deal.step>=1){S.user.credit=(S.user.credit||0)+deal.use;toast("Safe Pay was cancelled and your money is returned.");}
+  deal=null;renderWho();
+});
+
+/* reviews */
+let rv=null;
+function renderStars(){$("#stars").innerHTML=[1,2,3,4,5].map(n=>`<button type="button" class="star${n<=rv.stars?" on":""}" data-star="${n}" aria-label="${n} star${n>1?"s":""}">★</button>`).join("");}
+function openReview(l){
+  rv={seller:l.seller,stars:5};renderStars();
+  $("#rvSub").textContent="How was your deal with "+l.seller+"?";$("#rvText").value="";
+  $("#reviewDlg").showModal();
+}
+$("#stars").addEventListener("click",e=>{const b=e.target.closest("[data-star]");if(!b||!rv)return;rv.stars=+b.dataset.star;renderStars();});
+$("#reviewForm").addEventListener("submit",e=>{
+  e.preventDefault();if(!rv)return;
+  reviews.push({seller:rv.seller,stars:rv.stars,text:$("#rvText").value.trim(),by:S.user.name.split(" ")[0],byId:S.user.id,mine:true});
+  rv=null;$("#reviewDlg").close();refresh();toast("Thanks for your review.");
+});
+
+/* account */
+function openAcct(){
+  const u=S.user;if(!u)return;
+  const code=refCode(u);
+  const msg=encodeURIComponent("Join me on Declutter NG, the verified marketplace for used and new items in Nigeria. Use my code "+code+": "+SITE_URL+"#ref-"+code);
+  const seller=u.role==="seller";
+  const sales=u.sales||0,left=Math.max(0,FREE_SALES-sales);
+  const mine=listings.filter(l=>l.owner===u.id);
+  const my=deals.filter(x=>x.seller===u.id);
+  const gross=my.reduce((a,x)=>a+x.price,0),com=my.reduce((a,x)=>a+x.commission,0);
+  const savedCom=my.filter(x=>x.commission===0).reduce((a,x)=>a+Math.round(x.price*COMMISSION_PCT/100),0);
+  const notes=u.notes||[],alerts=u.alerts||[],th=threadsFor(u);
+  let h='<div class="dlg-head"><h2>'+esc(u.name)+'</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>';
+  h+='<p class="hint" style="margin:0 0 10px">'+(seller?"Verified seller "+TICK+" · "+levelOf(sales)+" level":"Buyer account")+" · Member since "+esc(u.joined)+"</p>";
+  const sup=myThread().slice(-20);
+  h+='<div class="remote" id="supBox"><h3>💬 Decluta support</h3>'+(sup.length?'<div class="chatlog" id="supLog">'+sup.map(m=>'<div class="msg '+(m.from==="admin"?"them":"me")+'">'+esc(m.text)+"</div>").join("")+"</div>":'<p class="hint" style="margin:0 0 8px">Message our team here, or call 0814 783 8934.</p>')+'<form class="chatform" id="supForm"><label class="sr" for="supIn">Message to support</label><input class="field" id="supIn" maxlength="500" placeholder="Write to Decluta support" autocomplete="off" required><button class="btn btn-green btn-sm" type="submit">Send</button></form></div>';
+  if(notes.length)h+='<div class="remote"><h3>🔔 Notifications</h3><ul>'+notes.slice(0,6).map(n=>"<li>"+esc(n.text)+"</li>").join("")+'</ul><button class="btn btn-line btn-sm" type="button" data-clear-notes style="margin-top:8px">Clear</button></div>';
+  h+='<div class="remote"><h3>Your credit: '+money(u.credit||0)+'</h3><p class="hint" style="margin:0">Used automatically when you pay with Safe Pay. You also get '+CASHBACK_PCT+'% cashback on purchases.</p></div>';
+  if(seller){
+    h+='<div class="remote"><h3>My shop</h3><p class="hint" style="margin:0 0 6px">Free boosts left: <strong>'+(u.boosts||0)+'</strong> · Commission-free sales left: '+left+'</p><p class="hint" style="margin:0 0 6px">Sales: '+sales+' · Earned: '+money(gross-com)+' · Commission paid: '+money(com)+' · Commission saved: '+money(savedCom)+'</p>';
+    h+=mine.length?'<ul class="slist">'+mine.map(l=>'<li><div class="srow2"><button type="button" class="linkbtn sellerlink" data-view="'+l.id+'">'+esc(l.title)+(l.hidden?" (photos rejected)":l.sold?" (sold out)":isBoosted(l)?" ⚡":"")+'</button><span>'+(l.hidden?'<button class="btn btn-line btn-sm" type="button" data-rephoto="'+l.id+'">Add photos</button> ':"")+(l.sold||l.hidden?"":'<button class="btn btn-line btn-sm" type="button" data-boost="'+l.id+'">Boost</button> ')+'<button class="btn btn-line btn-sm" type="button" data-flip="'+l.id+'">'+(l.sold?"Available":"Sold out")+'</button> <button class="btn btn-line btn-sm" type="button" data-editl="'+l.id+'">Edit</button> <button class="btn btn-line btn-sm danger" type="button" data-dell="'+l.id+'">Delete</button></span></div></li>').join("")+"</ul>":'<p class="hint" style="margin:0">You haven\'t posted anything yet.</p>';
+    h+='<p class="hint" style="margin:8px 0 0">You earn a free boost with every sale. Gold sellers (10+ sales) pay lower commission.</p><button class="btn btn-line btn-sm" type="button" data-myshop style="margin-top:8px">View my public shop</button></div>';
+  }
+  const myWant=wanted.filter(w=>w.owner===u.id);
+  h+='<div class="remote"><h3>📌 My wanted requests</h3>'+(myWant.length?'<ul class="slist">'+myWant.map(w=>'<li><div class="srow2"><span>'+esc(w.title)+(w.found?" (found)":"")+'</span><span><button class="btn btn-line btn-sm" type="button" data-wedit="'+w.id+'">Edit</button> <button class="btn btn-line btn-sm danger" type="button" data-wdel="'+w.id+'">Delete</button></span></div></li>').join("")+"</ul>":'<p class="hint" style="margin:0">You haven\'t posted a wanted request.</p>')+'</div>';
+  h+='<div class="remote"><h3>🔔 My alerts</h3>'+(alerts.length?'<ul class="slist">'+alerts.map((a,i)=>'<li><div class="srow2"><span>'+esc(alertLabel(a))+'</span><button class="btn btn-line btn-sm" type="button" data-alert-del="'+i+'">Remove</button></div></li>').join("")+"</ul>":'<p class="hint" style="margin:0">Pick a state, category or search, then tap "Alert me" above the list.</p>')+'</div>';
+  h+='<div class="remote"><h3>♥ Saved items: '+(u.saved||[]).length+'</h3><button class="btn btn-line btn-sm" type="button" data-show-saved>Show my saved items</button></div>';
+  h+='<div class="remote"><h3>💬 Chats</h3>'+(th.length?'<ul class="slist">'+th.map(t=>'<li><div class="srow2"><span>'+esc(t.l?t.l.title:"Wanted: "+t.w.title)+' <span class="hint">· '+esc(t.last.text.slice(0,30))+'</span></span><button class="btn btn-line btn-sm" type="button" data-thread="'+(t.l?t.l.id+"|"+t.buyer:"W|"+t.w.id+"|"+t.rid)+'">Open</button></div></li>').join("")+"</ul>":'<p class="hint" style="margin:0">No chats yet. Use "Chat with seller" on any item.</p>')+'</div>';
+  h+='<div class="remote"><h3>Refer a friend</h3><p style="margin:0 0 10px;font-size:15px">Share your code <strong>'+esc(code)+'</strong>. When your friend finishes their first Safe Pay purchase, you both get '+money(REFERRAL_CREDIT)+' credit.</p><a class="btn btn-green" target="_blank" rel="noopener noreferrer" href="https://wa.me/?text='+msg+'" style="width:100%">Invite on WhatsApp</a></div>';
+  h+='<p class="hint">Purchases: '+(u.purchases||0)+(seller?" · Earn the Top Seller badge with at least 3 reviews averaging 4.5 stars or more.":"")+'</p>';
+  h+='<div class="remote"><h3>Delete account</h3><p class="hint" style="margin:0 0 8px">Deactivate your account now. It is permanently deleted after 90 days, and you can sign in before then to restore it.</p><button class="btn btn-line btn-sm danger" type="button" data-delete>Delete my account</button></div>';
+  $("#acctBody").innerHTML=h;
+  markSupportSeen();{const lg=$("#supLog");if(lg)lg.scrollTop=lg.scrollHeight;}
+  const d=$("#acctDlg");if(!d.open)d.showModal();
+}
+$("#who").addEventListener("click",openAcct);
+
+/* photos */
+let photoData=[];
+function loadImage(f){return new Promise((res,rej)=>{const u=URL.createObjectURL(f);const im=new Image();im.onload=()=>{URL.revokeObjectURL(u);res(im);};im.onerror=()=>{URL.revokeObjectURL(u);rej(new Error("One of those photos couldn't be read. Try another."));};im.src=u;});}
+function checkPhoto(im){
+  if(Math.min(im.naturalWidth,im.naturalHeight)<300)return{ok:false,msg:"That photo is too small. Use a clear photo at least 300 pixels wide."};
+  const c=document.createElement("canvas");c.width=c.height=16;const x=c.getContext("2d");x.drawImage(im,0,0,16,16);
+  const d=x.getImageData(0,0,16,16).data;let sum=0,sq=0,sig="";const n=d.length/4;
+  for(let i=0;i<d.length;i+=4){const v=(d[i]+d[i+1]+d[i+2])/3;sum+=v;sq+=v*v;sig+=String.fromCharCode(48+Math.floor(v/8));}
+  const mean=sum/n,varc=sq/n-mean*mean;
+  if(mean<18||mean>248||varc<12)return{ok:false,msg:"That photo looks blank or too dark. Take a clear, well-lit photo of the item."};
+  return{ok:true,sig};
+}
+function toJpeg(im){const k=Math.min(1,1000/Math.max(im.naturalWidth,im.naturalHeight));const c=document.createElement("canvas");c.width=Math.max(1,Math.round(im.naturalWidth*k));c.height=Math.max(1,Math.round(im.naturalHeight*k));c.getContext("2d").drawImage(im,0,0,c.width,c.height);return c.toDataURL("image/jpeg",0.8);}
+async function readPhotos(files){
+  const out=[],seen=new Set();
+  for(const f of [...files].slice(0,3)){
+    if(!f.type.startsWith("image/"))throw new Error("Only photos can be added.");
+    if(f.size>15*1024*1024)throw new Error("A photo is too large. Use one under 15 MB.");
+    const im=await loadImage(f);const chk=checkPhoto(im);
+    if(!chk.ok)throw new Error(chk.msg);
+    if(seen.has(chk.sig))throw new Error("You added the same photo twice. Add different angles of the item.");
+    seen.add(chk.sig);out.push(toJpeg(im));
+  }
+  return out;
+}
+$("#pPhotos").addEventListener("change",async e=>{
+  photoData=[];$("#e5").textContent="";$("#pThumbs").innerHTML="";
+  if(!e.target.files.length)return;
+  try{photoData=await readPhotos(e.target.files);}catch(err){$("#e5").textContent=err.message;e.target.value="";photoData=[];}
+  $("#pThumbs").innerHTML=photoData.map(x=>'<img src="'+x+'" alt="Photo preview">').join("");
+});
+let rephotoId=null;
+$("#rePhotos").addEventListener("change",async e=>{
+  const l=listings.find(x=>x.id===rephotoId);if(!l||!e.target.files.length)return;
+  try{l.photos=await readPhotos(e.target.files);l.photoStatus="pending";l.hidden=false;refresh();openAcct();toast("Photos sent for review. Your item is live again.");}
+  catch(err){toast(err.message);}
+  e.target.value="";
+});
+function openPhoto(src){$("#photoBig").src=src;$("#photoDlg").showModal();}
+$("#postForm").addEventListener("reset",()=>{photoData=[];$("#pThumbs").innerHTML="";});
+
+/* trust pages */
+const DRAFT='<p class="hint">Draft for review by a Nigerian lawyer before launch.</p>';
+const PAGES={
+  about:{t:"About Declutter NG",h:'<p>Declutter NG helps Nigerians sell used and new items to people nearby or in other states.</p><p>Every seller is checked with a government ID and a live selfie. Safe Pay holds the buyer\'s money until the item is checked, and anything you can\'t find can go on the Wanted board.</p>'},
+  trust:{t:"Trust & Safety",h:'<h3>Verified sellers</h3><p>Sellers confirm their phone, ID and face before they can post. The blue tick shows who has done this.</p><h3>Safe Pay</h3><p>You pay through Safe Pay, never in cash or by transfer to the seller. The seller is paid only after you give them your pickup code.</p><h3>When you meet</h3><ul><li>Meet in a busy public place in daylight.</li><li>Take someone with you for large items.</li><li>Check the item before you give the code.</li><li>Never share your bank details or home address.</li></ul><h3>Report a problem</h3><p>Use "Report this listing" on any item. See the <a href="#page-refund" data-page="refund">Refund Policy</a>. Need help fast? Call or WhatsApp 0814 783 8934.</p>'},
+  faq:{t:"FAQ",h:'<h3>How does Safe Pay work?</h3><p>You pay, we hold the money, you check the item, then you give the seller your pickup code. They enter it and get paid.</p><h3>What if the item isn\'t as described?</h3><p>Don\'t give the code. Ask for a refund in Safe Pay and your money comes back.</p><h3>Why do sellers need ID and a selfie?</h3><p>So buyers know a real, identified person is selling to them.</p><h3>Can I buy from another state?</h3><p>Yes, from sellers marked with 🚚. Choose delivery in Safe Pay.</p><h3>How do rewards work?</h3><p>Refer a friend and you both get credit after their first purchase. Sellers pay no commission on their first 3 sales.</p>'},
+  refund:{t:"Refund Policy",h:'<p>If an item is not as described or has a major fault you were not told about, do not give the seller your pickup code. Choose "Ask for a refund" in Safe Pay and your money is returned. The seller is not paid.</p><p>For delivered items, check the item when it arrives before you give the code.</p><p>Once you have given the pickup code, the sale is complete. We cannot refund problems you could have seen when you checked the item.</p>'+DRAFT},
+  privacy:{t:"Privacy",h:'<p>We collect your name, phone number, the type of ID you used, and the result of your selfie match. We use this to verify sellers and prevent fraud.</p><p>We never show your ID or selfie to buyers or other users. We keep verification data only as long as needed for fraud prevention and legal reasons.</p><p>Under the Nigeria Data Protection Act you can ask to see, correct or delete your data. You can also delete your account yourself at any time from My account. Deleted accounts are kept for 90 days in case you change your mind, then permanently erased.</p><p>We never keep your ID number itself. We keep only a scrambled version, to stop the same ID being used on two accounts.</p><p>If our team has switched on cloud records, your name, phone number and activity on the site (listings, requests and deals, but not your chats or photos) are also saved in our secure records, so we can help you and keep the site safe.</p><p>Messages you send to our support team are stored so we can reply to you.</p><p>In this prototype, your data stays in your own browser.</p>'+DRAFT},
+  terms:{t:"Terms of Service",h:'<ul><li>You must be 18 or older.</li><li>Listings must be honest. No stolen, fake or illegal items.</li><li>Pay only through Safe Pay. Do not pay or ask to be paid outside it.</li><li>We may remove listings or accounts that break these rules.</li><li>You meet other users at your own risk, so follow the safety tips.</li><li>Fees and commissions are shown before you pay or sell.</li></ul>'+DRAFT},
+  earn:{t:"Earn with us",h:'<p>Refer friends and earn credit: you both get ₦1,000 after their first Safe Pay purchase. Your code is in My account.</p><h3>Campus and market ambassadors</h3><p>Know lots of people who want to sell? Bring them to Declutter NG and earn a commission on their sales. Leave your details and we will contact you when the programme opens.</p><form id="eForm"><label for="eName">Your name</label><input class="field" id="eName" required><label for="eContact">Phone or email</label><input class="field" id="eContact" required><label for="eWhere">Campus or market</label><input class="field" id="eWhere"><div class="actions"><button class="btn btn-green" type="submit">Join the waiting list</button></div></form>'},
+  contact:{t:"Contact us",h:'<p><strong>Call or WhatsApp: <a href="tel:+2348147838934">0814 783 8934</a></strong></p><p><a class="btn btn-green" href="https://wa.me/2348147838934" target="_blank" rel="noopener noreferrer" style="width:100%">💬 Chat on WhatsApp</a></p><p>Or send us a message and we will reply.</p><form id="cForm"><label for="cMsg">Your message</label><textarea class="field" id="cMsg" maxlength="500" required></textarea><label for="cEmail">Phone or email</label><input class="field" id="cEmail" required><div class="actions"><button class="btn btn-green" type="submit">Send message</button></div></form>'}
+};
+function openPage(k){
+  if(!PAGES[k])return;
+  $("#infoTitle").textContent=PAGES[k].t;$("#infoBody").innerHTML=PAGES[k].h;
+  if(!$("#infoDlg").open)$("#infoDlg").showModal();
+}
+document.addEventListener("click",e=>{const a=e.target.closest("[data-page]");if(!a)return;e.preventDefault();openPage(a.dataset.page);});
+$("#infoBody").addEventListener("submit",e=>{if(e.target.id!=="cForm")return;e.preventDefault();$("#infoDlg").close();toast("Demo: your message is saved. On the live site it goes to our support team.");});
+
+/* ---------- accounts, wanted items, new or used ---------- */
+const users=[];
+listings.forEach(l=>{l.kind=[9,10].includes(l.id)?"new":"used";if(l.kind==="new"){l.cond="Brand new";l.desc=l.id===10?"Sealed box with receipt. I bought one too many.":"Brand new in the carton. Wrong size for my kitchen.";}});
+
+function renderWho(){
+  const u=S.user;
+  $("#who").hidden=!u;$("#signupBtn").hidden=!!u;$("#signinBtn").hidden=!!u;$("#signoutBtn").hidden=!u;
+  if(u)$("#who").innerHTML=esc(u.name.split(" ")[0])+" · "+(u.role==="seller"?"Seller "+TICK:"Buyer")+((u.credit||0)>0?" · "+money(u.credit):"")+((u.notes||[]).length?" · 🔔"+u.notes.length:"")+(unreadSupport()?" · 💬"+unreadSupport():"");
+}
+function startSignup(r){
+  role=r;resetCamUI();$("#e1").textContent="";$("#e2").textContent="";$("#vRef").value=pendingRef;$("#toSignin").hidden=true;
+  if(S.user&&r==="seller"){$("#vName").value=S.user.name;$("#vPhone").value=S.user.phone;}
+  showStep(r?1:0);$("#verifyDlg").showModal();
+}
+function completeSignup(){
+  const name=$("#vName").value.trim().replace(/\s+/g," ");
+  const phone=normPhone($("#vPhone").value);
+  const ex=users.find(x=>x.phone===phone);if(ex&&ex.blocked){showStep(1);$("#e1").textContent="This account is suspended. Please contact support on 0814 783 8934.";return;}
+  const wantSeller=role==="seller";
+  let u=users.find(x=>x.phone===phone);
+  if(!u){u={id:"U"+(users.length+1001),name,phone,joined:new Date().toISOString().slice(0,10),role:"buyer",verified:false,credit:0,purchases:0,sales:0,saved:[],alerts:[],notes:[],boosts:0,blocked:false,usedRef:$("#vRef").value.trim().toUpperCase()||null,refPaid:false};users.push(u);}
+  if(wantSeller){u.role="seller";u.verified=true;u.idType=$("#vIdType").value;u.idHash=pendingIdHash||u.idHash;if(!u.sellerSince){u.sellerSince=Date.now();u.boosts=(u.boosts||0)+3;}}
+  S.user=u;
+  const seller=u.role==="seller";
+  renderWho();
+  $("#s4tick").style.display=seller?"":"none";
+  $("#s4head").textContent=seller?"You're verified":"You're signed up";
+  $("#s4text").textContent=seller?"The blue tick now shows next to your name on every listing. Your first 3 sales have no commission.":"You can now post what you're looking for, and sellers will see it.";
+  $("#toPost").textContent=seller?"Post your first item":"Post a wanted item";
+  showStep(4);refresh();
+}
+function onSell(){
+  if(S.user&&S.user.role==="seller"){openPostForm(null);return;}
+  if(S.user)toast("Buyer accounts can't post items. Verify to become a seller.");
+  startSignup("seller");
+}
+$("#sellBtn").addEventListener("click",onSell);
+$("#signupBtn").addEventListener("click",()=>startSignup(null));
+$("#s0").addEventListener("click",e=>{const b=e.target.closest("[data-role]");if(!b)return;role=b.dataset.role;showStep(1);});
+
+$("#pKind").addEventListener("change",e=>{$("#pCondWrap").hidden=e.target.value==="new";});
+$("#postForm").addEventListener("reset",()=>setTimeout(()=>{$("#pCondWrap").hidden=$("#pKind").value==="new";}));
+
+const wanted=[
+  {id:1,title:"Used Toyota Camry, 2010 to 2014",cat:"vehicles",state:"Lagos",pref:"Used is fine",budget:3500000,note:"Clean papers please. I can inspect in Ikeja.",by:"Kelechi P.",role:"buyer",when:"Today"},
+  {id:2,title:"Single bed with mattress",cat:"furniture",state:"Kaduna",pref:"Either",budget:60000,note:"For a student. Pickup in Kaduna only.",by:"Maryam S.",role:"buyer",when:"Yesterday"},
+  {id:3,title:"Infinix or Tecno phone, 6GB RAM",cat:"phones",state:"Oyo",pref:"Brand new only",budget:150000,note:"",by:"Dayo F.",role:"buyer",when:"2 days ago"},
+  {id:4,title:"SS2 Physics textbook",cat:"books",state:"Rivers",pref:"Used is fine",budget:5000,note:"Any publisher.",by:"Ebiere T.",role:"buyer",when:"3 days ago"},
+  {id:5,title:"Baby cot",cat:"kids",state:"FCT Abuja",pref:"Either",budget:40000,note:"Good condition, no cracks.",by:"Halima K.",role:"buyer",when:"4 days ago"}
+];
+wanted.forEach(w=>{w.found=false;w.owner=null;});
+$("#wCat").innerHTML=CATS.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("");
+$("#wState").innerHTML=STATES.map(x=>`<option>${esc(x)}</option>`).join("");
+
+function renderWanted(){
+  const items=wanted.filter(w=>(S.st==="all"||w.state===S.st)&&(S.cat==="all"||w.cat===S.cat)&&wantedVisible(w)).sort((a,b)=>(+!!a.found)-(+!!b.found));
+  $("#wantedTitle").textContent="Wanted in "+(S.st==="all"?"all Nigeria":S.st);
+  $("#wlist").innerHTML=items.length?items.map(w=>{
+    const c=catOf(w.cat);
+    const own=!!S.user&&w.owner===S.user.id;
+    let btns;
+    if(w.found)btns='<span class="foundtag">Found</span>'+(own?' <button class="btn btn-line btn-sm danger" type="button" data-wdel="'+w.id+'">Delete</button>':"");
+    else if(own)btns='<button class="btn btn-line btn-sm" type="button" data-found="'+w.id+'">Mark as found</button> <button class="btn btn-line btn-sm" type="button" data-wedit="'+w.id+'">Edit</button> <button class="btn btn-line btn-sm danger" type="button" data-wdel="'+w.id+'">Delete</button>';
+    else btns='<button class="btn btn-green" type="button" data-have="'+w.id+'">I have this</button>';
+    const ph=w.photo&&String(w.photo).startsWith("data:image/")?'<img class="wph" src="'+esc(w.photo)+'" alt="Photo of what '+esc(w.by)+' wants" data-wphoto="'+w.id+'">':"";
+    const line=c.icon+" "+c.name+" · "+w.pref+" · "+w.state+(w.budget?" · Budget up to "+money(w.budget):"");
+    return `<li class="want${w.found?" is-found":""}">${ph}<div class="wbody"><strong>${esc(w.title)}</strong><div class="hint" style="margin:2px 0 0">${esc(line)}</div>${w.note?'<div class="hint" style="margin:2px 0 0">'+esc(w.note)+"</div>":""}<div class="hint" style="margin:2px 0 0">Posted by ${esc(w.by)}${w.role==="seller"?" "+TICK:""} · ${esc(w.when)}${w.edited?" · edited":""}</div></div><div class="wbtns">${btns}</div></li>`;
+  }).join(""):'<li><div class="empty"><p>Nobody has asked for anything here yet.</p></div></li>';
+}
+$("#wlist").addEventListener("click",e=>{
+  const g=id=>wanted.find(x=>x.id==id);
+  const f=e.target.closest("[data-found]"),h=e.target.closest("[data-have]"),ed=e.target.closest("[data-wedit]"),dl=e.target.closest("[data-wdel]"),ph=e.target.closest("[data-wphoto]");
+  if(ph){const w=g(ph.dataset.wphoto);if(w)openPhoto(w.photo);return;}
+  if(f){const w=g(f.dataset.found);if(w){w.found=true;refresh();toast("Marked as found.");}return;}
+  if(ed){const w=g(ed.dataset.wedit);if(w)openWanted("",w);return;}
+  if(dl){deleteWanted(+dl.dataset.wdel);return;}
+  if(h){
+    if(!S.user||S.user.role!=="seller"){toast(S.user?"Only verified sellers can reply. Verify to become a seller.":"Sign up as a seller to reply.");startSignup("seller");return;}
+    const w=g(h.dataset.have);if(w)openWantChat(w);
+  }
+});
+function openWanted(prefill,w){
+  if(!S.user){startSignup("buyer");return;}
+  editWantedId=w?w.id:null;wantPhoto=w&&w.photo?w.photo:null;
+  $("#wantedForm").reset();$("#eW").textContent="";
+  $("#wTitle").textContent=w?"Edit your request":"Post a wanted item";
+  $("#wantSubmit").textContent=w?"Save changes":"Post request";
+  if(w){$("#wItem").value=w.title;$("#wCat").value=w.cat;$("#wPref").value=w.pref;$("#wState").value=w.state;$("#wBudget").value=w.budget||"";$("#wNote").value=w.note||"";}
+  else{$("#wItem").value=prefill||"";$("#wState").value=S.st==="all"?"Lagos":S.st;}
+  renderWantPhoto();
+  $("#wantedDlg").showModal();
+}
+$("#wantBtn").addEventListener("click",()=>openWanted(""));
+$("#postWantedBtn").addEventListener("click",()=>openWanted(""));
+$("#wantedForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const f={title:$("#wItem").value.trim(),cat:$("#wCat").value,state:$("#wState").value,pref:$("#wPref").value,budget:+$("#wBudget").value||0,note:$("#wNote").value.trim(),photo:wantPhoto||null};
+  const ex=editWantedId?wanted.find(x=>x.id===editWantedId&&x.owner===S.user.id):null;
+  if(ex){Object.assign(ex,f);ex.edited=true;editWantedId=null;wantPhoto=null;e.target.reset();$("#wantedDlg").close();refresh();toast("Changes saved.");return;}
+  const parts=S.user.name.split(" ");
+  wanted.unshift({id:Date.now(),...f,by:parts[0]+" "+(parts[parts.length-1][0]||"")+".",role:S.user.role,when:"Just now",owner:S.user.id,found:false});
+  notifySellersOfWanted(wanted[0]);
+  S.st=f.state;S.cat="all";S.q="";$("#q").value="";
+  wantPhoto=null;e.target.reset();$("#wantedDlg").close();refresh();$("#wanted").scrollIntoView();
+  toast("Your request is live. Sellers in "+S.st+" can see it.");
+});
+
+
+/* ---------- saved items, alerts, chat, shops, boosts, admin ---------- */
+const messages=[],deals=[],removed=[];
+const levelOf=n=>n>=10?"Gold":n>=3?"Silver":"Bronze";
+const shortName=u=>{const p=u.name.split(" ");return p[0]+" "+(p[p.length-1][0]||"")+".";};
+const sellerSlug=n=>n.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const sellerUser=n=>users.find(u=>u.role==="seller"&&shortName(u)===n);
+function isBoosted(l){return !!l.boostUntil&&l.boostUntil>Date.now();}
+function isSaved(id){return !!S.user&&(S.user.saved||[]).includes(id);}
+function pushNote(u,text){u.notes=u.notes||[];u.notes.unshift({text,when:Date.now()});}
+function toggleSave(id){
+  if(!S.user){toast("Sign up to save items.");startSignup(null);return;}
+  const a=S.user.saved=S.user.saved||[];const i=a.indexOf(id);
+  if(i<0)a.push(id);else a.splice(i,1);
+  refresh();openDetail(id);toast(i<0?"Saved. Find it under ♥ Saved.":"Removed from saved.");
+}
+
+/* alerts */
+function alertLabel(a){return [a.q||"Anything",a.cat==="all"?"all categories":catOf(a.cat).name,a.st==="all"?"all Nigeria":a.st].join(" · ");}
+function matchesAlert(a,l){return (a.st==="all"||a.st===l.state)&&(a.cat==="all"||a.cat===l.cat)&&(!a.q||(l.title+" "+l.area).toLowerCase().includes(a.q.toLowerCase()));}
+function addAlert(){
+  if(!S.user){toast("Sign up to get alerts.");startSignup(null);return;}
+  const a={q:S.q.trim(),st:S.st,cat:S.cat};
+  if(!a.q&&a.st==="all"&&a.cat==="all"){toast("Choose a state, category or search first, then tap Alert me.");return;}
+  S.user.alerts=S.user.alerts||[];
+  if(S.user.alerts.some(x=>x.q===a.q&&x.st===a.st&&x.cat===a.cat)){toast("You already have this alert.");return;}
+  S.user.alerts.push(a);save();toast("Alert saved. We'll tell you when a match is posted.");
+}
+function notifyMatches(l){
+  users.forEach(u=>{
+    if(u.id===l.owner||u.deleteAt)return;
+    if((u.alerts||[]).some(a=>matchesAlert(a,l)))pushNote(u,"New match: "+l.title+" in "+l.state);
+  });
+  wanted.forEach(w=>{
+    if(w.found||!w.owner||w.owner===l.owner||w.cat!==l.cat||w.state!==l.state)return;
+    const u=users.find(x=>x.id===w.owner);if(u)pushNote(u,"A seller listed "+l.title+", which may match what you wanted.");
+  });
+  renderWho();
+}
+$("#alertBtn").addEventListener("click",addAlert);
+
+/* chat */
+let chat=null;
+function threadsFor(u){
+  const map={};
+  messages.forEach(m=>{
+    if(m.wid){
+      const w=wanted.find(x=>x.id===m.wid);if(!w)return;
+      if(m.rid!==u.id&&w.owner!==u.id)return;
+      map["W|"+m.wid+"|"+m.rid]={w,rid:m.rid,last:m};return;
+    }
+    const l=listings.find(x=>x.id===m.lid);if(!l)return;if(m.buyer!==u.id&&l.owner!==u.id)return;
+    map[m.lid+"|"+m.buyer]={l,buyer:m.buyer,last:m};
+  });
+  return Object.values(map).reverse();
+}
+function openChat(l,buyerId,prefill){
+  if(!S.user){toast("Sign up to chat with sellers.");startSignup(null);return;}
+  const asSeller=l.owner===S.user.id;
+  if(asSeller&&!buyerId){toast("Open this chat from My account.");return;}
+  chat={l,asSeller,buyer:asSeller?buyerId:S.user.id};
+  $("#chatTitle").textContent=l.title;$("#chatIn").value=prefill||"";
+  renderChat();if(!$("#chatDlg").open)$("#chatDlg").showModal();
+}
+function renderChat(){
+  let th,other,demo,video,hint;
+  if(chat.w){
+    th=messages.filter(m=>m.wid===chat.w.id&&m.rid===chat.rid);
+    const req=users.find(u=>u.id===chat.w.owner),res=users.find(u=>u.id===chat.rid);
+    other=chat.asSeller?(req?req.name:chat.w.by):(res?res.name:"a seller");
+    demo=!chat.w.owner&&chat.asSeller;video=false;hint="Tell them what you have and how they can see it.";
+    $("#chatDemo").textContent="This is a demo request, so replies won't arrive here. Real buyers reply in this chat.";
+  }else{
+    th=messages.filter(m=>m.lid===chat.l.id&&m.buyer===chat.buyer);
+    other=chat.asSeller?(users.find(u=>u.id===chat.buyer)||{name:"the buyer"}).name:chat.l.seller;
+    demo=!chat.l.owner&&!chat.asSeller;video=chat.asSeller;hint="Say hello and ask about the item.";
+    $("#chatDemo").textContent="This is a demo seller, so replies won't arrive here. Real sellers reply in this chat.";
+  }
+  $("#chatSub").textContent="Chat with "+other+". Your phone number stays private.";
+  $("#chatDemo").hidden=!demo;
+  $("#chatVideoBtn").hidden=!video;
+  $("#chatLog").innerHTML=th.length?th.map(m=>'<div class="msg '+((m.from==="seller")===chat.asSeller?"me":"them")+'">'+(m.type==="video"&&String(m.url||"").startsWith("blob:")?'<video controls playsinline src="'+esc(m.url)+'" style="max-width:100%;border-radius:8px"></video>':esc(m.text))+"</div>").join(""):'<p class="hint">'+hint+"</p>";
+  $("#chatLog").scrollTop=$("#chatLog").scrollHeight;
+}
+$("#chatForm").addEventListener("submit",e=>{
+  e.preventDefault();if(!chat)return;
+  const text=$("#chatIn").value.trim();if(!text)return;
+  if(chat.w){
+    messages.push({wid:chat.w.id,rid:chat.rid,from:chat.asSeller?"seller":"buyer",text,when:Date.now()});
+    const other=chat.asSeller?users.find(x=>x.id===chat.w.owner):users.find(x=>x.id===chat.rid);
+    if(other)pushNote(other,"New message about the request: "+chat.w.title);
+  }else{
+    messages.push({lid:chat.l.id,buyer:chat.buyer,from:chat.asSeller?"seller":"buyer",text,when:Date.now()});
+    const other=chat.asSeller?users.find(x=>x.id===chat.buyer):users.find(x=>x.id===chat.l.owner);
+    if(other)pushNote(other,"New message about "+chat.l.title);
+  }
+  $("#chatIn").value="";renderChat();save();
+});
+$("#chatDlg").addEventListener("close",()=>{chat=null;renderWho();});
+
+/* public seller shop */
+function openSeller(name){
+  const items=listings.filter(l=>l.seller===name&&listingVisible(l));
+  const st=sellerStats(name),su=sellerUser(name);
+  const top=isTop(name)?'<span class="topbadge">Top Seller</span>':"";
+  const lvl=su?'<span class="topbadge">'+levelOf(su.sales||0)+'</span>':"";
+  const link=SITE_URL+"#seller-"+sellerSlug(name);
+  const wa="https://wa.me/?text="+encodeURIComponent("See "+name+"'s shop on Declutter NG: "+link);
+  const rows=items.length?items.map(l=>'<li><button type="button" class="srow" data-open="'+l.id+'"><span>'+esc(l.title)+(l.sold?" (sold out)":"")+'</span><strong>'+money(l.price)+'</strong></button></li>').join(""):'<li class="hint">No items yet.</li>';
+  const rv=reviews.filter(r=>r.seller===name).slice(-5).reverse().map(r=>"<li>"+"★".repeat(r.stars)+" "+esc(r.text||"")+' <span class="hint">· '+esc(r.by)+"</span></li>").join("");
+  $("#sellerBody").innerHTML='<div class="dlg-head"><h2>'+esc(name)+" "+TICK+'</h2><button class="x" type="button" data-close aria-label="Close">×</button></div><p class="hint" style="margin:0 0 8px">'+(st.n?"★ "+st.avg.toFixed(1)+" ("+st.n+" reviews)":"No reviews yet")+" · ID checked and face matched</p><p style=\"margin:0 0 10px\">"+top+lvl+'</p><h3 style="font-size:17px;margin:8px 0 0">Items</h3><ul class="slist">'+rows+"</ul>"+(rv?'<h3 style="font-size:17px;margin:12px 0 0">Reviews</h3><ul style="padding-left:20px;margin:6px 0;font-size:15px">'+rv+"</ul>":"")+'<a class="btn btn-line" target="_blank" rel="noopener noreferrer" href="'+wa+'" style="width:100%;margin-top:12px">Share this shop on WhatsApp</a>';
+  const d=$("#sellerDlg");if(!d.open)d.showModal();
+}
+$("#sellerBody").addEventListener("click",e=>{
+  if(e.target.closest("[data-close]")){$("#sellerDlg").close();return;}
+  const o=e.target.closest("[data-open]");if(o){$("#sellerDlg").close();openDetail(+o.dataset.open);}
+});
+
+/* account actions */
+$("#acctBody").addEventListener("click",e=>{
+  const t=e.target,u=S.user;if(!u)return;
+  if(t.closest("[data-close]")){$("#acctDlg").close();return;}
+  if(t.closest("[data-delete]")){$("#acctDlg").close();openDelete();return;}
+  const el=t.closest("[data-editl]");if(el){const l=listings.find(x=>x.id==el.dataset.editl);if(l){$("#acctDlg").close();openPostForm(l);}return;}
+  const dl=t.closest("[data-dell]");if(dl){deleteListing(+dl.dataset.dell);return;}
+  const we=t.closest("[data-wedit]");if(we){const w=wanted.find(x=>x.id==we.dataset.wedit);if(w){$("#acctDlg").close();openWanted("",w);}return;}
+  const wd=t.closest("[data-wdel]");if(wd){deleteWanted(+wd.dataset.wdel);return;}
+  const rp=t.closest("[data-rephoto]");if(rp){rephotoId=+rp.dataset.rephoto;$("#rePhotos").click();return;}
+  const bo=t.closest("[data-boost]");
+  if(bo){const l=listings.find(x=>x.id==bo.dataset.boost);if(!l)return;if((u.boosts||0)<1){toast("No free boosts left. You earn one with every sale.");return;}u.boosts--;l.boostUntil=Date.now()+3*86400000;refresh();openAcct();toast("Boosted for 3 days. It shows first in the list.");return;}
+  const fl=t.closest("[data-flip]");
+  if(fl){const l=listings.find(x=>x.id==fl.dataset.flip);if(!l)return;l.sold=!l.sold;refresh();openAcct();return;}
+  const vw=t.closest("[data-view]");if(vw){$("#acctDlg").close();openDetail(+vw.dataset.view);return;}
+  if(t.closest("[data-myshop]")){$("#acctDlg").close();openSeller(shortName(u));return;}
+  const ad=t.closest("[data-alert-del]");if(ad){u.alerts.splice(+ad.dataset.alertDel,1);save();openAcct();return;}
+  if(t.closest("[data-clear-notes]")){u.notes=[];renderWho();save();openAcct();return;}
+  if(t.closest("[data-show-saved]")){$("#acctDlg").close();S.saved=true;refresh();$("#results").scrollIntoView();return;}
+  const th=t.closest("[data-thread]");
+  if(th){const parts=th.dataset.thread.split("|");
+    if(parts[0]==="W"){const w=wanted.find(x=>x.id==parts[1]);if(w){$("#acctDlg").close();openWantThread(w,parts[2]);}}
+    else{const l=listings.find(x=>x.id==parts[0]);if(l){$("#acctDlg").close();openChat(l,parts[1]);}}}
+});
+
+/* admin (demo) */
+$("#infoBody").addEventListener("submit",e=>{if(e.target.id!=="eForm")return;e.preventDefault();$("#infoDlg").close();toast("You're on the waiting list. We'll contact you when ambassadors open.");});
+
+/* ---------- ID checks and account deletion ---------- */
+let lockUntil=0,vFails=0,pendingIdHash="",pendingIdNo="";
+async function hashId(type,no){
+  const s=type+":"+no.toLowerCase().replace(/\s+/g,"");
+  try{
+    const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));
+    return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");
+  }catch(e){let h=5381;for(const ch of s)h=((h<<5)+h+ch.charCodeAt(0))|0;return "x"+h;}
+}
+async function hashIdStrong(type,no){
+  const s=type+":"+no.toLowerCase().replace(/\s+/g,"");
+  try{
+    const key=await crypto.subtle.importKey("raw",new TextEncoder().encode(s),"PBKDF2",false,["deriveBits"]);
+    const bits=await crypto.subtle.deriveBits({name:"PBKDF2",hash:"SHA-256",salt:new TextEncoder().encode("decluta-id-v2"),iterations:150000},key,256);
+    return "p2:"+[...new Uint8Array(bits)].map(b=>b.toString(16).padStart(2,"0")).join("");
+  }catch(e){return hashId(type,no);}
+}
+/* DEMO ONLY: stands in for a real ID verification provider (name + face match). Replace with a provider call. */
+function verifyIdentity(idNo,name){
+  if(/000$/.test(idNo))return{ok:false,msg:"The name you entered doesn't match the name on this ID. Check your name and ID number."};
+  if(/999$/.test(idNo))return{ok:false,msg:"Your selfie doesn't match the photo on this ID. Try again in good light, or check your ID number."};
+  return{ok:true};
+}
+function openDelete(){$("#delConfirm").value="";$("#delErr").textContent="";$("#delDlg").showModal();}
+$("#delForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  if($("#delConfirm").value.trim()!=="DELETE"){$("#delErr").textContent="Type DELETE in capital letters to confirm.";return;}
+  requestDeletion();
+});
+const DELETE_DAYS=90;
+const fmtDate=t=>new Date(t).toLocaleDateString("en-NG",{day:"numeric",month:"long",year:"numeric"});
+function listingVisible(l){if(l.hidden)return false;const o=l.owner&&users.find(u=>u.id===l.owner);return !(o&&o.deleteAt);}
+function wantedVisible(w){const o=w.owner&&users.find(u=>u.id===w.owner);return !(o&&o.deleteAt);}
+function requestDeletion(){
+  const u=S.user;if(!u)return;
+  u.deleteAt=Date.now()+DELETE_DAYS*86400000;
+  S.user=null;
+  $("#delDlg").close();renderWho();refresh();
+  toast("Your account is deactivated and will be permanently deleted on "+fmtDate(u.deleteAt)+". Sign in before then to restore it.");
+}
+function purgeUser(u){
+  const id=u.id,sn=shortName(u);
+  const myIds=listings.filter(l=>l.owner===id).map(l=>l.id);
+  const myW=wanted.filter(w=>w.owner===id).map(w=>w.id);
+  const drop=(arr,fn)=>{for(let i=arr.length-1;i>=0;i--)if(fn(arr[i]))arr.splice(i,1);};
+  drop(listings,l=>l.owner===id);
+  drop(wanted,w=>w.owner===id);
+  drop(messages,m=>m.buyer===id||m.rid===id||myIds.includes(m.lid)||myW.includes(m.wid));
+  drop(reviews,r=>r.byId===id||(r.mine&&r.seller===sn));
+  drop(reports,r=>r.by===id);
+  deals.forEach(d=>{if(d.buyer===id)d.buyer="deleted";if(d.seller===id){d.seller=null;d.sellerName="Deleted seller";}});
+  const i=users.findIndex(x=>x.id===id);if(i>=0)users.splice(i,1);
+  dropSupport(id);
+  if(S.user&&S.user.id===id)S.user=null;
+}
+function purgeExpired(){users.filter(u=>u.deleteAt&&u.deleteAt<=Date.now()).forEach(purgeUser);}
+let restoreUser=null;
+function showRestore(u){
+  restoreUser=u;
+  $("#rsText").textContent="This account will be permanently deleted on "+fmtDate(u.deleteAt)+". Restore it now to get your profile and listings back.";
+  $("#restoreDlg").showModal();
+}
+$("#rsRestore").addEventListener("click",()=>{
+  const u=restoreUser;if(!u)return;
+  delete u.deleteAt;S.user=u;restoreUser=null;
+  $("#restoreDlg").close();renderWho();refresh();toast("Welcome back. Your account is restored.");
+});
+$("#rsKeep").addEventListener("click",()=>{
+  const u=restoreUser;restoreUser=null;$("#restoreDlg").close();
+  if(u)toast("Okay. Your account will be permanently deleted on "+fmtDate(u.deleteAt)+".");
+});
+
+/* ---------- sign in ---------- */
+function normPhone(p){return String(p).replace(/[\s-]/g,"").replace(/^(\+234|234)/,"0");}
+const normName=n=>String(n).toLowerCase().replace(/\s+/g," ").trim();
+let siFails=0,siLock=0;
+function openSignin(name,phone){
+  $("#siErr").textContent="";$("#siName").value=name||"";$("#siPhone").value=phone||"";
+  $("#signinDlg").showModal();
+}
+$("#signinBtn").addEventListener("click",()=>openSignin());
+$("#siToSignup").addEventListener("click",()=>{$("#signinDlg").close();startSignup(null);});
+$("#s0ToSignin").addEventListener("click",()=>{$("#verifyDlg").close();openSignin();});
+$("#toSignin").addEventListener("click",()=>{const n=$("#vName").value,ph=$("#vPhone").value;$("#verifyDlg").close();openSignin(n,ph);});
+$("#signinForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  if(Date.now()<siLock){$("#siErr").textContent="Too many tries. Please wait a few minutes and try again.";return;}
+  const name=normName($("#siName").value),phone=normPhone($("#siPhone").value);
+  if(!name||!/^0[789]\d{9}$/.test(phone)){$("#siErr").textContent="Enter your full name and a valid Nigerian phone number.";return;}
+  const u=users.find(x=>x.phone===phone&&normName(x.name)===name);
+  if(!u){
+    siFails++;
+    if(siFails>=5){siLock=Date.now()+5*60*1000;siFails=0;$("#siErr").textContent="Too many tries. Please wait 5 minutes or sign up if you're new.";return;}
+    $("#siErr").textContent="We couldn't find an account with that name and number. Check both and try again, or sign up.";return;
+  }
+  if(u.blocked){$("#siErr").textContent="This account is suspended. Please contact support on 0814 783 8934.";return;}
+  if(u.deleteAt){siFails=0;$("#signinDlg").close();showRestore(u);return;}
+  siFails=0;S.user=u;
+  $("#signinDlg").close();renderWho();refresh();
+  toast("Welcome back, "+u.name.split(" ")[0]+".");
+});
+
+/* ---------- edit, delete, wanted photos and wanted chats ---------- */
+let editListingId=null,editWantedId=null,wantPhoto=null,cfFn=null;
+function openPostForm(l){
+  editListingId=l?l.id:null;
+  $("#postForm").reset();photoData=[];$("#pThumbs").innerHTML="";$("#e5").textContent="";
+  $("#pTitle").textContent=l?"Edit item":"Post an item";
+  $("#postSubmit").textContent=l?"Save changes":"Post item";
+  $("#pPhotoHint").textContent="";
+  if(l){
+    $("#pKind").value=l.kind||"used";$("#pCondWrap").hidden=l.kind==="new";
+    $("#pItem").value=l.title;$("#pCat").value=l.cat;$("#pState").value=l.state;$("#pArea").value=l.area;
+    $("#pPrice").value=l.price;if(l.kind!=="new")$("#pCond").value=l.cond;
+    $("#pSwap").checked=!!l.swap;$("#pShip").value=l.ship?"1":"0";$("#pDesc").value=l.desc||"";
+    $("#pThumbs").innerHTML=(l.photos||[]).filter(x=>String(x).startsWith("data:image/")).map(x=>'<img src="'+esc(x)+'" alt="Current photo">').join("");
+    $("#pPhotoHint").textContent="Your current photos are kept unless you choose new ones.";
+  }
+  $("#postDlg").showModal();
+}
+function askConfirm(title,text,okLabel,fn){
+  cfFn=fn;$("#cfTitle").textContent=title;$("#cfText").textContent=text;$("#cfOk").textContent=okLabel;
+  $("#confirmDlg").showModal();
+}
+$("#cfOk").addEventListener("click",()=>{const f=cfFn;cfFn=null;$("#confirmDlg").close();if(f)f();});
+$("#confirmDlg").addEventListener("close",()=>{cfFn=null;});
+function deleteListing(id){
+  const l=listings.find(x=>x.id===id);if(!l||!S.user||l.owner!==S.user.id)return;
+  askConfirm('Delete "'+l.title+'"?',"This removes the item and its chats. It can't be undone.","Delete item",()=>{
+    const i=listings.findIndex(x=>x.id===id);if(i>=0)listings.splice(i,1);
+    for(let k=messages.length-1;k>=0;k--)if(messages[k].lid===id)messages.splice(k,1);
+    for(let k=reports.length-1;k>=0;k--)if(reports[k].id===id)reports.splice(k,1);
+    users.forEach(u=>{u.saved=(u.saved||[]).filter(x=>x!==id);});
+    if($("#detailDlg").open)$("#detailDlg").close();
+    refresh();if($("#acctDlg").open)openAcct();
+    toast("Item deleted.");
+  });
+}
+function deleteWanted(id){
+  const w=wanted.find(x=>x.id===id);if(!w||!S.user||w.owner!==S.user.id)return;
+  askConfirm("Delete this request?",'"'+w.title+'" and its chats will be removed.',"Delete request",()=>{
+    const i=wanted.findIndex(x=>x.id===id);if(i>=0)wanted.splice(i,1);
+    for(let k=messages.length-1;k>=0;k--)if(messages[k].wid===id)messages.splice(k,1);
+    refresh();if($("#acctDlg").open)openAcct();
+    toast("Request deleted.");
+  });
+}
+function renderWantPhoto(){
+  $("#wThumb").innerHTML=wantPhoto?'<img src="'+esc(wantPhoto)+'" alt="Photo of what you want">':"";
+  $("#wPhotoRemove").hidden=!wantPhoto;
+}
+$("#wPhoto").addEventListener("change",async e=>{
+  $("#eW").textContent="";
+  if(!e.target.files.length)return;
+  try{const r=await readPhotos([e.target.files[0]]);wantPhoto=r[0];}catch(err){$("#eW").textContent=err.message;e.target.value="";}
+  renderWantPhoto();
+});
+$("#wPhotoRemove").addEventListener("click",()=>{wantPhoto=null;$("#wPhoto").value="";renderWantPhoto();});
+function notifySellersOfWanted(w){
+  users.forEach(u=>{
+    if(u.id===w.owner||u.role!=="seller"||u.deleteAt)return;
+    if(listings.some(l=>l.owner===u.id&&!l.sold&&!l.hidden&&l.cat===w.cat&&l.state===w.state))pushNote(u,"Someone in "+w.state+" wants: "+w.title+". You have a matching item.");
+  });
+  renderWho();
+}
+function openWantChat(w){
+  if(!S.user){toast("Sign up as a seller to reply.");startSignup("seller");return;}
+  if(w.owner===S.user.id){toast("This is your own request.");return;}
+  chat={w,asSeller:true,rid:S.user.id};
+  $("#chatTitle").textContent="Wanted: "+w.title;
+  $("#chatIn").value="Hello, I have what you're looking for: ";
+  renderChat();if(!$("#chatDlg").open)$("#chatDlg").showModal();
+}
+function openWantThread(w,rid){
+  if(!S.user)return;
+  chat={w,asSeller:S.user.id===rid,rid};
+  $("#chatTitle").textContent="Wanted: "+w.title;$("#chatIn").value="";
+  renderChat();if(!$("#chatDlg").open)$("#chatDlg").showModal();
+}
+
+/* ---------- video requests and private admin key ---------- */
+function requestVideo(l){
+  if(!S.user){toast("Sign up to ask the seller for a video.");startSignup(null);return;}
+  if(l.owner===S.user.id){toast("This is your own listing.");return;}
+  const have=messages.some(m=>m.lid===l.id&&m.buyer===S.user.id&&m.type==="videoreq");
+  if(!have){
+    messages.push({lid:l.id,buyer:S.user.id,from:"buyer",type:"videoreq",text:"📹 Video request: please send a short video showing the item working and from all sides.",when:Date.now()});
+    const o=users.find(x=>x.id===l.owner);if(o)pushNote(o,"Video request for "+l.title);
+    save();
+  }
+  openChat(l,null,"");
+  toast(have?"You already asked for a video. We'll tell you when the seller replies.":"Video request sent to the seller.");
+}
+$("#chatVideoBtn").addEventListener("click",()=>$("#chatVideo").click());
+$("#chatVideo").addEventListener("change",e=>{
+  const f=e.target.files[0];e.target.value="";if(!f||!chat||!chat.l)return;
+  if(!f.type.startsWith("video/")){toast("Please choose a video.");return;}
+  if(f.size>10*1024*1024){toast("That video is too large. Use one under 10 MB (about 20 seconds).");return;}
+  messages.push({lid:chat.l.id,buyer:chat.buyer,from:"seller",type:"video",url:URL.createObjectURL(f),text:"📹 Video",when:Date.now()});
+  const bu=users.find(x=>x.id===chat.buyer);if(bu)pushNote(bu,"The seller sent a video for "+chat.l.title);
+  renderChat();save();
+});
+
+/* ---------- optional cloud record for the owner (Google Sheet) ---------- */
+/* The cloud record address comes from config.js (see that file). */
+const CLOUD_URL=(typeof window.DECLUTA_CLOUD==="string"&&/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(window.DECLUTA_CLOUD))?window.DECLUTA_CLOUD:"";
+const DEVICE_KEY="declutterng-device";
+function deviceId(){
+  let d="";
+  try{d=localStorage.getItem(DEVICE_KEY)||"";if(!d){d="D"+Math.random().toString(36).slice(2,10)+Date.now().toString(36);localStorage.setItem(DEVICE_KEY,d);}}catch(e){d="D-temp";}
+  return d;
+}
+let syncT=null;
+function scheduleSync(){if(!CLOUD_URL)return;clearTimeout(syncT);syncT=setTimeout(syncCloud,3000);}
+function cloudPayload(){
+  const pub=u=>({id:u.id,name:u.name,phone:u.phone,role:u.role,verified:!!u.verified,idType:u.idType||"",idHash:u.idHash||"",joined:u.joined,status:u.deleteAt?"deleting":u.blocked?"suspended":"active",deleteAt:u.deleteAt||"",credit:u.credit||0,purchases:u.purchases||0,sales:u.sales||0});
+  return{
+    device:deviceId(),when:Date.now(),
+    users:users.map(pub),
+    listings:listings.filter(l=>l.owner).map(l=>({id:l.id,title:l.title,cat:l.cat,state:l.state,area:l.area,price:l.price,kind:l.kind||"used",seller:l.seller,owner:l.owner,sold:!!l.sold,hidden:!!l.hidden,photoStatus:l.photoStatus||"",photos:(l.photos||[]).length,when:l.when||""})),
+    wanted:wanted.filter(w=>w.owner).map(w=>({id:w.id,title:w.title,cat:w.cat,state:w.state,budget:w.budget||0,owner:w.owner,found:!!w.found,hasPhoto:!!w.photo})),
+    deals:deals.map(d=>({id:d.id,title:d.title,price:d.price,fee:d.fee||0,commission:d.commission||0,buyer:d.buyer,seller:d.seller||"",method:d.method||"",when:d.when})),
+    reports:reports.map(r=>({id:r.id,reason:r.reason,by:r.by,when:r.when||""})),
+    reviews:reviews.filter(r=>r.mine).map(r=>({seller:r.seller,stars:r.stars,text:r.text||"",by:r.by}))
+  };
+}
+function syncCloud(){
+  syncT=null;if(!CLOUD_URL)return;
+  try{fetch(CLOUD_URL,{method:"POST",mode:"no-cors",keepalive:true,headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(cloudPayload())}).catch(()=>{});}catch(e){}
+}
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden"&&syncT){clearTimeout(syncT);syncCloud();}});
+
+/* ---------- messages between users and Decluta support ---------- */
+const SUP_KEY="declutterng-support";
+let support=[];
+function loadSupport(){
+  try{const a=JSON.parse(localStorage.getItem(SUP_KEY)||"[]");support=Array.isArray(a)?a.filter(m=>m&&m.id&&m.uid&&typeof m.text==="string"):[];}catch(e){support=[];}
+}
+function saveSupport(){
+  try{
+    const cur=JSON.parse(localStorage.getItem(SUP_KEY)||"[]");const ids=new Set(support.map(m=>m.id));
+    if(Array.isArray(cur))cur.forEach(m=>{if(m&&m.id&&!ids.has(m.id))support.push(m);});
+    support.sort((a,b)=>a.when-b.when);support=support.slice(-500);
+    localStorage.setItem(SUP_KEY,JSON.stringify(support));
+  }catch(e){}
+}
+function dropSupport(uid){
+  support=support.filter(m=>String(m.uid)!==String(uid));
+  try{localStorage.setItem(SUP_KEY,JSON.stringify(support));}catch(e){}
+}
+function myThread(){return S.user?support.filter(m=>String(m.uid)===String(S.user.id)&&(!m.device||m.device===deviceId())).sort((a,b)=>a.when-b.when):[];}
+function unreadSupport(){if(!S.user)return 0;const seen=S.user.supportSeen||0;return myThread().filter(m=>m.from==="admin"&&m.when>seen).length;}
+function markSupportSeen(){
+  if(!S.user)return;
+  const latest=myThread().reduce((a,m)=>Math.max(a,m.when),0);
+  if(latest>(S.user.supportSeen||0)){S.user.supportSeen=latest;save();renderWho();}
+}
+function cloudSupportPost(m){
+  if(!CLOUD_URL)return;
+  try{fetch(CLOUD_URL,{method:"POST",mode:"no-cors",keepalive:true,headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({type:"support",...m})}).catch(()=>{});}catch(e){}
+}
+function sendSupport(text){
+  text=String(text).trim().slice(0,500);if(!text||!S.user)return;
+  const now=Date.now();
+  if(now-(sendSupport.last||0)<2000){toast("Please wait a moment before sending another message.");return;}
+  sendSupport.last=now;
+  const m={id:"M"+now+Math.random().toString(36).slice(2,7),uid:S.user.id,device:deviceId(),from:"user",name:S.user.name,text,when:now};
+  support.push(m);saveSupport();cloudSupportPost(m);
+  openAcct();toast("Message sent to Decluta support.");
+}
+$("#acctBody").addEventListener("submit",e=>{if(e.target.id!=="supForm")return;e.preventDefault();sendSupport($("#supIn").value);});
+window.addEventListener("storage",e=>{
+  if(e.key!==SUP_KEY)return;
+  const before=unreadSupport();loadSupport();renderWho();
+  if(unreadSupport()>before)toast("New message from Decluta support.");
+  if($("#acctDlg").open&&S.user)openAcct();
+});
+async function pollSupport(){
+  if(!CLOUD_URL||!S.user||document.visibilityState!=="visible")return;
+  try{
+    const r=await fetch(CLOUD_URL+"?action=inbox&device="+encodeURIComponent(deviceId())+"&uid="+encodeURIComponent(S.user.id));
+    const j=await r.json();if(!j||!j.ok||!Array.isArray(j.messages))return;
+    const ids=new Set(support.map(m=>m.id));let added=0,fromAdmin=0;
+    j.messages.forEach(m=>{
+      if(!m.id||ids.has(String(m.id)))return;
+      const from=m.from==="admin"?"admin":"user";
+      support.push({id:String(m.id),uid:String(m.uid),device:String(m.device||""),from,name:String(m.name||""),text:String(m.text||"").slice(0,500),when:Number(m.when)||Date.now()});
+      added++;if(from==="admin")fromAdmin++;
+    });
+    if(added){saveSupport();renderWho();if($("#acctDlg").open)openAcct();if(fromAdmin)toast("New message from Decluta support.");}
+  }catch(e){}
+}
+setInterval(pollSupport,30000);
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")pollSupport();});
+
+/* ---------- keep your posts in this browser ---------- */
+const KEY="declutterng-v2";
+function save(){scheduleSync();
+  try{localStorage.setItem(KEY,JSON.stringify({listings:listings.filter(l=>l.owner),wanted:wanted.filter(w=>w.owner),users,reviews:reviews.filter(r=>r.mine),reports,messages:messages.map(m=>m.type==="video"?{...m,url:undefined,text:"📹 Video sent (not saved in this demo)"}:m),deals,removed,uid:S.user?S.user.id:null}));}catch(e){if(!save.warned){save.warned=1;toast("Your browser storage is full, so new posts may not be saved. Remove old listings to free space.");}}
+}
+function load(){
+  try{
+    const d=JSON.parse(localStorage.getItem(KEY)||"null");
+    if(!d||!Array.isArray(d.listings)||!Array.isArray(d.wanted)||!Array.isArray(d.users))return;
+    d.listings.forEach(l=>{l.photos=(l.photos||[]).filter(x=>String(x).startsWith("data:image/"));});
+    listings.unshift(...d.listings);wanted.unshift(...d.wanted);users.push(...d.users);
+    reviews.push(...(d.reviews||[]));reports.push(...(d.reports||[]));messages.push(...(d.messages||[]));deals.push(...(d.deals||[]));removed.push(...(d.removed||[]));
+    for(let i=listings.length-1;i>=0;i--)if(removed.includes(listings[i].id))listings.splice(i,1);
+    listings.forEach(l=>{if(typeof l.title!=="string")l.title="Item";if(typeof l.state!=="string")l.state="Lagos";if(!Number.isFinite(+l.price))l.price=0;l.price=+l.price;});
+    users.forEach(u=>{u.phone=normPhone(u.phone);u.credit=u.credit||0;u.purchases=u.purchases||0;u.sales=u.sales||0;u.saved=u.saved||[];u.alerts=u.alerts||[];u.notes=u.notes||[];u.boosts=u.boosts||0;});
+    S.user=users.find(u=>u.id===d.uid)||null;if(S.user&&S.user.deleteAt)S.user=null;
+  }catch(e){}
+}
+$("#signoutBtn").addEventListener("click",()=>{S.user=null;renderWho();refresh();toast("You're signed out.");});
+
+loadSupport();load();purgeExpired();renderWho();refresh();applyHash(false);setTimeout(pollSupport,2000);
+</script>
+</body>
+</html>

@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; connect-src https://script.google.com https://script.googleusercontent.com; form-action 'none'; base-uri 'none'; object-src 'none'; frame-src 'none'">
+<title>Decluta Admin</title>
+<style>
+:root{--bg:#F6F7F4;--surface:#fff;--ink:#15201A;--muted:#58665D;--line:#DCE1DA;--green:#0E6B3F;--yellow:#FFC20E;--red:#C0341D;--blue:#1D6FE0;--font:'Segoe UI',system-ui,-apple-system,sans-serif}
+@media(prefers-color-scheme:dark){:root{--bg:#0F1511;--surface:#17201A;--ink:#EDF2EE;--muted:#9BAAA0;--line:#2A362E;--green:#23895A;--red:#FF8A75}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.5;padding-bottom:env(safe-area-inset-bottom,0px)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.btn{border:0;border-radius:10px;padding:10px 16px;font-weight:700;min-height:44px;background:var(--green);color:#fff}
+.btn.line{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.line:hover{border-color:var(--ink)}
+.btn.sm{padding:5px 10px;min-height:34px;font-size:14px}
+.btn.danger{background:transparent;color:var(--red);border:1.5px solid var(--red)}
+.btn.ink{background:#15201A;color:#fff}
+.field{width:100%;min-height:44px;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;background:var(--surface);color:var(--ink)}
+label{display:block;font-weight:600;margin:12px 0 4px}
+.hint{color:var(--muted);font-size:14px;margin:4px 0}
+.err{color:var(--red);font-size:14px;min-height:1.2em;margin:6px 0 0}
+.gate{max-width:420px;margin:12vh auto 0;padding:24px 18px}
+.gate h1{font-size:26px;margin:0 0 6px}
+.bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 16px;background:#15201A;color:#fff;position:sticky;top:0;z-index:5}
+.bar strong{font-size:18px}
+.badge{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--yellow);color:#15201A}
+.bar .sp{flex:1}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;background:var(--surface);border-bottom:1.5px solid var(--line);scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;border:1.5px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:7px 14px;font-weight:600}
+.tab[aria-current="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+main{max-width:1100px;margin:0 auto;padding:16px}
+h2{font-size:22px;margin:0 0 10px}
+h3{font-size:17px;margin:18px 0 6px}
+.notice{border-radius:10px;padding:10px 14px;margin:0 0 14px;background:color-mix(in srgb,var(--yellow) 25%,var(--surface));font-size:15px}
+.notice.warn{background:color-mix(in srgb,var(--red) 14%,var(--surface))}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.card{background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px}
+.card span{display:block;color:var(--muted);font-size:13px}
+.card strong{font-size:22px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.filters .field{flex:1;min-width:130px}
+.tbl{overflow-x:auto;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;margin-bottom:14px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:12px;color:var(--muted);text-transform:none;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.nw{white-space:nowrap}
+.pill{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;background:var(--line);color:var(--ink)}
+.pill.ok{background:color-mix(in srgb,var(--green) 22%,var(--surface))}
+.pill.bad{background:color-mix(in srgb,var(--red) 22%,var(--surface))}
+.pill.warn{background:color-mix(in srgb,var(--yellow) 45%,var(--surface))}
+.thumb{width:44px;height:44px;object-fit:cover;border-radius:8px;border:1px solid var(--line);cursor:zoom-in;background:var(--bg)}
+a{color:var(--ink)}
+.chart{display:flex;align-items:flex-end;gap:4px;height:120px;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:10px 10px 4px}
+.chart div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%}
+.chart i{display:block;width:100%;background:var(--green);border-radius:4px 4px 0 0;min-height:2px}
+.chart small{font-size:10px;color:var(--muted)}
+.hbar{display:grid;grid-template-columns:110px 1fr 36px;gap:8px;align-items:center;font-size:14px;margin:4px 0}
+.hbar b{display:block;height:10px;background:var(--green);border-radius:5px}
+dialog{border:0;border-radius:16px;padding:0;width:min(640px,calc(100% - 20px));max-height:calc(100% - 20px);background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:rgba(10,16,12,.6)}
+.dlg{padding:18px}
+.dlg-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.x{border:0;background:transparent;color:var(--ink);font-size:28px;width:44px;height:44px;border-radius:10px}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.kv{display:grid;grid-template-columns:130px 1fr;gap:4px 10px;font-size:15px}
+.kv span{color:var(--muted)}
+.photos{display:flex;gap:8px;flex-wrap:wrap}
+.photos img{max-width:100%;max-height:70vh;border-radius:10px;border:1px solid var(--line)}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#15201A;color:#fff;padding:12px 18px;border-radius:10px;max-width:calc(100% - 32px);z-index:50;font-weight:600}
+.toast[hidden]{display:none}
+[hidden]{display:none!important}
+textarea.field{min-height:100px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+.chatlog{display:flex;flex-direction:column;gap:6px;max-height:300px;overflow-y:auto;margin:10px 0;padding:4px}
+.msg{max-width:82%;padding:8px 12px;border-radius:14px;font-size:15px;word-break:break-word}
+.msg small{display:block;font-size:11px;opacity:.7;margin-top:2px}
+.msg.me{align-self:flex-end;background:var(--green);color:#fff}
+.msg.them{align-self:flex-start;background:var(--bg);border:1.5px solid var(--line)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<noscript>Please turn on JavaScript to use the admin page.</noscript>
+
+<div class="gate" id="gate" hidden>
+  <h1 id="gateTitle">Admin sign in</h1>
+  <p class="hint" id="gateText"></p>
+  <form id="gateForm" novalidate>
+    <label for="pass">Passcode</label>
+    <input class="field" id="pass" type="password" autocomplete="current-password">
+    <div id="pass2Wrap"><label for="pass2">Repeat passcode</label><input class="field" id="pass2" type="password" autocomplete="new-password"></div>
+    <p class="err" id="gateErr" role="alert"></p>
+    <button class="btn" type="submit" style="width:100%;margin-top:6px">Continue</button>
+  </form>
+  <p class="hint" style="margin-top:16px">This page is private to you. It is not linked from the public website.</p>
+</div>
+
+<div id="app" hidden>
+  <header class="bar"><strong>Decluta Admin</strong><span class="badge" id="srcBadge"></span><span class="sp"></span><input class="field" id="gs" placeholder="Search anything" aria-label="Search anything" style="max-width:190px;min-height:36px;padding:4px 10px"><button class="btn line sm" id="lockBtn" type="button" style="color:#fff;border-color:#5a6a60">Lock</button></header>
+  <nav class="tabs" id="tabs" aria-label="Admin sections"></nav>
+  <main id="view"></main>
+</div>
+
+<dialog id="dlg"><div class="dlg" id="dlgBody"></div></dialog>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>if(self!==top&&/(^|\.)github\.io$|^(www\.)?decluta\.com$/.test(location.hostname)){document.documentElement.innerHTML="";}</script>
+<script src="config.js"></script>
+<script>
+(function(){
+"use strict";
+var SCRIPT_TEXT="// Decluta.com cloud record + support messages (Google Apps Script)\n// 1. Change ADMIN_KEY below to a long secret (at least 16 letters and numbers) that only you know.\n// 2. Deploy as a Web app: Execute as \"Me\", Who has access \"Anyone\".\n// 3. After you change this code later, choose Deploy > Manage deployments > Edit > New version.\n\nconst ADMIN_KEY = \"CHANGE_ME_TO_A_LONG_SECRET\";\n\nconst SHEETS = {\n  users: [\"device\",\"id\",\"name\",\"phone\",\"role\",\"verified\",\"idType\",\"idHash\",\"joined\",\"status\",\"deleteAt\",\"credit\",\"purchases\",\"sales\",\"updatedAt\"],\n  listings: [\"device\",\"id\",\"title\",\"cat\",\"state\",\"area\",\"price\",\"kind\",\"seller\",\"owner\",\"sold\",\"hidden\",\"photoStatus\",\"photos\",\"when\",\"updatedAt\"],\n  wanted: [\"device\",\"id\",\"title\",\"cat\",\"state\",\"budget\",\"owner\",\"found\",\"hasPhoto\",\"updatedAt\"],\n  deals: [\"device\",\"id\",\"title\",\"price\",\"fee\",\"commission\",\"buyer\",\"seller\",\"method\",\"when\",\"updatedAt\"],\n  reports: [\"device\",\"id\",\"reason\",\"by\",\"when\",\"updatedAt\"],\n  reviews: [\"device\",\"seller\",\"stars\",\"text\",\"by\",\"updatedAt\"]\n};\nconst SUPPORT_COLS = [\"id\",\"device\",\"uid\",\"from\",\"name\",\"text\",\"when\"];\n\n// Safety limits so strangers cannot flood your sheet.\nconst CAPS = { users: 100, listings: 500, wanted: 300, deals: 500, reports: 200, reviews: 300 };\nconst MAX_BODY = 300000;        // largest message the website may send\nconst MAX_SHEET_ROWS = 20000;   // stop writing when a sheet is this full\nconst DEVICE_RE = /^D[a-z0-9-]{6,40}$/i;\nconst UID_RE = /^U[0-9]{3,8}$/;\nconst MID_RE = /^M[a-z0-9]{6,40}$/i;\n\nfunction clip_(v, n) { return String(v === undefined || v === null ? \"\" : v).slice(0, n); }\n\n// Stops text that starts with = + - @ from being treated as a formula.\nfunction safe_(v) {\n  const s = String(v === undefined || v === null ? \"\" : v);\n  return /^[=+\\-@]/.test(s) ? \"'\" + s : s;\n}\nfunction unsafe_(v) {\n  return typeof v === \"string\" ? v.replace(/^'([=+\\-@])/, \"$1\") : v;\n}\n\nfunction keyOk_() {\n  return ADMIN_KEY && ADMIN_KEY !== \"CHANGE_ME_TO_A_LONG_SECRET\" && ADMIN_KEY.length >= 16;\n}\n// Returns \"ok\", \"bad\", \"locked\" or \"weakkey\". Too many wrong keys pauses key checks for 10 minutes.\nfunction checkKey_(k) {\n  const cache = CacheService.getScriptCache();\n  const fails = Number(cache.get(\"keyfails\") || 0);\n  if (fails >= 20) return \"locked\";\n  if (!keyOk_()) return \"weakkey\";\n  if (k !== ADMIN_KEY) { cache.put(\"keyfails\", String(fails + 1), 600); return \"bad\"; }\n  return \"ok\";\n}\nfunction rateOk_(name, limit, secs) {\n  const c = CacheService.getScriptCache();\n  const n = Number(c.get(name) || 0);\n  if (n >= limit) return false;\n  c.put(name, String(n + 1), secs);\n  return true;\n}\n\nfunction sheetFor_(name, cols) {\n  const ss = SpreadsheetApp.getActiveSpreadsheet();\n  let sh = ss.getSheetByName(name);\n  if (!sh) {\n    sh = ss.insertSheet(name);\n    sh.getRange(1, 1, sh.getMaxRows(), cols.length).setNumberFormat(\"@\"); // keep phone numbers as text\n    sh.appendRow(cols);\n    sh.setFrozenRows(1);\n  }\n  return sh;\n}\nfunction sheet_(name) { return sheetFor_(name, SHEETS[name]); }\nfunction supportSheet_() { return sheetFor_(\"support\", SUPPORT_COLS); }\n\nfunction out_(o) {\n  return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);\n}\n\nfunction appendSupport_(m) {\n  if (!DEVICE_RE.test(String(m.device)) || !UID_RE.test(String(m.uid)) || !MID_RE.test(String(m.id))) return false;\n  const text = clip_(m.text, 500).trim();\n  if (!text) return false;\n  const sh = supportSheet_();\n  const last = sh.getLastRow();\n  if (last > MAX_SHEET_ROWS) return false;\n  if (last > 1) {\n    const ids = sh.getRange(2, 1, last - 1, 1).getValues();\n    for (let i = 0; i < ids.length; i++) if (String(ids[i][0]) === String(m.id)) return true; // already stored\n  }\n  const rec = { id: m.id, device: m.device, uid: m.uid, from: m.from, name: clip_(m.name, 60), text: text, when: clip_(m.when, 20) };\n  const row = SUPPORT_COLS.map(function (c) { return safe_(clip_(rec[c], 500)); });\n  sh.getRange(sh.getLastRow() + 1, 1, 1, SUPPORT_COLS.length).setValues([row]);\n  return true;\n}\n\nfunction readSupport_() {\n  const v = supportSheet_().getDataRange().getValues();\n  v.shift();\n  return v.map(function (r) {\n    const o = {};\n    SUPPORT_COLS.forEach(function (k, i) { o[k] = unsafe_(r[i]); });\n    return o;\n  });\n}\n\n// The website sends either a snapshot of what one browser holds, or a support message.\nfunction doPost(e) {\n  const lock = LockService.getScriptLock();\n  lock.waitLock(20000);\n  try {\n    if (!e || !e.postData || !e.postData.contents || e.postData.contents.length > MAX_BODY) return out_({ ok: false });\n    let d;\n    try { d = JSON.parse(e.postData.contents); } catch (x) { return out_({ ok: false }); }\n    if (!d || typeof d !== \"object\" || !DEVICE_RE.test(String(d.device || \"\"))) return out_({ ok: false });\n\n    if (d.type === \"support\") {\n      if (d.from !== \"user\") return out_({ ok: false });\n      if (!rateOk_(\"sup:\" + d.device, 30, 3600)) return out_({ ok: false, error: \"slow down\" });\n      return out_({ ok: appendSupport_({ id: d.id, device: d.device, uid: d.uid, from: \"user\", name: d.name, text: d.text, when: d.when }) });\n    }\n\n    if (!rateOk_(\"snap:\" + d.device, 60, 3600)) return out_({ ok: false, error: \"slow down\" });\n    const now = new Date().toISOString();\n    Object.keys(SHEETS).forEach(function (name) {\n      const sh = sheet_(name), cols = SHEETS[name];\n      const last = sh.getLastRow();\n      if (last > 1) {\n        const devs = sh.getRange(2, 1, last - 1, 1).getValues();\n        for (let i = devs.length - 1; i >= 0; i--) {\n          if (devs[i][0] === d.device) sh.deleteRow(i + 2);\n        }\n      }\n      if (sh.getLastRow() > MAX_SHEET_ROWS) return;\n      const src = Array.isArray(d[name]) ? d[name].slice(0, CAPS[name]) : [];\n      const rows = src.map(function (r) {\n        r = r && typeof r === \"object\" ? r : {};\n        return cols.map(function (c) {\n          if (c === \"device\") return d.device;\n          if (c === \"updatedAt\") return now;\n          return safe_(clip_(r[c], 200));\n        });\n      });\n      if (rows.length) sh.getRange(sh.getLastRow() + 1, 1, rows.length, cols.length).setValues(rows);\n    });\n    return out_({ ok: true });\n  } finally {\n    lock.releaseLock();\n  }\n}\n\nfunction read_(name) {\n  const v = sheet_(name).getDataRange().getValues();\n  const h = v.shift();\n  return v.map(function (r) {\n    const o = {};\n    h.forEach(function (k, i) { o[k] = unsafe_(r[i]); });\n    return o;\n  });\n}\n\nfunction doGet(e) {\n  const p = (e && e.parameter) || {};\n  if (p.action === \"ping\") return out_({ ok: true });\n\n  // A visitor reads only the messages for their own browser and account.\n  if (p.action === \"inbox\") {\n    if (!DEVICE_RE.test(String(p.device || \"\")) || !UID_RE.test(String(p.uid || \"\"))) return out_({ ok: false });\n    if (!rateOk_(\"inbox:\" + p.device, 600, 3600)) return out_({ ok: false });\n    const msgs = readSupport_().filter(function (m) { return m.device === p.device && String(m.uid) === String(p.uid); });\n    return out_({ ok: true, messages: msgs.slice(-200) });\n  }\n\n  // Everything below needs your admin key.\n  const k = checkKey_(p.key);\n  if (k === \"locked\") return out_({ ok: false, error: \"locked, try again in 10 minutes\" });\n  if (k === \"weakkey\") return out_({ ok: false, error: \"set a stronger ADMIN_KEY in the script\" });\n  if (k !== \"ok\") return out_({ ok: false, error: \"bad key\" });\n\n  if (p.action === \"list\") {\n    const res = { ok: true };\n    Object.keys(SHEETS).forEach(function (n) { res[n] = read_(n); });\n    res.support = readSupport_();\n    return out_(res);\n  }\n  if (p.action === \"support_all\") return out_({ ok: true, support: readSupport_() });\n  if (p.action === \"send\") {\n    const lock = LockService.getScriptLock();\n    lock.waitLock(20000);\n    try {\n      const done = appendSupport_({ id: p.id, device: p.device, uid: p.uid, from: \"admin\", name: p.name || \"Decluta support\", text: p.text, when: Date.now() });\n      return out_({ ok: done });\n    } finally {\n      lock.releaseLock();\n    }\n  }\n  return out_({ ok: false });\n}\n";
+var KEY="declutterng-v2",LOGKEY="dng-admin-log",AUTH="dng-admin-auth",CFG="dng-admin-cloud";
+function $(s){return document.querySelector(s);}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function money(n){return "₦"+Number(n||0).toLocaleString("en-NG");}
+function day(t){var d=new Date(t);return isNaN(d)?"":d.toLocaleDateString("en-NG",{day:"numeric",month:"short",year:"numeric"});}
+function intl(p){p=String(p||"").replace(/[^0-9]/g,"");return p.indexOf("234")===0?p:"234"+p.replace(/^0/,"");}
+function getJSON(k){try{return JSON.parse(localStorage.getItem(k)||"null");}catch(e){return null;}}
+function setJSON(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true;}catch(e){return false;}}
+var CATS={phones:"Phones",electronics:"Electronics",furniture:"Furniture",home:"Home & kitchen",fashion:"Fashion",vehicles:"Vehicles",kids:"Kids",books:"Books"};
+function toast(m){var t=$("#toast");t.textContent=m;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(function(){t.hidden=true;},Math.max(2600,m.length*50));}
+async function sha(s){try{var b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0");}).join("");}catch(e){var h=5381;for(var i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return "x"+h;}}
+
+/* ---------- passcode gate ---------- */
+var gateFails=0,gateLock=0;
+function gerr(m){$("#gateErr").textContent=m;}
+function showGate(){
+  var a=getJSON(AUTH);
+  $("#gate").hidden=false;$("#app").hidden=true;
+  $("#gateTitle").textContent=a?"Admin sign in":"Create your admin passcode";
+  $("#gateText").textContent=a?"Enter your admin passcode.":"Choose a passcode with at least 8 characters. You will use it each time you open this page.";
+  $("#pass2Wrap").hidden=!!a;gerr("");$("#pass").value="";$("#pass2").value="";
+}
+$("#gateForm").addEventListener("submit",async function(e){
+  e.preventDefault();
+  var a=getJSON(AUTH),p=$("#pass").value;
+  if(Date.now()<gateLock){gerr("Too many tries. Please wait a few minutes.");return;}
+  if(!a){
+    if(p.length<8){gerr("Use at least 8 characters.");return;}
+    if(p!==$("#pass2").value){gerr("The two passcodes don't match.");return;}
+    var salt=Array.from(crypto.getRandomValues(new Uint8Array(12))).map(function(x){return x.toString(16).padStart(2,"0");}).join("");
+    setJSON(AUTH,{salt:salt,hash:await sha(salt+p)});
+  }else if(await sha(a.salt+p)!==a.hash){
+    gateFails++;if(gateFails>=5){gateLock=Date.now()+300000;gateFails=0;}
+    gerr("Wrong passcode.");return;
+  }
+  gateFails=0;try{sessionStorage.setItem("dng-admin-ok","1");}catch(x){}
+  enter();
+});
+$("#lockBtn").addEventListener("click",function(){try{sessionStorage.removeItem("dng-admin-ok");}catch(x){}showGate();});
+
+/* ---------- data ---------- */
+var D={users:[],listings:[],wanted:[],deals:[],reports:[],reviews:[],messages:[],removed:[],support:[]},SRC="local",RAW={},TAB="overview",Q={},FOUND=false;
+var SUPKEY="declutterng-support",NOTESK="dng-admin-notes",SEENK="dng-admin-seen",CK=null,openChatKey=null;
+var TABS=[["overview","Overview"],["users","Users"],["messages","Messages"],["listings","Listings"],["wanted","Wanted"],["reports","Reports"],["deals","Deals"],["reviews","Reviews"],["scan","Risk scan"],["deletions","Deletions"],["activity","Activity"],["data","Data & cloud"],["settings","Settings"]];
+function canEdit(){return SRC!=="cloud";}
+function uk(u){return (u.device?u.device+"|":"")+u.id;}
+function ownerKey(x,f){return (x.device?x.device+"|":"")+x[f||"owner"];}
+function userOf(x,f){var k=ownerKey(x,f);return D.users.find(function(u){return uk(u)===k;});}
+function ustatus(u){return u.deleteAt?"deleting":u.blocked?"suspended":"active";}
+function photoCount(l){return Array.isArray(l.photos)?l.photos.length:Number(l.photos)||0;}
+function photoState(l){return l.photoStatus==="verified"?"verified":l.photoStatus==="rejected"?"rejected":(photoCount(l)>0?"pending":"none");}
+function lstatus(l){return l.hidden?"hidden":l.sold?"sold":"active";}
+function shortName(u){var p=String(u.name||"").split(" ");return p[0]+" "+((p[p.length-1]||"")[0]||"")+".";}
+function logA(t){var a=getJSON(LOGKEY)||[];a.unshift({text:t,when:Date.now()});setJSON(LOGKEY,a.slice(0,300));}
+function loadLocal(){
+  var r=getJSON(KEY);RAW=r||{};
+  D={users:RAW.users||[],listings:RAW.listings||[],wanted:RAW.wanted||[],deals:RAW.deals||[],reports:RAW.reports||[],reviews:RAW.reviews||[],messages:RAW.messages||[],removed:RAW.removed||[],support:getJSON(SUPKEY)||[]};
+  SRC="local";FOUND=!!r;
+}
+function persist(){
+  if(SRC!=="local")return;
+  RAW.users=D.users;RAW.listings=D.listings;RAW.wanted=D.wanted;RAW.deals=D.deals;RAW.reports=D.reports;RAW.reviews=D.reviews;RAW.messages=D.messages;RAW.removed=D.removed;
+  if(!setJSON(KEY,RAW))toast("Could not save. Browser storage may be full.");
+  saveSupportLocal();
+}
+function bool(v){return v===true||String(v).toLowerCase()==="true";}
+function loadCloud(j){
+  var users=(j.users||[]).map(function(u){var st=String(u.status||"active");return{device:u.device,id:String(u.id),name:u.name,phone:String(u.phone||""),role:u.role,verified:bool(u.verified),idType:u.idType,idHash:u.idHash,joined:u.joined,credit:Number(u.credit)||0,purchases:Number(u.purchases)||0,sales:Number(u.sales)||0,blocked:st==="suspended",deleteAt:st==="deleting"?(Number(u.deleteAt)||Date.now()+90*864e5):undefined,updatedAt:u.updatedAt};});
+  D={users:users,
+    listings:(j.listings||[]).map(function(l){return{device:l.device,id:l.id,title:l.title,cat:l.cat,state:l.state,area:l.area,price:Number(l.price)||0,kind:l.kind,seller:l.seller,owner:String(l.owner),sold:bool(l.sold),hidden:bool(l.hidden),photoStatus:l.photoStatus,photos:Number(l.photos)||0,when:l.when};}),
+    wanted:(j.wanted||[]).map(function(w){return{device:w.device,id:w.id,title:w.title,cat:w.cat,state:w.state,budget:Number(w.budget)||0,owner:String(w.owner),found:bool(w.found),hasPhoto:bool(w.hasPhoto)};}),
+    deals:(j.deals||[]).map(function(d){return{device:d.device,id:d.id,title:d.title,price:Number(d.price)||0,fee:Number(d.fee)||0,commission:Number(d.commission)||0,buyer:String(d.buyer),seller:String(d.seller),method:d.method,when:Number(d.when)||0};}),
+    reports:(j.reports||[]).map(function(r){return{device:r.device,id:r.id,reason:r.reason,by:r.by,when:r.when};}),
+    reviews:(j.reviews||[]).map(function(r){return{seller:r.seller,stars:Number(r.stars)||0,text:r.text,by:r.by};}),
+    messages:[],removed:[],support:(j.support||[]).map(function(m){return{id:String(m.id),device:String(m.device||""),uid:String(m.uid),from:m.from==="admin"?"admin":"user",name:m.name||"",text:String(m.text||""),when:Number(m.when)||0};})};
+  SRC="cloud";FOUND=true;
+}
+
+/* ---------- demo data ---------- */
+function svgPhoto(emoji,c){return "data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect width="400" height="300" fill="'+c+'"/><text x="200" y="185" font-size="120" text-anchor="middle">'+emoji+'</text></svg>');}
+function demo(){
+  var now=Date.now(),d=function(n){return new Date(now-n*864e5).toISOString().slice(0,10);};
+  var U=function(i,name,phone,role,joined,ex){return Object.assign({id:"U"+(1000+i),name:name,phone:phone,role:role,verified:role==="seller",joined:d(joined),credit:0,purchases:0,sales:0,saved:[],alerts:[],notes:[],boosts:0},ex||{});};
+  var users=[U(1,"Ada Obi","08031234567","seller",13,{sales:4,idType:"nin",idHash:"h1"}),U(2,"Bola Eze","08051234567","buyer",12,{purchases:2,credit:1200}),U(3,"Chuka Nwosu","08061112222","seller",10,{sales:1,idType:"nin",idHash:"h2"}),
+    U(4,"Dami Ade","08072223333","buyer",9),U(5,"Emeka Okoro","08083334444","seller",8,{idType:"passport",idHash:"h3"}),U(6,"Funke Bello","08094445555","buyer",7,{purchases:1}),
+    U(7,"Gbenga Ola","08105556666","seller",6,{blocked:true,idType:"nin",idHash:"h4"}),U(8,"Hauwa Musa","08116667777","buyer",5,{deleteAt:now+40*864e5}),U(9,"Ife Kalu","08127778888","seller",3,{idType:"dl",idHash:"h2"}),
+    U(10,"Jide Ojo","08031234567","buyer",2),U(11,"Kemi Ade","08149998888","buyer",1),U(12,"Lola Yusuf","08150001111","seller",0,{verified:false,idType:"nin",idHash:"h5"})];
+  var P=function(e,c){return svgPhoto(e,c);};
+  var L=function(i,t,cat,st,price,owner,ex){var u=users.find(function(x){return x.id===owner;});return Object.assign({id:2000+i,title:t,cat:cat,state:st,area:"Central",price:price,kind:"used",cond:"Good",seller:shortName(u),owner:owner,sold:false,photos:[P("📦","#DDEBD8")],photoStatus:"pending",when:"Today"},ex||{});};
+  var listings=[L(1,"iPhone 11, 64GB","phones","Lagos",185000,"U1001",{photos:[P("📱","#D6E4FA"),P("🔋","#EEE")],photoStatus:"verified"}),L(2,"3-seater leather sofa","furniture","FCT Abuja",120000,"U1003",{photos:[P("🛋️","#F0E2CC")],photoStatus:"verified"}),
+    L(3,"HP EliteBook 840","electronics","Rivers",260000,"U1005"),L(4,"Standing fan","home","Kano",18500,"U1001",{sold:true,photoStatus:"verified"}),L(5,"Ankara gowns (6)","fashion","Oyo",30000,"U1009",{photoStatus:"rejected",hidden:true}),
+    L(6,"Toyota Corolla 2008","vehicles","Enugu",2800000,"U1003",{sold:true}),L(7,"Kids bicycle","kids","Lagos",25000,"U1012"),L(8,"Office desk","furniture","Delta",55000,"U1001"),L(9,"Samsung 43 inch TV","electronics","Kaduna",145000,"U1005",{photoStatus:"verified"}),
+    L(10,"Textbooks (8)","books","Kwara",12000,"U1009"),L(11,"Gas cooker","home","Anambra",65000,"U1012"),L(12,"Tecno Spark 10","phones","Ogun",78000,"U1007",{kind:"new",cond:"Brand new"})];
+  var wanted=[{id:3001,title:"Used Toyota Camry",cat:"vehicles",state:"Lagos",budget:3500000,pref:"Used is fine",owner:"U1002",by:"Bola E.",found:false,note:"Clean papers"},{id:3002,title:"Single bed with mattress",cat:"furniture",state:"Kaduna",budget:60000,owner:"U1004",by:"Dami A.",found:false,photo:P("🛏️","#E6DDF4")},{id:3003,title:"Baby cot",cat:"kids",state:"FCT Abuja",budget:40000,owner:"U1006",by:"Funke B.",found:true}];
+  var deals=[{id:4001,lid:2001,title:"iPhone 11, 64GB",price:185000,fee:3700,commission:9250,buyer:"U1002",seller:"U1001",method:"pickup",when:now-9*864e5},{id:4002,lid:2004,title:"Standing fan",price:18500,fee:0,commission:0,buyer:"U1006",seller:"U1001",method:"delivery",when:now-4*864e5},{id:4003,lid:2006,title:"Toyota Corolla 2008",price:2800000,fee:56000,commission:140000,buyer:"U1002",seller:"U1003",method:"pickup",when:now-2*864e5}];
+  var reports=[{id:2003,reason:"Looks like a scam",by:"U1004",when:new Date(now-864e5).toISOString()},{id:2005,reason:"Wrong category or price",by:"U1002",when:new Date(now-2*864e5).toISOString()}];
+  var reviews=[{seller:"Ada O.",stars:5,text:"Phone exactly as described",by:"Bola",mine:true},{seller:"Chuka N.",stars:4,text:"Good deal",by:"Funke",mine:true},{seller:"Ada O.",stars:2,text:"Late reply",by:"Dami",mine:true}];
+  var sm=function(i,uid,from,text,ago){return{id:"DM"+i,uid:uid,device:"",from:from,name:from==="admin"?"Decluta support":"",text:text,when:now-ago*36e5};};
+  D={users:users,listings:listings,wanted:wanted,deals:deals,reports:reports,reviews:reviews,messages:[],removed:[],support:[sm(1,"U1002","user","Hi, my payment for the iPhone has not shown yet.",3),sm(2,"U1002","admin","Hello Bola, we are checking this now.",2.5),sm(3,"U1002","user","Thank you, waiting.",2),sm(4,"U1004","user","How do I verify my ID?",1),sm(5,"U1001","admin","Welcome to Decluta! If you need any help, just reply here.",30)]};SRC="demo";FOUND=true;RAW={};
+}
+
+/* ---------- helpers for views ---------- */
+function tbl(head,rows){return '<div class="tbl"><table><thead><tr>'+head.map(function(h){return "<th>"+h+"</th>";}).join("")+"</tr></thead><tbody>"+(rows.join("")||'<tr><td colspan="'+head.length+'">Nothing to show</td></tr>')+"</tbody></table></div>";}
+function tr(a){return "<tr>"+a.map(function(x){return "<td>"+x+"</td>";}).join("")+"</tr>";}
+function pill(t,k){return '<span class="pill '+(k||"")+'">'+esc(t)+"</span>";}
+function contact(u){return '<a href="tel:+'+intl(u.phone)+'">Call</a> · <a href="https://wa.me/'+intl(u.phone)+'" target="_blank" rel="noopener noreferrer">WhatsApp</a> · <a href="sms:+'+intl(u.phone)+'">SMS</a>';}
+function btn(act,id,label,cls){return '<button class="btn sm '+(cls||"line")+'" type="button" data-act="'+act+'" data-id="'+esc(id)+'">'+label+"</button>";}
+function csv(rows){return rows.map(function(r){return r.map(function(c){return '"'+String(c==null?"":c).replace(/"/g,'""')+'"';}).join(",");}).join("\n");}
+function dupes(){
+  var by={};
+  D.users.forEach(function(u){
+    [["phone",u.phone],["id",u.idHash]].forEach(function(p){if(!p[1])return;var k=p[0]+":"+p[1];(by[k]=by[k]||[]).push(u);});
+  });
+  return Object.keys(by).filter(function(k){return by[k].length>1;}).map(function(k){return{kind:k.split(":")[0]==="phone"?"Phone number":"ID",value:k.split(":").slice(1).join(":"),users:by[k]};});
+}
+function statusPill(u){var s=ustatus(u);return s==="active"?pill("Active","ok"):s==="suspended"?pill("Suspended","bad"):pill("Deleting "+day(u.deleteAt),"warn");}
+
+/* ---------- views ---------- */
+function bars(items){
+  var max=Math.max.apply(null,items.map(function(x){return x[1];}).concat([1]));
+  return items.length?items.map(function(x){return '<div class="hbar"><span>'+esc(x[0])+'</span><b style="width:'+Math.max(4,Math.round(x[1]/max*100))+'%"></b><span>'+x[1]+"</span></div>";}).join(""):'<p class="hint">No data yet.</p>';
+}
+function overview(){
+  var U=D.users,S=U.filter(function(u){return u.role==="seller";}),B=U.length-S.length;
+  var wk=Date.now()-7*864e5,nw=U.filter(function(u){return new Date(u.joined).getTime()>=wk-864e5;}).length;
+  var act=D.listings.filter(function(l){return !l.sold&&!l.hidden;}).length,sold=D.listings.filter(function(l){return l.sold;}).length;
+  var pend=D.listings.filter(function(l){return photoState(l)==="pending";}).length;
+  var open=D.wanted.filter(function(w){return !w.found;}).length;
+  var gmv=D.deals.reduce(function(a,x){return a+x.price;},0),fees=D.deals.reduce(function(a,x){return a+(x.fee||0);},0),com=D.deals.reduce(function(a,x){return a+(x.commission||0);},0);
+  var delc=U.filter(function(u){return u.deleteAt;}).length,susp=U.filter(function(u){return u.blocked;}).length,dp=dupes().length;
+  var cards=[["Users",U.length],["Sellers",S.length],["Buyers",B],["New this week",nw],["Active listings",act],["Sold",sold],["Open wanted",open],["Deals",D.deals.length],["Sales value",money(gmv)],["Fees earned",money(fees)],["Commission",money(com)],["Reviews",D.reviews.length]];
+  var h='<h2>Overview</h2>'+banner()+'<div class="cards">'+cards.map(function(c){return '<div class="card"><span>'+c[0]+"</span><strong>"+c[1]+"</strong></div>";}).join("")+"</div>";
+  var todo=[],unread=unreadTotal(),hi=scanFlags().filter(function(f){return f.sev==="High";}).length;
+  if(unread)todo.push(['Unread messages: <b>'+unread+'</b>','messages']);
+  if(hi)todo.push(['High-risk flags: <b>'+hi+'</b>','scan']);
+  if(pend)todo.push(['Photos waiting for review: <b>'+pend+'</b>','listings']);
+  if(D.reports.length)todo.push(['Open reports: <b>'+D.reports.length+'</b>','reports']);
+  if(dp)todo.push(['Duplicate phone numbers or IDs: <b>'+dp+'</b>','users']);
+  if(delc)todo.push(['Accounts waiting to be deleted: <b>'+delc+'</b>','deletions']);
+  if(susp)todo.push(['Suspended accounts: <b>'+susp+'</b>','users']);
+  h+='<h3>Needs your attention</h3>'+(todo.length?'<div class="tbl"><table><tbody>'+todo.map(function(t){return "<tr><td>"+t[0]+'</td><td class="nw"><button class="btn sm line" type="button" data-tab="'+t[1]+'">Open</button></td></tr>';}).join("")+"</tbody></table></div>":'<p class="hint">Nothing needs attention.</p>');
+  var days=[],i;for(i=13;i>=0;i--){var dt=new Date(Date.now()-i*864e5);days.push([dt.toISOString().slice(0,10),dt.getDate()]);}
+  var counts=days.map(function(x){return U.filter(function(u){return u.joined===x[0];}).length;}),mx=Math.max.apply(null,counts.concat([1]));
+  h+='<h3>New accounts, last 14 days</h3><div class="chart">'+days.map(function(x,j){return '<div title="'+x[0]+': '+counts[j]+'"><i style="height:'+Math.round(counts[j]/mx*85)+'%"></i><small>'+x[1]+"</small></div>";}).join("")+"</div>";
+  var bs={},bc={};D.listings.forEach(function(l){bs[l.state]=(bs[l.state]||0)+1;bc[CATS[l.cat]||l.cat]=(bc[CATS[l.cat]||l.cat]||0)+1;});
+  var top=function(o){return Object.keys(o).map(function(k){return [k,o[k]];}).sort(function(a,b){return b[1]-a[1];}).slice(0,8);};
+  h+='<h3>Listings by state</h3>'+bars(top(bs))+'<h3>Listings by category</h3>'+bars(top(bc));
+  return h;
+}
+function banner(){
+  if(SRC==="demo")return '<div class="notice">Demo data. You can try every button here. Nothing is saved.</div>';
+  if(SRC==="cloud")return '<div class="notice">Cloud view: accounts and activity from every visitor who used the website. This view is read-only. Use Call, WhatsApp or SMS to contact people.</div>';
+  if(!FOUND)return '<div class="notice warn">No website data was found in this browser. Open the Decluta website in this same browser and use it first, load the cloud data, or try the demo data from the Data &amp; cloud tab.</div>';
+  return '<div class="notice">Showing the accounts and activity stored in this browser. To see everyone who uses the live site, switch on the cloud record (Data &amp; cloud tab).</div>';
+}
+function usersFilters(){var q=Q.users||{};if(!D.users.length)return banner()+'<h2>Users</h2><div class="notice warn"><b>No users found in this browser.</b><br>Each person\'s account is saved inside the browser they used, and this page can only read this browser. To see everyone, switch on the cloud record. Existing users then appear here the next time they open your website.<div class="row"><button class="btn sm" type="button" data-tab="data">Set up the cloud record</button></div></div>';return banner()+'<h2>Users</h2>'+dupeBox()+'<div class="filters"><input class="field" data-q="users.q" placeholder="Search name, phone or ID" value="'+esc(q.q||"")+'"><select class="field" data-q="users.role"><option value="all">All roles</option><option value="seller">Sellers</option><option value="buyer">Buyers</option></select><select class="field" data-q="users.status"><option value="all">Any status</option><option value="active">Active</option><option value="suspended">Suspended</option><option value="deleting">Deleting</option><option value="unverified">Not verified</option></select></div><div id="res"></div>';}
+function dupeBox(){var d=dupes();if(!d.length)return "";return '<div class="notice warn"><b>⚠ Possible duplicate accounts</b><br>'+d.map(function(x){return esc(x.kind)+" "+(x.kind==="ID"?"(scrambled)":esc(x.value))+": "+x.users.map(function(u){return '<a href="#" data-act="user" data-id="'+esc(uk(u))+'">'+esc(u.name)+"</a>";}).join(", ");}).join("<br>")+"</div>";}
+function usersRes(){
+  var q=Q.users||{},t=(q.q||"").toLowerCase();
+  var L=D.users.filter(function(u){
+    if(t&&(String(u.name).toLowerCase().indexOf(t)<0&&String(u.phone).indexOf(t)<0&&String(u.id).toLowerCase().indexOf(t)<0))return false;
+    if(q.role&&q.role!=="all"&&(q.role==="seller")!==(u.role==="seller"))return false;
+    if(q.status&&q.status!=="all"){if(q.status==="unverified"){if(u.verified)return false;}else if(ustatus(u)!==q.status)return false;}
+    return true;
+  });
+  return '<p class="hint">'+L.length+" of "+D.users.length+' users</p>'+tbl(["","Name","Role","Phone","Contact","Joined","Status","Buys","Sales"],L.map(function(u){return tr([btn("user",uk(u),"View"),esc(u.name)+(u.verified?" ✓":""),esc(u.role),esc(u.phone),contact(u),esc(u.joined||""),statusPill(u),u.purchases||0,u.sales||0]);}));
+}
+function listingsFilters(){
+  var q=Q.listings||{},sts=Array.from(new Set(D.listings.map(function(l){return l.state;}))).sort();
+  return banner()+'<h2>Listings and photos</h2><div class="filters"><input class="field" data-q="listings.q" placeholder="Search item or seller" value="'+esc(q.q||"")+'"><select class="field" data-q="listings.st"><option value="all">All states</option>'+sts.map(function(s){return '<option>'+esc(s)+"</option>";}).join("")+'</select><select class="field" data-q="listings.status"><option value="all">Any status</option><option value="active">Active</option><option value="sold">Sold</option><option value="hidden">Hidden</option><option value="pending">Photos pending</option><option value="verified">Photos verified</option><option value="rejected">Photos rejected</option></select></div><div id="res"></div>';
+}
+function listingsRes(){
+  var q=Q.listings||{},t=(q.q||"").toLowerCase();
+  var L=D.listings.filter(function(l){
+    if(t&&String(l.title).toLowerCase().indexOf(t)<0&&String(l.seller).toLowerCase().indexOf(t)<0)return false;
+    if(q.st&&q.st!=="all"&&l.state!==q.st)return false;
+    if(q.status&&q.status!=="all"){if(["active","sold","hidden"].indexOf(q.status)>=0){if(lstatus(l)!==q.status)return false;}else if(photoState(l)!==q.status)return false;}
+    return true;
+  });
+  return '<p class="hint">'+L.length+" of "+D.listings.length+' listings</p>'+tbl(["","Item","Seller","State","Price","Status","Photos"],L.map(function(l){
+    var ps=photoState(l),th=Array.isArray(l.photos)&&l.photos[0]?'<img class="thumb" src="'+esc(l.photos[0])+'" alt="" data-act="listing" data-id="'+l.id+'"> ':"";
+    return tr([btn("listing",l.id,"Manage"),th+esc(l.title)+(l.kind==="new"?" "+pill("New"):""),esc(l.seller),esc(l.state),money(l.price),pill(lstatus(l),l.sold?"warn":l.hidden?"bad":"ok"),pill(ps+" ("+photoCount(l)+")",ps==="verified"?"ok":ps==="rejected"?"bad":ps==="pending"?"warn":"")]);
+  }));
+}
+function wantedView(){
+  var ed=canEdit();
+  return banner()+'<h2>Wanted requests</h2>'+tbl(["","Photo","Request","Posted by","State","Budget","Status"],D.wanted.map(function(w){
+    var u=userOf(w),ph=w.photo?'<img class="thumb" src="'+esc(w.photo)+'" alt="" data-act="wphoto" data-id="'+w.id+'">':(w.hasPhoto?"yes":"");
+    return tr([ed?btn("wdel",w.id,"Delete","danger"):"",ph,esc(w.title)+(w.note?'<div class="hint">'+esc(w.note)+"</div>":""),esc(u?u.name:(w.by||"")),esc(w.state),w.budget?money(w.budget):"",w.found?pill("Found","ok"):pill("Open","warn")]);
+  }));
+}
+function reportsView(){
+  return banner()+'<h2>Reports</h2>'+tbl(["","Item","Reason","Reported by","When"],D.reports.map(function(r,i){
+    var l=D.listings.find(function(x){return x.id===r.id&&(x.device||"")===(r.device||"");}),by=D.users.find(function(u){return uk(u)===((r.device?r.device+"|":"")+r.by);});
+    return tr([btn("report",i,"Review"),esc(l?l.title:"(removed)"),esc(r.reason),esc(by?by.name:r.by),esc(day(r.when))]);
+  }));
+}
+function dealsView(){
+  var gmv=D.deals.reduce(function(a,x){return a+x.price;},0),fees=D.deals.reduce(function(a,x){return a+(x.fee||0);},0),com=D.deals.reduce(function(a,x){return a+(x.commission||0);},0);
+  return banner()+'<h2>Deals</h2><div class="cards"><div class="card"><span>Deals</span><strong>'+D.deals.length+'</strong></div><div class="card"><span>Sales value</span><strong>'+money(gmv)+'</strong></div><div class="card"><span>Safe Pay fees</span><strong>'+money(fees)+'</strong></div><div class="card"><span>Commission</span><strong>'+money(com)+'</strong></div></div>'+
+    tbl(["Item","Price","Fee","Commission","Method","Buyer","Seller","Date"],D.deals.slice().reverse().map(function(x){var b=D.users.find(function(u){return uk(u)===((x.device?x.device+"|":"")+x.buyer);}),s=D.users.find(function(u){return uk(u)===((x.device?x.device+"|":"")+x.seller);});return tr([esc(x.title),money(x.price),money(x.fee),money(x.commission),esc(x.method),esc(b?b.name:x.buyer),esc(s?s.name:(x.sellerName||x.seller||"")),esc(day(x.when))]);}));
+}
+function reviewsView(){
+  var ed=canEdit();
+  return banner()+'<h2>Reviews</h2>'+tbl(["","Seller","Stars","Comment","By"],D.reviews.map(function(r,i){return tr([ed?btn("rev-del",i,"Delete","danger"):"",esc(r.seller),"★".repeat(r.stars)+" "+r.stars,esc(r.text||""),esc(r.by||"")]);}));
+}
+function deletionsView(){
+  var ed=canEdit(),L=D.users.filter(function(u){return u.deleteAt;});
+  return banner()+'<h2>Account deletions</h2><p class="hint">Accounts are kept for 90 days after the person asks to delete, then permanently erased.</p>'+tbl(["","Name","Phone","Contact","Deletes on","Days left"],L.map(function(u){return tr([ed?btn("restore",uk(u),"Restore")+" "+btn("purge",uk(u),"Delete now","danger"):"",esc(u.name),esc(u.phone),contact(u),esc(day(u.deleteAt)),Math.max(0,Math.ceil((u.deleteAt-Date.now())/864e5))]);}));
+}
+function activityView(){
+  var a=getJSON(LOGKEY)||[];
+  var recent=D.users.slice().sort(function(x,y){return String(y.joined).localeCompare(String(x.joined));}).slice(0,8);
+  return banner()+'<h2>Activity</h2><h3>Newest accounts</h3>'+tbl(["Name","Role","Joined","Contact"],recent.map(function(u){return tr([esc(u.name),esc(u.role),esc(u.joined||""),contact(u)]);}))+'<h3>Your admin actions</h3>'+tbl(["When","Action"],a.map(function(x){return tr([esc(new Date(x.when).toLocaleString("en-NG")),esc(x.text)]);}));
+}
+function storageInfo(){
+  var v1=getJSON("declutterng-v1"),v2=getJSON(KEY),sp=getJSON(SUPKEY);
+  return [["Website data in this browser",v2?(v2.users||[]).length+" users, "+(v2.listings||[]).length+" listings, "+(v2.wanted||[]).length+" wanted requests":"none found"],["Older website data (not used any more)",v1?(v1.users||[]).length+" users":"none"],["Support messages",sp?sp.length+" messages":"none"]];
+}
+function cfgAddress(){return (typeof window.DECLUTA_CLOUD==="string"&&window.DECLUTA_CLOUD)||"";}
+function dataView(){
+  var c=getJSON(CFG)||{},cfg=cfgAddress(),url=cfg||c.url||"";
+  var site=location.origin+location.pathname.replace(/admin\.html$/,"");
+  var steps=["Open <b>sheets.google.com</b> and create a new blank spreadsheet. Name it \"Decluta records\".","Click <b>Extensions</b>, then <b>Apps Script</b>.","Delete the code that is there, paste the script below, and change <b>CHANGE_ME_TO_A_LONG_SECRET</b> to your own long secret key. Click Save.","Click <b>Deploy</b>, then <b>New deployment</b>. Choose <b>Web app</b>. Set \"Execute as\" to <b>Me</b> and \"Who has access\" to <b>Anyone</b>. Click Deploy and allow access.","Copy the <b>Web app address</b> (it ends in /exec) and paste it into the box further down.","Click <b>Make config.js line</b>. In your GitHub repository, create a file named <b>config.js</b> with exactly that line and commit it. Your website then starts sending records.","Come back here, type your secret key and click <b>Load everyone's data</b>. Existing users appear after they next open your website."];
+  return banner()+'<h2>Data &amp; cloud</h2>'+
+  '<h3>Why you may not see all your users yet</h3><p class="hint">Each person\'s account is saved inside the browser they used. This page can only read the browser you are using now. To see everyone, switch on the cloud record below. After that, each existing user appears here the next time they open your website.</p>'+
+  '<h3>What this browser holds</h3>'+tbl(["Item","Found"],storageInfo().map(function(r){return tr([esc(r[0]),esc(r[1])]);}))+
+  '<p class="hint">Cloud record status: <b>'+(cfg?"switched on for the website ("+esc(cfg.slice(0,48))+"…)":"not switched on yet")+'</b></p>'+
+  '<h3>Where the data comes from</h3><div class="row"><button class="btn line" type="button" data-act="src-local">Use this browser\'s data</button><button class="btn line" type="button" data-act="src-demo">Load demo data</button></div>'+
+  '<p class="hint">Close the main website tab while you make changes here, otherwise the website can overwrite them.</p>'+
+  '<h3>Switch on the cloud record (all visitors)</h3><ol style="padding-left:20px">'+steps.map(function(t){return "<li style=\"margin:4px 0\">"+t+"</li>";}).join("")+'</ol>'+
+  '<label for="scriptBox">Script to paste in step 3</label><textarea class="field" id="scriptBox" readonly rows="6"></textarea><div class="row"><button class="btn line sm" type="button" data-act="copy-script">Copy script</button></div>'+
+  '<label for="cloudUrl">Web app address</label><input class="field" id="cloudUrl" placeholder="https://script.google.com/macros/s/.../exec" value="'+esc(url)+'">'+
+  '<label for="cloudKey">Admin key</label><input class="field" id="cloudKey" type="password" autocomplete="off" value="'+esc(CK?CK.key:"")+'">'+
+  '<div class="row"><button class="btn line" type="button" data-act="cloud-test">Test connection</button><button class="btn line" type="button" data-act="gen-config">Make config.js line</button><button class="btn" type="button" data-act="cloud-load">Load everyone\'s data</button></div><p class="err" id="cloudErr" role="status"></p>'+
+  '<label for="cfgOut">Line for your config.js file</label><textarea class="field" id="cfgOut" readonly rows="2"></textarea><div class="row"><button class="btn line sm" type="button" data-act="copy-config">Copy line</button></div>'+
+  '<p class="hint">The admin key is kept only while this page is open and is never saved on this device.</p>'+
+  '<h3>Ask existing users to open the website once</h3><p class="hint">After step 6, each person\'s account is sent to your sheet the next time they open the website. You can send them this message on WhatsApp:</p><textarea class="field" id="inviteBox" readonly rows="3"></textarea><div class="row"><button class="btn line sm" type="button" data-act="copy-invite">Copy message</button></div>'+
+  '<h3>Export</h3><div class="row"><button class="btn line sm" type="button" data-act="csv-users">Users CSV</button><button class="btn line sm" type="button" data-act="csv-listings">Listings CSV</button><button class="btn line sm" type="button" data-act="csv-deals">Deals CSV</button><button class="btn line sm" type="button" data-act="csv-messages">Messages CSV</button><button class="btn line sm" type="button" data-act="backup">Backup (JSON)</button></div>'+
+  '<h3>Restore a backup</h3><textarea class="field" id="importBox" placeholder="Paste a backup here"></textarea><div class="row"><button class="btn line" type="button" data-act="import">Restore backup into this browser</button></div>'+
+  '<span id="siteUrl" hidden>'+esc(site)+'</span>';
+}
+function settingsView(){
+  return '<h2>Settings</h2><h3>Change passcode</h3><label for="oldp">Current passcode</label><input class="field" id="oldp" type="password"><label for="newp">New passcode (8+ characters)</label><input class="field" id="newp" type="password"><p class="err" id="setErr" role="alert"></p><div class="row"><button class="btn" type="button" data-act="chpass">Change passcode</button></div>'+
+  '<h3>Housekeeping</h3><div class="row"><button class="btn line" type="button" data-act="clearlog">Clear my action log</button><button class="btn line" type="button" data-act="lock">Lock now</button></div>'+
+  '<p class="hint">Forgot the passcode? Clear this site\'s data in your browser settings. That also clears the admin passcode, but not your Google Sheet.</p>';
+}
+
+/* ---------- messages ---------- */
+var TEMPLATES=[["Welcome","Welcome to Decluta! If you need any help, just reply here."],["Photos","Your photos were not clear. Please add clear, well-lit photos of the item."],["Verify ID","To start selling, please verify your ID and take a selfie in your account."],["Report","Thanks for your report. We have received it and are looking into it."],["Credit","We have added credit to your account. Thank you for using Decluta!"]];
+function thr(u){return D.support.filter(function(m){return String(m.uid)===String(u.id)&&(SRC==="cloud"?(m.device||"")===(u.device||""):true);}).sort(function(a,b){return a.when-b.when;});}
+function seenMap(){return getJSON(SEENK)||{};}
+function unreadFor(u){var s0=seenMap()[uk(u)]||0;return thr(u).filter(function(m){return m.from==="user"&&m.when>s0;}).length;}
+function unreadTotal(){return D.users.reduce(function(a,u){return a+unreadFor(u);},0);}
+function markSeen(u){var m=seenMap();m[uk(u)]=Date.now();setJSON(SEENK,m);}
+function saveSupportLocal(){
+  if(SRC!=="local")return;
+  var cur=getJSON(SUPKEY)||[],ids={};
+  D.support.forEach(function(m){ids[m.id]=1;});
+  cur.forEach(function(m){if(m&&m.id&&!ids[m.id])D.support.push(m);});
+  D.support.sort(function(a,b){return a.when-b.when;});
+  setJSON(SUPKEY,D.support.slice(-500));
+}
+async function sendMsg(u,text,quiet){
+  text=String(text).trim().slice(0,400);if(!text)return false;
+  var m={id:"M"+Date.now()+Math.random().toString(36).slice(2,7),uid:u.id,device:u.device||"",from:"admin",name:"Decluta support",text:text,when:Date.now()};
+  if(SRC==="cloud"){
+    if(!CK){toast("Load the cloud data first.");return false;}
+    try{
+      var r=await fetch(CK.url+"?action=send&key="+encodeURIComponent(CK.key)+"&device="+encodeURIComponent(m.device)+"&uid="+encodeURIComponent(m.uid)+"&id="+encodeURIComponent(m.id)+"&name="+encodeURIComponent(m.name)+"&text="+encodeURIComponent(m.text));
+      var j=await r.json();if(!j.ok)throw new Error("no");
+    }catch(e){toast("Could not send. Check your cloud connection and admin key.");return false;}
+  }
+  D.support.push(m);
+  if(SRC==="local")saveSupportLocal();
+  if(!quiet)logA("Messaged "+u.name);
+  return true;
+}
+function chatDlg(k){
+  var u=D.users.find(function(x){return uk(x)===k;});if(!u)return;
+  openChatKey=k;var th=thr(u);markSeen(u);
+  var h=head("Chat with "+u.name)+'<p class="hint">'+esc(u.role)+" · "+esc(u.phone)+" · "+contact(u)+'</p><div class="chatlog" id="adminLog">'+(th.length?th.map(function(m){return '<div class="msg '+(m.from==="admin"?"me":"them")+'">'+esc(m.text)+"<small>"+esc(new Date(m.when).toLocaleString("en-NG"))+"</small></div>";}).join(""):'<p class="hint">No messages yet. Write the first one below.</p>')+"</div>";
+  h+='<div class="row">'+TEMPLATES.map(function(t,i){return '<button class="btn line sm" type="button" data-act="tpl" data-id="'+i+'">'+esc(t[0])+"</button>";}).join("")+"</div>";
+  h+='<form id="msgForm" data-key="'+esc(k)+'"><label class="sr" for="msgText">Message</label><textarea class="field" id="msgText" maxlength="400" style="min-height:70px;font-family:inherit;font-size:16px" placeholder="Write a message. They will see it in their account on the website."></textarea><p class="err" id="msgErr" role="alert"></p><button class="btn" type="submit">Send</button></form>';
+  openDlg(h);var lg=$("#adminLog");if(lg)lg.scrollTop=lg.scrollHeight;
+  render();
+}
+$("#dlg").addEventListener("close",function(){openChatKey=null;});
+document.addEventListener("submit",async function(e){
+  if(e.target.id!=="msgForm")return;
+  e.preventDefault();
+  var k=e.target.dataset.key,u=D.users.find(function(x){return uk(x)===k;}),t=$("#msgText").value.trim();
+  if(!u||!t){$("#msgErr").textContent="Write a message first.";return;}
+  if(await sendMsg(u,t)){persist();chatDlg(k);toast("Message sent. They will see it in their account.");}
+});
+function messagesView(){
+  var map={};
+  D.support.forEach(function(m){var k=SRC==="cloud"?(m.device||"")+"|"+m.uid:String(m.uid);(map[k]=map[k]||[]).push(m);});
+  var rows=Object.keys(map).map(function(k){
+    var u=SRC==="cloud"?D.users.find(function(x){return uk(x)===k;}):D.users.find(function(x){return String(x.id)===k;});
+    var th=map[k].slice().sort(function(a,b){return a.when-b.when;}),last=th[th.length-1];
+    return {u:u,last:last};
+  }).filter(function(x){return x.u;}).sort(function(a,b){return b.last.when-a.last.when;});
+  var h=banner()+'<h2>Messages</h2><p class="hint">Chat with any user. They see your message in My account on the website and can reply there. Messages from users also arrive here.</p>';
+  h+='<h3>Conversations</h3>'+tbl(["","Name","Role","Last message","When","New"],rows.map(function(x){var n=unreadFor(x.u);return tr([btn("chat",uk(x.u),"Open"),esc(x.u.name),esc(x.u.role),esc(String(x.last.text).slice(0,60))+(x.last.from==="admin"?" (you)":""),esc(day(x.last.when)),n?pill(String(n),"warn"):""]);}));
+  h+='<h3>Start a conversation</h3><div class="row"><select class="field" id="startSel" style="flex:1">'+D.users.map(function(u){return '<option value="'+esc(uk(u))+'">'+esc(u.name)+" · "+esc(u.role)+" · "+esc(u.phone)+"</option>";}).join("")+'</select><button class="btn line" type="button" data-act="msg-start">Open chat</button></div>';
+  h+='<h3>Message a group</h3><div class="row"><select class="field" id="bcAud" style="max-width:260px"><option value="all">Everyone</option><option value="sellers">All sellers</option><option value="buyers">All buyers</option><option value="pending">Sellers with photos waiting for review</option></select></div><textarea class="field" id="bcText" maxlength="400" style="min-height:80px;font-family:inherit;font-size:16px" placeholder="Write the message to send to the group"></textarea><div class="row"><button class="btn" type="button" data-act="broadcast">Send to group</button></div><p class="hint" id="bcMsg" role="status"></p>';
+  return h;
+}
+async function broadcast(){
+  var aud=$("#bcAud").value,text=$("#bcText").value.trim(),msg=$("#bcMsg");
+  if(!text){msg.textContent="Write a message first.";return;}
+  var L=D.users.filter(function(u){
+    if(u.blocked||u.deleteAt)return false;
+    if(aud==="sellers")return u.role==="seller";
+    if(aud==="buyers")return u.role!=="seller";
+    if(aud==="pending")return D.listings.some(function(l){return ownerKey(l)===uk(u)&&photoState(l)==="pending";});
+    return true;
+  });
+  if(!L.length){msg.textContent="No one is in that group.";return;}
+  if(L.length>200){msg.textContent="That group is too large (limit 200).";return;}
+  if(!window.confirm("Send this message to "+L.length+" people?"))return;
+  var ok=0;
+  for(var i=0;i<L.length;i++){msg.textContent="Sending "+(i+1)+" of "+L.length+"…";if(await sendMsg(L[i],text,true))ok++;}
+  logA("Sent a group message to "+ok+" people");persist();render();toast("Sent to "+ok+" people.");
+}
+
+/* ---------- risk scan ---------- */
+function scanFlags(){
+  var f=[];
+  dupes().forEach(function(d){f.push({sev:"High",txt:d.kind+(d.kind==="ID"?" (scrambled)":" "+d.value)+" is used on "+d.users.length+" accounts: "+d.users.map(function(u){return u.name;}).join(", "),act:"user",id:uk(d.users[0])});});
+  var rc={};
+  D.reports.forEach(function(r){var l=D.listings.find(function(x){return x.id===r.id&&(x.device||"")===(r.device||"");});if(l){var k=ownerKey(l);rc[k]=(rc[k]||0)+1;}});
+  Object.keys(rc).forEach(function(k){if(rc[k]>=2){var u=D.users.find(function(x){return uk(x)===k;});f.push({sev:"High",txt:(u?u.name:"A seller")+" has "+rc[k]+" reports against their listings",act:"user",id:k});}});
+  D.listings.forEach(function(l){
+    var u=userOf(l);
+    if(l.price<500||l.price>50000000)f.push({sev:"Medium",txt:'Odd price on "'+l.title+'": '+money(l.price),act:"listing",id:l.id});
+    if(photoCount(l)===0)f.push({sev:"Medium",txt:'"'+l.title+'" has no photos',act:"listing",id:l.id});
+    if(u&&u.blocked&&!l.hidden&&!l.sold)f.push({sev:"High",txt:"Suspended seller "+u.name+' still has a live listing: "'+l.title+'"',act:"listing",id:l.id});
+    if(u&&!u.verified&&!l.hidden)f.push({sev:"High",txt:"Seller "+u.name+' is not verified but has "'+l.title+'" live',act:"listing",id:l.id});
+    if(u&&u.joined&&(Date.now()-new Date(u.joined).getTime())<2*864e5&&l.price>=500000)f.push({sev:"Medium",txt:"New account "+u.name+' listed a high-value item: "'+l.title+'" ('+money(l.price)+")",act:"listing",id:l.id});
+  });
+  var order={High:0,Medium:1,Low:2};
+  return f.sort(function(a,b){return order[a.sev]-order[b.sev];});
+}
+function scanView(){
+  var f=scanFlags(),hi=f.filter(function(x){return x.sev==="High";}).length;
+  return banner()+'<h2>Risk scan</h2><p class="hint">Checks your data for signs of fraud or mistakes: duplicate phones and IDs, sellers with many reports, unverified sellers with live items, odd prices, missing photos and new accounts listing expensive items.</p><div class="cards"><div class="card"><span>Flags</span><strong>'+f.length+'</strong></div><div class="card"><span>High risk</span><strong>'+hi+"</strong></div></div>"+
+    tbl(["","Level","What we found"],f.map(function(x){return tr([btn(x.act,x.id,"Open"),pill(x.sev,x.sev==="High"?"bad":"warn"),esc(x.txt)]);}));
+}
+
+/* ---------- search everything ---------- */
+function searchDlg(q){
+  q=q.trim().toLowerCase();if(!q)return;
+  var U=D.users.filter(function(u){return String(u.name).toLowerCase().indexOf(q)>=0||String(u.phone).indexOf(q)>=0||String(u.id).toLowerCase().indexOf(q)>=0;}).slice(0,15);
+  var L=D.listings.filter(function(l){return String(l.title).toLowerCase().indexOf(q)>=0||String(l.seller).toLowerCase().indexOf(q)>=0;}).slice(0,15);
+  var W=D.wanted.filter(function(w){return String(w.title).toLowerCase().indexOf(q)>=0;}).slice(0,15);
+  var h=head('Results for "'+q+'"');
+  h+='<h3>Users ('+U.length+')</h3>'+(U.length?'<ul>'+U.map(function(u){return '<li><a href="#" data-act="user" data-id="'+esc(uk(u))+'">'+esc(u.name)+"</a> · "+esc(u.role)+" · "+esc(u.phone)+"</li>";}).join("")+"</ul>":'<p class="hint">None</p>');
+  h+='<h3>Listings ('+L.length+')</h3>'+(L.length?'<ul>'+L.map(function(l){return '<li><a href="#" data-act="listing" data-id="'+l.id+'">'+esc(l.title)+"</a> · "+esc(l.seller)+" · "+money(l.price)+"</li>";}).join("")+"</ul>":'<p class="hint">None</p>');
+  h+='<h3>Wanted ('+W.length+')</h3>'+(W.length?'<ul>'+W.map(function(w){return "<li>"+esc(w.title)+" · "+esc(w.state)+"</li>";}).join("")+"</ul>":'<p class="hint">None</p>');
+  openDlg(h);
+}
+$("#gs").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();searchDlg(this.value);}});
+
+/* ---------- live updates ---------- */
+window.addEventListener("storage",function(e){
+  if(e.key!==SUPKEY||SRC!=="local")return;
+  D.support=getJSON(SUPKEY)||[];render();
+  if(openChatKey&&$("#dlg").open)chatDlg(openChatKey);
+});
+setInterval(async function(){
+  if(SRC!=="cloud"||!CK||$("#app").hidden)return;
+  try{
+    var r=await fetch(CK.url+"?action=support_all&key="+encodeURIComponent(CK.key)),j=await r.json();
+    if(!j.ok||!j.support||j.support.length===D.support.length)return;
+    D.support=j.support.map(function(m){return{id:String(m.id),device:String(m.device||""),uid:String(m.uid),from:m.from==="admin"?"admin":"user",name:m.name||"",text:String(m.text||""),when:Number(m.when)||0};});
+    render();if(openChatKey&&$("#dlg").open)chatDlg(openChatKey);
+  }catch(e){}
+},30000);
+var VIEWS={overview:overview,users:usersFilters,messages:messagesView,scan:scanView,listings:listingsFilters,wanted:wantedView,reports:reportsView,deals:dealsView,reviews:reviewsView,deletions:deletionsView,activity:activityView,data:dataView,settings:settingsView};
+var RES={users:usersRes,listings:listingsRes};
+function render(){
+  $("#tabs").innerHTML=TABS.map(function(t){var n=t[0]==="messages"?unreadTotal():0;return '<button class="tab" type="button" data-tab="'+t[0]+'" aria-current="'+(TAB===t[0])+'">'+t[1]+(n?" ("+n+")":"")+"</button>";}).join("");
+  $("#srcBadge").textContent=SRC==="cloud"?"Cloud (all visitors)":SRC==="demo"?"Demo data":"This browser";
+  $("#view").innerHTML=VIEWS[TAB]();
+  document.querySelectorAll("[data-q]").forEach(function(el){var p=el.dataset.q.split("."),v=(Q[p[0]]||{})[p[1]];if(v!=null&&el.tagName==="SELECT")el.value=v;});
+  refreshRes();
+  if(TAB==="data"){var sb=$("#scriptBox");if(sb)sb.value=SCRIPT_TEXT;var ib=$("#inviteBox");if(ib)ib.value="Hello from Decluta! Please open "+$("#siteUrl").textContent+" once on your phone so we can finish updating your account. Thank you!";}
+}
+function refreshRes(){if(RES[TAB]&&$("#res"))$("#res").innerHTML=RES[TAB]();}
+document.addEventListener("input",function(e){var el=e.target.closest("[data-q]");if(!el||el.tagName==="SELECT")return;var p=el.dataset.q.split(".");(Q[p[0]]=Q[p[0]]||{})[p[1]]=el.value;refreshRes();});
+document.addEventListener("change",function(e){var el=e.target.closest("[data-q]");if(!el||el.tagName!=="SELECT")return;var p=el.dataset.q.split(".");(Q[p[0]]=Q[p[0]]||{})[p[1]]=el.value;refreshRes();});
+
+/* ---------- dialogs ---------- */
+function openDlg(h){$("#dlgBody").innerHTML=h;var d=$("#dlg");if(!d.open)d.showModal();}
+function closeDlg(){var d=$("#dlg");if(d.open)d.close();}
+$("#dlg").addEventListener("click",function(e){if(e.target===$("#dlg"))closeDlg();});
+function head(t){return '<div class="dlg-head"><h2>'+esc(t)+'</h2><button class="x" type="button" data-act="close" aria-label="Close">×</button></div>';}
+function userDlg(k){
+  var u=D.users.find(function(x){return uk(x)===k;});if(!u)return;
+  var ed=canEdit(),mine=function(x){return ownerKey(x)===k;};
+  var L=D.listings.filter(mine),W=D.wanted.filter(mine),
+      dl=D.deals.filter(function(x){var p=(x.device?x.device+"|":"");return p+x.buyer===k||p+x.seller===k;}),
+      rv=D.reviews.filter(function(r){return r.seller===shortName(u);});
+  var h=head(u.name)+'<div class="kv"><span>Role</span><b>'+esc(u.role)+(u.verified?" ✓ verified":" (not verified)")+'</b><span>Phone</span><b>'+esc(u.phone)+'</b><span>Contact</span><b>'+contact(u)+'</b><span>Joined</span><b>'+esc(u.joined||"")+'</b><span>Status</span><b>'+statusPill(u)+'</b><span>ID type</span><b>'+esc(u.idType||"—")+'</b><span>Credit</span><b>'+money(u.credit)+'</b><span>Purchases / sales</span><b>'+(u.purchases||0)+" / "+(u.sales||0)+'</b><span>Account ID</span><b>'+esc(u.id)+(u.device?" · "+esc(u.device):"")+'</b></div>';
+  h+='<div class="row">'+btn("chat",k,"💬 Message"+(unreadFor(u)?" ("+unreadFor(u)+" new)":""),"")+"</div>";
+  if(ed){
+    h+='<h3>Actions</h3><div class="row">'+btn("block",k,u.blocked?"Unsuspend":"Suspend","danger")+(u.verified?"":btn("verify-user",k,"Mark as verified"))+(u.deleteAt?btn("restore",k,"Restore account"):"")+btn("purge",k,"Delete account now","danger")+'</div>'+
+      '<div class="row"><input class="field" id="credAmt" type="number" min="1" placeholder="Credit amount (₦)" style="max-width:200px"><button class="btn line sm" type="button" data-act="credit" data-id="'+esc(k)+'">Add credit</button></div>'+
+      '<div class="row"><input class="field" id="noteTxt" maxlength="160" placeholder="Message to show in their account" style="flex:1"><button class="btn line sm" type="button" data-act="notify" data-id="'+esc(k)+'">Send</button></div>';
+  }
+  h+='<h3>Private admin note</h3><textarea class="field" id="adminNote" maxlength="400" style="min-height:70px;font-family:inherit;font-size:15px">'+esc((getJSON(NOTESK)||{})[k]||"")+'</textarea><div class="row"><button class="btn line sm" type="button" data-act="note-save" data-id="'+esc(k)+'">Save note</button></div>';
+  h+='<h3>Listings ('+L.length+')</h3>'+(L.length?'<ul>'+L.map(function(l){return "<li>"+esc(l.title)+" · "+money(l.price)+" · "+esc(lstatus(l))+"</li>";}).join("")+"</ul>":'<p class="hint">None</p>');
+  h+='<h3>Wanted requests ('+W.length+')</h3>'+(W.length?'<ul>'+W.map(function(w){return "<li>"+esc(w.title)+(w.found?" (found)":"")+"</li>";}).join("")+"</ul>":'<p class="hint">None</p>');
+  h+='<h3>Deals ('+dl.length+')</h3>'+(dl.length?'<ul>'+dl.map(function(x){return "<li>"+esc(x.title)+" · "+money(x.price)+"</li>";}).join("")+"</ul>":'<p class="hint">None</p>');
+  h+='<h3>Reviews about this seller ('+rv.length+')</h3>'+(rv.length?'<ul>'+rv.map(function(r){return "<li>"+"★".repeat(r.stars)+" "+esc(r.text||"")+"</li>";}).join("")+"</ul>":'<p class="hint">None</p>');
+  openDlg(h);
+}
+function listingDlg(id){
+  var l=findL(id);if(!l)return;
+  var o=userOf(l),ed=canEdit(),ps=photoState(l);
+  var h=head(l.title)+(Array.isArray(l.photos)&&l.photos.length?'<div class="photos">'+l.photos.map(function(p){return '<img src="'+esc(p)+'" alt="Photo of '+esc(l.title)+'">';}).join("")+"</div>":'<p class="hint">'+photoCount(l)+" photo(s). Photos are not included in the cloud view.</p>");
+  h+='<div class="kv"><span>Price</span><b>'+money(l.price)+'</b><span>Seller</span><b>'+esc(l.seller)+(o?' · <a href="#" data-act="user" data-id="'+esc(uk(o))+'">open profile</a>':"")+'</b><span>Where</span><b>'+esc(l.area||"")+", "+esc(l.state)+'</b><span>Kind</span><b>'+esc(l.kind||"used")+'</b><span>Status</span><b>'+pill(lstatus(l),l.sold?"warn":l.hidden?"bad":"ok")+" "+pill("photos "+ps,ps==="verified"?"ok":ps==="rejected"?"bad":ps==="pending"?"warn":"")+"</b></div>";
+  if(ed)h+='<h3>Actions</h3><div class="row">'+btn("photo-ok",id,"Verify photos")+btn("photo-no",id,"Reject photos","danger")+btn("hide",id,l.hidden?"Unhide":"Hide")+btn("feature",id,"Feature 7 days")+btn("lsold",id,l.sold?"Mark available":"Mark sold")+btn("ldel",id,"Delete","danger")+"</div>";
+  if(o)h+='<h3>Contact the seller</h3><div class="row">'+contact(o)+"</div>";
+  openDlg(h);
+}
+function reportDlg(i){
+  var r=D.reports[i];if(!r)return;
+  var l=D.listings.find(function(x){return x.id===r.id&&(x.device||"")===(r.device||"");});
+  var by=D.users.find(function(u){return uk(u)===((r.device?r.device+"|":"")+r.by);});
+  openDlg(head("Report")+'<div class="kv"><span>Item</span><b>'+esc(l?l.title:"(removed)")+'</b><span>Reason</span><b>'+esc(r.reason)+'</b><span>Reported by</span><b>'+esc(by?by.name:r.by)+'</b><span>When</span><b>'+esc(day(r.when))+'</b></div>'+(canEdit()?'<div class="row">'+btn("rep-dismiss",i,"Dismiss")+(l?btn("rep-remove",i,"Remove listing","danger")+btn("rep-suspend",i,"Suspend seller","danger"):"")+"</div>":"")+(l?'<div class="row"><button class="btn line sm" type="button" data-act="listing" data-id="'+l.id+'">Open the listing</button></div>':""));
+}
+function csvDlg(title,text){openDlg(head(title)+'<textarea class="field" id="csvOut" readonly rows="8"></textarea><div class="row"><button class="btn sm" type="button" data-act="copy">Copy</button><button class="btn line sm" type="button" data-act="download" data-id="'+esc(title)+'">Download file</button></div>');$("#csvOut").value=text;}
+
+/* ---------- actions ---------- */
+function findL(id){return D.listings.find(function(l){return String(l.id)===String(id);});}
+function pushNote(u,t){u.notes=u.notes||[];u.notes.unshift({text:t,when:Date.now()});}
+function purge(u){
+  var id=u.id,sn=shortName(u);
+  var myL=D.listings.filter(function(l){return l.owner===id;}).map(function(l){return l.id;}),myW=D.wanted.filter(function(w){return w.owner===id;}).map(function(w){return w.id;});
+  function drop(a,f){for(var i=a.length-1;i>=0;i--)if(f(a[i]))a.splice(i,1);}
+  drop(D.listings,function(l){return l.owner===id;});drop(D.wanted,function(w){return w.owner===id;});
+  drop(D.messages,function(m){return m.buyer===id||m.rid===id||myL.indexOf(m.lid)>=0||myW.indexOf(m.wid)>=0;});
+  drop(D.reviews,function(r){return r.byId===id||(r.mine&&r.seller===sn);});drop(D.reports,function(r){return r.by===id;});
+  D.deals.forEach(function(d){if(d.buyer===id)d.buyer="deleted";if(d.seller===id){d.seller=null;d.sellerName="Deleted seller";}});
+  D.users.splice(D.users.indexOf(u),1);if(RAW.uid===id)RAW.uid=null;
+  D.support=D.support.filter(function(m){return String(m.uid)!==String(id)||(SRC==="cloud"&&(m.device||"")!==(u.device||""));});if(SRC==="local")setJSON(SUPKEY,D.support);
+}
+var csvName="";
+async function act(a,id,el){
+  var u,l;
+  if(["block","verify-user","credit","notify","restore","purge"].indexOf(a)>=0){u=D.users.find(function(x){return uk(x)===id;});if(!u)return;}
+  if(!canEdit()&&["user","listing","report","chat","tpl","msg-start","broadcast","note-save","csv-messages","copy-script","copy-config","copy-invite","gen-config","close","tab","cloud-test","cloud-load","src-local","src-demo","csv-users","csv-listings","csv-deals","backup","copy","download","photos","wphoto","lock","chpass","clearlog"].indexOf(a)<0){toast("The cloud view is read-only.");return;}
+  switch(a){
+    case "close":closeDlg();return;
+    case "user":userDlg(id);return;
+    case "listing":listingDlg(id);return;
+    case "chat":chatDlg(id);return;
+    case "tpl":$("#msgText").value=TEMPLATES[+id][1];$("#msgText").focus();return;
+    case "msg-start":chatDlg($("#startSel").value);return;
+    case "broadcast":await broadcast();return;
+    case "note-save":var nm=getJSON(NOTESK)||{};nm[id]=$("#adminNote").value.trim();setJSON(NOTESK,nm);toast("Note saved.");return;
+    case "copy-script":case "copy-config":case "copy-invite":
+      var srcEl=a==="copy-script"?$("#scriptBox"):a==="copy-config"?$("#cfgOut"):$("#inviteBox");
+      if(!srcEl.value){toast("Nothing to copy yet.");return;}
+      try{await navigator.clipboard.writeText(srcEl.value);toast("Copied.");}catch(e){srcEl.select();toast("Press copy on your keyboard.");}return;
+    case "gen-config":
+      var gu=$("#cloudUrl").value.trim();
+      if(!/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(gu)){$("#cloudErr").textContent="Paste the full web app address that ends in /exec.";return;}
+      $("#cloudErr").textContent="";$("#cfgOut").value='window.DECLUTA_CLOUD = "'+gu+'";';toast("Now put this line in a file named config.js on GitHub.");return;
+    case "csv-messages":csvDlg("Messages",csv([["when","user id","device","from","text"]].concat(D.support.map(function(m){return [new Date(m.when).toISOString(),m.uid,m.device,m.from,m.text];}))));return;
+    case "report":reportDlg(+id);return;
+    case "photos":l=findL(id);if(l&&Array.isArray(l.photos))openDlg(head(l.title)+'<div class="photos">'+l.photos.map(function(p){return '<img src="'+esc(p)+'" alt="Photo of '+esc(l.title)+'">';}).join("")+"</div>");return;
+    case "wphoto":var w=D.wanted.find(function(x){return String(x.id)===String(id);});if(w&&w.photo)openDlg(head(w.title)+'<div class="photos"><img src="'+esc(w.photo)+'" alt=""></div>');return;
+    case "block":u.blocked=!u.blocked;logA((u.blocked?"Suspended ":"Unsuspended ")+u.name);toast(u.blocked?"Account suspended.":"Account unsuspended.");break;
+    case "verify-user":u.verified=true;logA("Marked "+u.name+" as verified");toast("Marked as verified.");break;
+    case "credit":var amt=Number($("#credAmt").value);if(!amt||amt<1){toast("Enter an amount.");return;}u.credit=(u.credit||0)+amt;pushNote(u,"You received "+money(amt)+" credit from Decluta.");logA("Gave "+u.name+" "+money(amt)+" credit");toast("Credit added.");break;
+    case "notify":var tx=$("#noteTxt").value.trim();if(!tx){toast("Write a message first.");return;}pushNote(u,tx);logA("Sent a message to "+u.name);toast("Message sent. They will see it in their account.");break;
+    case "restore":delete u.deleteAt;logA("Restored "+u.name);toast("Account restored.");break;
+    case "purge":if(!window.confirm("Permanently delete "+u.name+" and everything they posted? This can't be undone."))return;purge(u);logA("Deleted account "+u.name);toast("Account deleted.");closeDlg();break;
+    case "photo-ok":l=findL(id);l.photoStatus="verified";l.hidden=false;logA("Verified photos: "+l.title);toast("Photos verified.");break;
+    case "photo-no":l=findL(id);l.photoStatus="rejected";l.hidden=true;var o=D.users.find(function(x){return x.id===l.owner;});if(o)pushNote(o,"Photos rejected for "+l.title+". Add clearer photos in My account to relist.");logA("Rejected photos: "+l.title);toast("Photos rejected and the listing is hidden.");break;
+    case "hide":l=findL(id);l.hidden=!l.hidden;logA((l.hidden?"Hid ":"Unhid ")+l.title);break;
+    case "feature":l=findL(id);l.boostUntil=Date.now()+7*864e5;logA("Featured "+l.title);toast("Featured for 7 days.");break;
+    case "lsold":l=findL(id);l.sold=!l.sold;logA("Changed sold status: "+l.title);break;
+    case "ldel":l=findL(id);if(!window.confirm('Delete "'+l.title+'"?'))return;D.listings.splice(D.listings.indexOf(l),1);D.removed.push(l.id);logA("Deleted listing "+l.title);toast("Listing deleted.");break;
+    case "wdel":var wi=D.wanted.findIndex(function(x){return String(x.id)===String(id);});if(wi>=0&&window.confirm("Delete this request?")){logA("Deleted wanted request "+D.wanted[wi].title);D.wanted.splice(wi,1);toast("Request deleted.");}break;
+    case "rep-dismiss":D.reports.splice(+id,1);logA("Dismissed a report");break;
+    case "rep-remove":var r=D.reports[+id];l=findL(r.id);if(l&&window.confirm('Remove "'+l.title+'"?')){D.listings.splice(D.listings.indexOf(l),1);D.removed.push(l.id);}D.reports.splice(+id,1);logA("Removed a reported listing");toast("Listing removed.");break;
+    case "rep-suspend":var r2=D.reports[+id];l=findL(r2.id);var ow=l&&D.users.find(function(x){return x.id===l.owner;});if(ow){ow.blocked=true;logA("Suspended "+ow.name+" after a report");toast("Seller suspended.");}D.reports.splice(+id,1);break;
+    case "rev-del":D.reviews.splice(+id,1);logA("Deleted a review");break;
+    case "src-local":loadLocal();toast(FOUND?"Showing this browser's data.":"No website data found in this browser.");break;
+    case "src-demo":demo();toast("Demo data loaded.");break;
+    case "csv-users":csvDlg("Users",csv([["id","name","phone","role","verified","joined","status","credit","purchases","sales"]].concat(D.users.map(function(x){return [x.id,x.name,x.phone,x.role,x.verified?"yes":"no",x.joined,ustatus(x),x.credit||0,x.purchases||0,x.sales||0];}))));return;
+    case "csv-listings":csvDlg("Listings",csv([["id","title","category","state","price","seller","status","photos"]].concat(D.listings.map(function(x){return [x.id,x.title,x.cat,x.state,x.price,x.seller,lstatus(x),photoState(x)];}))));return;
+    case "csv-deals":csvDlg("Deals",csv([["id","title","price","fee","commission","method","when"]].concat(D.deals.map(function(x){return [x.id,x.title,x.price,x.fee,x.commission,x.method,new Date(x.when).toISOString()];}))));return;
+    case "backup":csvDlg("Backup",JSON.stringify({users:D.users,listings:D.listings,wanted:D.wanted,deals:D.deals,reports:D.reports,reviews:D.reviews,messages:D.messages,removed:D.removed}));return;
+    case "copy":try{await navigator.clipboard.writeText($("#csvOut").value);toast("Copied.");}catch(e){$("#csvOut").select();toast("Press copy on your keyboard.");}return;
+    case "download":var bl=new Blob([$("#csvOut").value],{type:"text/plain"}),an=document.createElement("a");an.href=URL.createObjectURL(bl);an.download="decluta-"+id.toLowerCase()+".txt";document.body.appendChild(an);an.click();an.remove();return;
+    case "import":
+      try{var j=JSON.parse($("#importBox").value);if(!j||!Array.isArray(j.users))throw 0;}catch(e){toast("That doesn't look like a backup.");return;}
+      if(!window.confirm("Replace the data in this browser with this backup?"))return;
+      var cur=getJSON(KEY)||{};["users","listings","wanted","deals","reports","reviews","messages","removed"].forEach(function(k){cur[k]=j[k]||[];});setJSON(KEY,cur);loadLocal();logA("Restored a backup");toast("Backup restored.");break;
+    case "cloud-test":case "cloud-load":await cloud(a);return;
+    case "chpass":await changePass();return;
+    case "clearlog":setJSON(LOGKEY,[]);toast("Log cleared.");break;
+    case "lock":try{sessionStorage.removeItem("dng-admin-ok");}catch(e){}showGate();return;
+  }
+  persist();render();
+  if(["block","verify-user","credit","notify","restore"].indexOf(a)>=0&&$("#dlg").open)userDlg(id);
+  if(["photo-ok","photo-no","hide","feature","lsold"].indexOf(a)>=0&&$("#dlg").open)listingDlg(id);
+  if(["ldel","rep-dismiss","rep-remove","rep-suspend"].indexOf(a)>=0)closeDlg();
+}
+async function cloud(a){
+  var url=$("#cloudUrl").value.trim(),key=$("#cloudKey").value,err=$("#cloudErr");
+  if(!/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(url)){err.textContent="Paste the full web app address that ends in /exec.";return;}
+  if(a==="cloud-load"&&key.length<16){err.textContent="Your admin key is too short. Use at least 16 letters and numbers in your Google script, then enter it here.";return;}
+  setJSON(CFG,{url:url});err.textContent="Working…";
+  try{
+    var r=await fetch(url+"?action="+(a==="cloud-test"?"ping":"list&key="+encodeURIComponent(key)));
+    var j=await r.json();
+    if(a==="cloud-test"){err.textContent=j.ok?"Connected. Your Google script is reachable.":"The script answered, but not as expected.";return;}
+    if(!j.ok){err.textContent="Not allowed. Check your admin key.";return;}
+    loadCloud(j);CK={url:url,key:key};logA("Loaded cloud data");toast("Loaded "+D.users.length+" users from the cloud.");persist();render();
+  }catch(e){err.textContent="Could not reach your Google script. Check the address and that it is deployed for 'Anyone'.";}
+}
+async function changePass(){
+  var a=getJSON(AUTH),o=$("#oldp").value,n=$("#newp").value,er=$("#setErr");
+  if(await sha(a.salt+o)!==a.hash){er.textContent="Current passcode is wrong.";return;}
+  if(n.length<8){er.textContent="Use at least 8 characters.";return;}
+  var salt=Array.from(crypto.getRandomValues(new Uint8Array(12))).map(function(x){return x.toString(16).padStart(2,"0");}).join("");
+  setJSON(AUTH,{salt:salt,hash:await sha(salt+n)});$("#oldp").value="";$("#newp").value="";er.textContent="";toast("Passcode changed.");
+}
+document.addEventListener("click",function(e){
+  var t=e.target.closest("[data-tab]");
+  if(t){TAB=t.dataset.tab;render();window.scrollTo(0,0);return;}
+  var b=e.target.closest("[data-act]");
+  if(b){e.preventDefault();act(b.dataset.act,b.dataset.id,b);}
+});
+
+/* ---------- start ---------- */
+function enter(){
+  $("#gate").hidden=true;$("#app").hidden=false;
+  if(SRC!=="demo"&&SRC!=="cloud")loadLocal();
+  render();
+}
+var ok=false;try{ok=sessionStorage.getItem("dng-admin-ok")==="1";}catch(e){}
+if(ok&&getJSON(AUTH))enter();else showGate();
+})();
+</script>
+</body>
+</html>
