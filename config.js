@@ -1,2 +1,11 @@
-window.DECLUTA_CLOUD = "https://script.google.com/macros/s/AKfycbxAODATS-ieDtXVjFi4I5Uh54btSlNXZW31zVOhlrkahbC3O5rVsq0EIiyxH1ZfEuRKcA/exec";
-window.DECLUTA_BUSINESS = { name: "decluta.ng", address: "Warri delta state nigeria", email: "rotimistly@gmail.com" };
+// Decluta.com settings file. Edit the quoted text below, then save.
+
+// 1. Cloud record address. Paste your Google Apps Script web app address (ends in /exec).
+window.DECLUTA_CLOUD = "PASTE_YOUR_EXEC_ADDRESS_HERE";
+
+// 2. Your business details. They appear in the Terms of Service and Privacy Policy.
+window.DECLUTA_BUSINESS = {
+  name: "",
+  address: "",
+  email: ""
+};
